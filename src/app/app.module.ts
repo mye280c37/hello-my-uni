@@ -7,13 +7,17 @@ import { HeaderComponent } from './header/header.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { MainComponent } from './main/main.component';
+import { GedConsultingComponent } from './ged-consulting/ged-consulting.component';
+import { GedConversionComponent } from './ged-conversion/ged-conversion.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     ReviewsComponent,
-    MainComponent
+    MainComponent,
+    GedConsultingComponent,
+    GedConversionComponent
   ],
   imports: [
     BrowserModule,

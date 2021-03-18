@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div style="min-width: 6rem">
     <div class="position-absolute">
-      <a class="navbar-brand my-2" [routerLink]="'.'">MYUNI</a>
+      <a class="navbar-brand my-2" routerLink=" ">MYUNI</a>
     </div>
   </div>
   <!-- Step 3: Toggle the value of the property when the toggler button is clicked. -->
@@ -13,8 +13,8 @@
       <li ngbDropdown class="nav-item active" (mouseover)="isopen=true" (mouseleave)="isopen=false">
         <div type="button" class="text-center py-2">입시 성과 및 후기</div>
         <div *ngIf="isopen" class="pt-2 pb-3 nav-sub-item">
-          <button ngbDropdownItem class="text-center" [routerLink]="'/reviews'">입시 성과</button>
-          <button ngbDropdownItem class="text-center" [routerLink]="'/reviews'">후기</button>
+          <button ngbDropdownItem class="text-center" routerLink="/reviews">입시 성과</button>
+          <button ngbDropdownItem class="text-center" routerLink="/reviews">후기</button>
         </div>
       </li>
       <li ngbDropdown class="nav-item active" (mouseover)="isopen=true" (mouseleave)="isopen=false">
@@ -28,8 +28,8 @@
       <li ngbDropdown class="nav-item active" (mouseover)="isopen=true" (mouseleave)="isopen=false">
         <div type="button" class="text-center py-2">검정고시 전형</div>
         <div *ngIf="isopen" class="pt-2 pb-3 nav-sub-item">
-          <button ngbDropdownItem class="text-center">검정고시 전형 내신 환산</button>
-          <button ngbDropdownItem class="text-center">검정고시 전형 맞춤 진학 컨설팅</button>
+          <button ngbDropdownItem class="text-center" routerLink="/ged/conversion">검정고시 전형 내신 환산</button>
+          <button ngbDropdownItem class="text-center" routerLink="/ged/consulting">검정고시 전형 맞춤 진학 컨설팅</button>
         </div>
       </li>
       <li ngbDropdown class="nav-item active">
