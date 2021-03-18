@@ -1,36 +1,43 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div style="min-width: 6rem">
-    <a class="navbar-brand position-absolute my-2" [routerLink]="'.'">MYUNI</a>
+    <div class="position-absolute">
+      <a class="navbar-brand my-2" [routerLink]="'.'">MYUNI</a>
+    </div>
   </div>
   <!-- Step 3: Toggle the value of the property when the toggler button is clicked. -->
-  <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+  <button class="navbar-toggler mr-auto my-2" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
     &#9776;
   </button>
   <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
-    <ul class="navbar-nav w-100 d-flex justify-content-around">
+    <ul class="navbar-nav w-100">
       <li ngbDropdown class="nav-item active" (mouseover)="isopen=true" (mouseleave)="isopen=false">
-        <div type="button" class="text-center py-2">입시 성과</div>
-        <div *ngIf="isopen" class="pt-2 pb-3">
+        <div type="button" class="text-center py-2">입시 성과 및 후기</div>
+        <div *ngIf="isopen" class="pt-2 pb-3 nav-sub-item">
+          <button ngbDropdownItem class="text-center" [routerLink]="'/reviews'">입시 성과</button>
           <button ngbDropdownItem class="text-center" [routerLink]="'/reviews'">후기</button>
         </div>
       </li>
       <li ngbDropdown class="nav-item active" (mouseover)="isopen=true" (mouseleave)="isopen=false">
         <div type="button" class="text-center py-2">진학 컨설팅</div>
-        <div *ngIf="isopen" class="pt-2 pb-3">
+        <div *ngIf="isopen" class="pt-2 pb-3 nav-sub-item">
           <button ngbDropdownItem class="text-center">자기소개서</button>
           <button ngbDropdownItem class="text-center">논술</button>
           <button ngbDropdownItem class="text-center">면접</button>
         </div>
       </li>
-      <li ngbDropdown class="nav-item active">
-        <div type="button" class="text-center py-2">검정고시 전형 내신 환산</div>
+      <li ngbDropdown class="nav-item active" (mouseover)="isopen=true" (mouseleave)="isopen=false">
+        <div type="button" class="text-center py-2">검정고시 전형</div>
+        <div *ngIf="isopen" class="pt-2 pb-3 nav-sub-item">
+          <button ngbDropdownItem class="text-center">검정고시 전형 내신 환산</button>
+          <button ngbDropdownItem class="text-center">검정고시 전형 맞춤 진학 컨설팅</button>
+        </div>
       </li>
       <li ngbDropdown class="nav-item active">
         <div type="button" class="text-center py-2">마음치료(심리치료/상담)</div>
       </li>
     </ul>
-    <div style="min-width: 6rem">
-      <button class="btn-sm position-absolute my-2" style="min-width: 6rem; right: 0.5rem">상담 신청</button>
-    </div>
+  </div>
+  <div style="min-width: 6rem">
+    <button class="btn-sm position-absolute my-2" style="min-width: 6rem; right: 0.5rem">상담 신청</button>
   </div>
 </nav>

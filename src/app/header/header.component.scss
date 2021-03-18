@@ -3,6 +3,21 @@
   border-bottom: solid black 2px;
 }
 
+.navbar-brand{
+  margin-right: 0.3rem;
+}
+
+.nav-item{
+  width: 25%;
+  @media (max-width: 992px) {
+    width: 100%;
+  }
+}
+
+.nav-sub-item{
+  font-size: 0.85rem;
+}
+
 .navbar .position-absolute{
   top: 0
 }
