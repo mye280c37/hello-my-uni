@@ -21,3 +21,16 @@
 .navbar .position-absolute{
   top: 0
 }
+
+nav .btn-box{
+  min-width: 6rem;
+  right: 0.7rem;
+
+  .btn{
+    border: solid 1px black;
+  }
+}
+
+.nav-absolute-item{
+  min-width: 6rem;
+}
