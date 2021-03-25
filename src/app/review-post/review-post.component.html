@@ -1,0 +1,31 @@
+<div class="container py-5">
+  <h1 class="h1 py-4 position-relative">
+    {{ title }}
+    <div class="under-line-box position-absolute"></div>
+  </h1>
+  <form method="post">
+    <div class="form-group">
+      <label for="title">제목</label>
+      <input type="text" class="form-control" id="title" name="title"/>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label for="author">작성자</label>
+        <input type="text" class="form-control" id="author" name="author">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="time">상담 시간</label>
+        <input type="datetime-local" class="form-control" name="time" id="time"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">비밀번호 <span class="text-black-50">(글 수정 및 삭제시에 사용됩니다.)</span></label>
+      <input type="password" class="form-control" id="password" name="password"/>
+    </div>
+    <div class="form-group">
+      <label for="body">내용</label>
+      <textarea type="text" class="form-control" id="body" name="body" rows="20"></textarea>
+    </div>
+    <input type="submit" class="btn" name="submit" value="작성하기">
+  </form>
+</div>

@@ -1,75 +1,99 @@
 <div class="container">
   <div class="p-5 text-center">
-    <h1 class="h1 py-4">검정고시 전형 내신 환산 </h1>
+    <h1 class="h1 py-4">
+      검정고시 전형 내신 환산
+    </h1>
   </div>
-  <form class="score-form" id="abcd" method="GET">
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+<!--    <div class="card mb-5">-->
+<!--      <div class="card-body">-->
+<!--        <h3 class="card-title h3 mb-4">반영과목 및 비율 선택</h3>-->
+<!--        <div class="form-check mb-2 ml-3">-->
+<!--          <input class="form-check-input" type="radio" name="status" id="1" value="0" aria-describedby="radioHelpBlock">-->
+<!--          <label class="form-check-label" id="radioHelpBlock" for="1">-->
+<!--            전과목-->
+<!--          </label>-->
+<!--          &lt;!&ndash; <input type="radio" name="status" id="2" value="1"/><label for="2">필수과목(국/영/수/사/과/한)</label><br>-->
+<!--          <input type="radio" name="status" id="3" value="2"/><label for="3">국/영/수 가중 반영</label>-->
+<!--          <input type="radio" name="status" id="4" value="3"/><label for="4">상위</label> &ndash;&gt;-->
+<!--        </div>-->
+<!--        <div class="ml-3 form-text" style="color:rgb(125, 125, 125)">전과목 꼭 체크해주세요.</div>-->
+<!--      </div>-->
+<!--    </div>-->
     <div class="card mb-5">
       <div class="card-body">
-        <h3 class="card-title h3">반영과목 및 비율 선택</h3>
-        <div class="form-check mb-2 ml-3">
-          <input class="form-check-input" type="radio" name="status" id="1" value="0" aria-describedby="radioHelpBlock">
-          <label class="form-check-label" id="radioHelpBlock" for="1">
-            전과목
-          </label>
-          <!-- <input type="radio" name="status" id="2" value="1"/><label for="2">필수과목(국/영/수/사/과/한)</label><br>
-          <input type="radio" name="status" id="3" value="2"/><label for="3">국/영/수 가중 반영</label>
-          <input type="radio" name="status" id="4" value="3"/><label for="4">상위</label> -->
+        <h3 class="h3 card-title mb-4">성적 입력</h3>
+        <div class="card-subtitle">
+          반영과목 및 비율은 전과목으로 선택되어 점수가 환산됩니다.
         </div>
-        <div class="ml-3 form-text" style="color:rgb(125, 125, 125)">전과목 꼭 체크해주세요.</div>
-      </div>
-    </div>
-    <div class="card mb-5">
-      <div class="card-body">
-        <h3 class="h3 card-title">성적 입력</h3>
         <div class="px-5 mt-4" id="subject-box">
-          <div class="d-flex justify-content-between">
-            <p class="score-input"><label for="korean">국어</label><input type="number" name="korean" id="korean"></p>
-            <p class="score-input"><label for="english">영어</label><input type="number" name="english" id="english"></p>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="korean">국어</label>
+              <input type="text" class="form-control" name="korean" id="korean" ngModel>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="english">영어</label>
+              <input type="text" class="form-control" name="english" id="english" ngModel>
+            </div>
           </div>
-          <div class="d-flex justify-content-between">
-            <p class="score-input"><label for="math">수학</label><input type="number" name="math" id="math"></p>
-            <p class="score-input"><label for="society">사회</label><input type="number" name="society" id="society"></p>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="math">수학</label>
+              <input type="text" class="form-control" name="math" id="math" ngModel>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="society">사회</label>
+              <input type="text" class="form-control" name="society" id="society" ngModel>
+            </div>
           </div>
-          <div class="d-flex justify-content-between">
-            <p class="score-input"><label for="science">과학</label><input type="number" name="science" id="science"></p>
-            <p class="score-input"><label for="history">한국사</label><input type="number" name="history" id="history"></p>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="science">과학</label>
+              <input type="text" class="form-control" name="science" id="science" ngModel>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="history">한국사</label>
+              <input type="text" class="form-control" name="history" id="history" ngModel>
+            </div>
           </div>
-          <div class="d-flex justify-content-start">
-            <p class="score-input"><label for="choice">선택</label><input type="number" name="choice" id="choice"></p>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="choice">선택</label>
+              <input type="text" class="form-control" name="choice" id="choice" ngModel>
+            </div>
           </div>
           <div class="d-flex justify-content-end">
-            <button id="sendbutton">환산하기</button>
+            <input type="submit" class="btn" value="환산하기">
           </div>
         </div>
       </div>
     </div>
   </form>
   <div class="div1-5 box" id="result-box">
-    <h2 class="h2">환산 결과</h2>
-    <div class="filter">
-      <div class="d-flex">
-        <button class="svg-btn" id="find-btn" type="button"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24pt" height="24pt" viewBox="0 0 24 24" version="1.1">
-          <g id="surface6025373">
-            <path style=" stroke:none;fill-rule:nonzero;fill:rgb(43.921569%,43.921569%,43.921569%);fill-opacity:1;" d="M 13.261719 14.867188 L 15.742188 17.347656 C 15.363281 18.070312 15.324219 18.789062 15.722656 19.1875 L 20.25 23.714844 C 20.820312 24.285156 22.0625 23.972656 23.015625 23.015625 C 23.972656 22.058594 24.285156 20.820312 23.714844 20.25 L 19.191406 15.722656 C 18.789062 15.324219 18.070312 15.363281 17.347656 15.738281 L 14.867188 13.261719 Z M 8.5 0 C 3.804688 0 0 3.804688 0 8.5 C 0 13.195312 3.804688 17 8.5 17 C 13.195312 17 17 13.195312 17 8.5 C 17 3.804688 13.195312 0 8.5 0 Z M 8.5 15 C 4.910156 15 2 12.089844 2 8.5 C 2 4.910156 4.910156 2 8.5 2 C 12.089844 2 15 4.910156 15 8.5 C 15 12.089844 12.089844 15 8.5 15 Z M 8.5 15 "></path>
-          </g>
-        </svg></button>
-        <form class="uni-name-form">
-          <input type="text" name="uni" id="keyword" placeholder="대학명으로 검색해보세요">
+    <h2 class="h1 py-4 position-relative">
+      환산 결과
+      <div class="under-line-box position-absolute"></div>
+    </h2>
+    <div class="row">
+      <div class="d-flex col-md-6 position-relative">
+        <form class="w-100">
+          <input type="text" class="w-100" name="uni" id="keyword" placeholder="대학명으로 검색해보세요">
         </form>
+        <fa-icon class="position-absolute search-icon" [icon]="['fas', 'search']" size="lg"></fa-icon>
       </div>
-      <button class="svg-btn" id="filter-btn" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#707070"><g data-name="Layer 2"><g data-name="options-2"><rect width="24" height="24" transform="rotate(90 12 12)" opacity="0"></rect><path d="M19 9a3 3 0 0 0-2.82 2H3a1 1 0 0 0 0 2h13.18A3 3 0 1 0 19 9zm0 4a1 1 0 1 1 1-1 1 1 0 0 1-1 1z"></path><path d="M3 7h1.18a3 3 0 0 0 5.64 0H21a1 1 0 0 0 0-2H9.82a3 3 0 0 0-5.64 0H3a1 1 0 0 0 0 2zm4-2a1 1 0 1 1-1 1 1 1 0 0 1 1-1z"></path><path d="M21 17h-7.18a3 3 0 0 0-5.64 0H3a1 1 0 0 0 0 2h5.18a3 3 0 0 0 5.64 0H21a1 1 0 0 0 0-2zm-10 2a1 1 0 1 1 1-1 1 1 0 0 1-1 1z"></path></g></g></svg></button>
     </div>
-    <div class="div1-2">
-      <nav class="contents" id="filter-nav">
-        <ul>
-          <li><div id="orderGanada"> 가나다순</div></li>
-          <li><div id="orderDescend">등급 내림차순</div></li>
-          <li><div id="orderAscend">등급 오름차순</div></li>
-        </ul>
-      </nav>
-    </div>
+<!--    <div class="div1-2">-->
+<!--      <nav class="contents" id="filter-nav">-->
+<!--        <ul>-->
+<!--          <li><div id="orderGanada"> 가나다순</div></li>-->
+<!--          <li><div id="orderDescend">등급 내림차순</div></li>-->
+<!--          <li><div id="orderAscend">등급 오름차순</div></li>-->
+<!--        </ul>-->
+<!--      </nav>-->
+<!--    </div>-->
     <div style="height: 565px; margin: 35px 0;">
-      <table class="table text-center">
+      <table class="table text-center" *ngIf="result; else noResultMessage">>
         <thead>
         <tr>
           <th>대학명</th>
@@ -78,21 +102,26 @@
           <th>과별 입결</th>
         </tr>
         </thead>
-        <tbody id="resultTbody">
-
+        <tbody>
         </tbody>
         <!-- js로 tbody 넘어옴 -->
       </table>
-    </div>
-    <div class="move-table">
-      <button class="svg-btn" id="move-l-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#707070"><g data-name="Layer 2"><g data-name="arrow-ios-back"><rect width="24" height="24" transform="rotate(90 12 12)" opacity="0"></rect><path d="M13.83 19a1 1 0 0 1-.78-.37l-4.83-6a1 1 0 0 1 0-1.27l5-6a1 1 0 0 1 1.54 1.28L10.29 12l4.32 5.36a1 1 0 0 1-.78 1.64z"></path></g></g></svg>
-        <p>이전</p>
-      </button>
-      <button class="svg-btn" id="move-r-btn">
-        <p>다음</p>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#707070"><g data-name="Layer 2"><g data-name="arrow-ios-forward"><rect width="24" height="24" transform="rotate(-90 12 12)" opacity="0"></rect><path d="M10 19a1 1 0 0 1-.64-.23 1 1 0 0 1-.13-1.41L13.71 12 9.39 6.63a1 1 0 0 1 .15-1.41 1 1 0 0 1 1.46.15l4.83 6a1 1 0 0 1 0 1.27l-5 6A1 1 0 0 1 10 19z"></path></g></g></svg>
-      </button>
+      <ng-template #noResultMessage>
+        <table class="table text-center">
+          <thead>
+          <tr>
+            <th>대학명</th>
+            <th>지역</th>
+            <th>내신 환산</th>
+            <th>과별 입결</th>
+          </tr>
+          </thead>
+          <!-- js로 tbody 넘어옴 -->
+        </table>
+        <div class="text-center no-result-message" style="margin-top: 257px">
+          입력된 점수가 없습니다.
+        </div>
+      </ng-template>
     </div>
     <div class="extra-box">
       * 예체능계열의 환산 결과와는 다를 수 있습니다.

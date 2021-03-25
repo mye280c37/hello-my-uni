@@ -1,0 +1,10 @@
+@import "../../scss/_variables.scss";
+
+.search-icon {
+  right: 5%;
+  top: 10%;
+}
+
+.no-result-message, .card-subtitle{
+  color: $background;
+}

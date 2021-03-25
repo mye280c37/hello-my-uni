@@ -1,8 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
-
-/* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';
+@import "scss/_variables.scss";
 
 html, body{
   height: 100%;
 }
+
+.btn{
+  color: $dark !important;
+  background-color: $primary !important;
+  border: solid 1px $primary !important;
+  border-radius: 0 !important;
+}
+
+.under-line-box{
+  background-color: $shadow;
+  width: 18%;
+  height: 1rem;
+  opacity: 0.8;
+  z-index: -1;
+  bottom: 19%;
+  left: 0.8%;
+
+  @media (max-width: 992px) {
+    width: 50%;
+  }
+}
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';

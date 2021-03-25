@@ -1,0 +1,15 @@
+@import "../../scss/_variables.scss";
+
+.under-line-box{
+  left: 13%;
+  width: 75%;
+}
+
+.header-box{
+  background-color: $secondary;
+  padding: 1rem 1.8rem;
+
+  .h3{
+    margin-bottom: 0;
+  }
+}

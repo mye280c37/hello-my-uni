@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ReviewsComponent } from './reviews/reviews.component';
+import { ReviewPostComponent } from './review-post/review-post.component';
 import { MainComponent } from './main/main.component';
 import { GedConsultingComponent } from './ged-consulting/ged-consulting.component';
 import { GedConversionComponent } from './ged-conversion/ged-conversion.component';
@@ -9,6 +10,7 @@ import { GedConversionComponent } from './ged-conversion/ged-conversion.componen
 const routes: Routes = [
   { path: '', component: MainComponent },
   { path: 'reviews', component: ReviewsComponent },
+  { path: 'review/post', component: ReviewPostComponent },
   { path: 'ged/consulting', component: GedConsultingComponent },
   { path: 'ged/conversion', component: GedConversionComponent },
 ];
