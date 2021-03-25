@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReviewsComponent implements OnInit {
   title = '후기';
+  loadReviews = false;
 
   constructor() { }
 

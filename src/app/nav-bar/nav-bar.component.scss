@@ -1,8 +1,14 @@
 @import "../../styles.scss";
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Gothic:wght@400;700;800&display=swap');
 
 .text-underline{
   padding-bottom: 1rem;
   border-bottom: solid black 2px;
+}
+
+.nav-header {
+  font-family: 'Do Hyeon', sans-serif !important;
+  font-size: 1.2rem;
 }
 
 nav div{
@@ -50,6 +56,7 @@ nav .btn-box{
 
 .item-hover{
   background-color: rgba(0,0,0,0) !important;
+  font-family: 'Nanum Gothic', sans-serif !important;
   border:0;
   outline: 0;
 }
@@ -64,6 +71,6 @@ nav .btn-box{
 }
 
 .disabled{
-  cursor: none !important;
+  cursor: default !important;
   color: $background !important;
 }

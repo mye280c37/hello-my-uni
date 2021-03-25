@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg">
   <div class="nav-absolute-item">
     <div class="position-absolute">
-      <a class="navbar-brand my-2" routerLink="">MYUNI</a>
+      <a class="navbar-brand my-2 nav-header" routerLink="">MYUNI</a>
     </div>
   </div>
   <!-- Step 3: Toggle the value of the property when the toggler button is clicked. -->
@@ -11,14 +11,14 @@
   <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse" (mouseover)="isopen=true" (mouseleave)="isopen=false">
     <ul class="navbar-nav w-100">
       <li ngbDropdown class="nav-item active">
-        <div type="button" class="text-center py-2">입시 성과 및 후기</div>
+        <div type="button" class="text-center py-2 nav-header">입시 성과 및 후기</div>
         <div *ngIf="isopen" class="pt-2 pb-3 nav-sub-item">
           <div ngbDropdownItem class="text-center item-hover disabled" routerLink="/reviews">입시 성과</div>
           <div ngbDropdownItem class="text-center item-hover" routerLink="/reviews">후기</div>
         </div>
       </li>
       <li ngbDropdown class="nav-item disabled">
-        <div type="button" class="text-center py-2 disabled">진학 컨설팅</div>
+        <div type="button" class="text-center py-2 disabled nav-header">진학 컨설팅</div>
         <div *ngIf="isopen" class="pt-2 pb-3 nav-sub-item">
           <div ngbDropdownItem class="text-center item-hover disabled">자기소개서</div>
           <div ngbDropdownItem class="text-center item-hover disabled">논술</div>
@@ -26,21 +26,21 @@
         </div>
       </li>
       <li ngbDropdown class="nav-item active">
-        <div type="button" class="text-center py-2">검정고시 전형</div>
+        <div type="button" class="text-center py-2 nav-header">검정고시 전형</div>
         <div *ngIf="isopen" class="pt-2 pb-3 nav-sub-item">
           <div ngbDropdownItem class="text-center item-hover" routerLink="/ged/conversion">검정고시 전형 내신 환산</div>
           <div ngbDropdownItem class="text-center item-hover" routerLink="/ged/consulting">검정고시 전형 맞춤 진학 컨설팅</div>
         </div>
       </li>
       <li ngbDropdown class="nav-item disabled">
-        <div type="button" class="text-center py-2 disabled">마음치료(심리치료/상담)</div>
+        <div type="button" class="text-center py-2 disabled nav-header">마음치료(심리치료/상담)</div>
       </li>
     </ul>
   </div>
   <div class="nav-absolute-item">
     <div class="position-absolute btn-box">
       <div class="background-box"></div>
-      <button class="nav-absolute-item btn my-2" (click)="alertMessage()">상담 신청</button>
+      <button class="nav-absolute-item btn my-2 nav-header" (click)="alertMessage()">상담 신청</button>
     </div>
   </div>
 </nav>

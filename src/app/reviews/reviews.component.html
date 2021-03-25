@@ -3,7 +3,7 @@
     {{ title }}
     <div class="under-line-box position-absolute"></div>
   </h1>
-  <table class="table text-center">
+  <table class="table text-center" *ngIf="loadReviews; else noReviewMessage">
     <thead>
     <tr>
       <th scope="col">제목</th>
@@ -12,6 +12,20 @@
     </tr>
     </thead>
   </table>
+  <ng-template #noReviewMessage>
+    <table class="table text-center">
+      <thead>
+      <tr>
+        <th scope="col">제목</th>
+        <th scope="col">분류</th>
+        <th scope="col">상담 날짜</th>
+      </tr>
+      </thead>
+    </table>
+    <div class="text-center" style="padding: 150px 0">
+      아직 작성된 후기가 없습니다.
+    </div>
+  </ng-template>
 </div>
 <div class="fixed-bottom p-4">
   <button class="btn" routerLink="/review/post">후기 작성</button>

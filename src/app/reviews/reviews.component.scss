@@ -5,5 +5,9 @@ table{
 }
 
 .under-line-box{
-  width: 10% !important;
+  width: 9.5% !important;
+  @media (max-width: 992px) {
+    width: 23% !important;
+    left: 2%;
+  }
 }
