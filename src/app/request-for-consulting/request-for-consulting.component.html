@@ -1,0 +1,198 @@
+<div class="container py-5">
+  <h1 class="h1 py-4 position-relative">
+    {{ title }}
+    <div class="under-line-box position-absolute"></div>
+  </h1>
+  <div class="mb-5">
+    <span style="color: darkred">*</span>는 필수 항목입니다.
+    기타 문의사항은 imaginemyuni@gmail.com으로 메일 부탁드립니다.
+  </div>
+  <form #consultingForm="ngForm" (ngSubmit)="onSubmit(consultingForm)">
+    <div class="p-4">
+      <table class="table">
+        <tbody>
+        <tr>
+          <th scope="row" style="width: 30%">이름<span style="color: darkred">*</span></th>
+          <td><input type="text" name="이름" ngModel/></td>
+        </tr>
+        <tr>
+          <th scope="row" style="width: 30%">나이<span style="color: darkred">*</span></th>
+          <td><input type="number" name="age" ngModel/></td>
+        </tr>
+        <tr>
+          <th scope="row" style="width: 30%">성별*</th>
+          <td>
+            <input type="radio" class="mr-1" name="gender" value="m" ngModel/><span class="mr-3">남</span>
+            <input type="radio" class="mr-1" name="gender" value="w" ngModel/><span>여</span>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" style="width: 30%">과목별 점수<span style="color: darkred">*</span></th>
+          <td>
+            <div class="row mb-2">
+              <div class="col-md-2 py-auto">국어</div>
+              <div class="col-md-10"><input type="number" name="korean" ngModel></div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-md-2 py-auto">영어</div>
+              <div class="col-md-10"><input type="number" name="english" ngModel></div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-md-2 py-auto">수학</div>
+              <div class="col-md-10"><input type="number" name="math" ngModel></div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-md-2 py-auto">사회</div>
+              <div class="col-md-10"><input type="number" name="society" ngModel></div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-md-2 py-auto">과학</div>
+              <div class="col-md-10"><input type="number" name="science" ngModel></div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-md-2 py-auto">한국사</div>
+              <div class="col-md-10"><input type="number" name="history" ngModel></div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-md-2 py-auto">선택</div>
+              <div class="col-md-10"><input type="number" name="choice" ngModel></div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" style="width: 30%">평균 점수<span style="color: darkred">*</span></th>
+          <td>
+            <input type="number" name="average" ngModel/>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" style="width: 30%">지원 전형<span style="color: darkred">*</span></th>
+          <td>
+            <div><input type="radio" class="mr-1" name="application" value="0" (click)="onHideTextField()" ngModel/>학생부 교과(검정고시 성적)</div>
+            <div><input type="radio" class="mr-1" name="application" value="1" (click)="onHideTextField()" ngModel/>학생부 교과 면접(검정고시 성적 + 면접)</div>
+            <div><input type="radio" class="mr-1" name="application" value="2" (click)="onHideTextField()" ngModel/>학생부 종합(검정고시 성적 + 자기소개서 작성 + 면접)</div>
+            <div><input type="radio" class="mr-1" name="application" value="3" (click)="onHideTextField()" ngModel/>정시(수능)</div>
+            <div><input type="radio" class="mr-1" name="application" value="4" (click)="showTextField=true" ngModel/>기타</div>
+            <div *ngIf="showTextField" class="pl-2 pt-1">
+              <input type="text" name="description"/>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" style="width: 30%">지원 전형 선택 이유<span style="color: darkred">*</span></th>
+          <td>
+            <textarea class="w-100" rows="5" name="apllication-reason"></textarea>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" style="width: 30%">지망 학교 및 학과</th>
+          <td>
+            <div class="row mb-2">
+              <div class="col-md-2 my-auto">1지망<span style="color: darkred">*</span></div>
+              <div class="row col-md-10">
+                <div class="col-md-6">
+                  <input type="text" class="mb-1 w-100" name="uni1" placeholder="대학교" ngModel/>
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="w-100" name="major1" placeholder="학과" ngModel/>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-md-2 my-auto">2지망<span style="color: darkred">*</span></div>
+              <div class="row col-md-10">
+                <div class="col-md-6">
+                  <input type="text" class="mb-1 w-100" name="uni2" placeholder="대학교" ngModel/>
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="w-100" name="major2" placeholder="학과" ngModel/>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-md-2 my-auto">3지망<span style="color: darkred">*</span></div>
+              <div class="row col-md-10">
+                <div class="col-md-6">
+                  <input type="text" class="mb-1 w-100" name="uni3" placeholder="대학교" ngModel/>
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="w-100" name="major3" placeholder="학과" ngModel/>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-md-2 my-auto">4지망</div>
+              <div class="row col-md-10">
+                <div class="col-md-6">
+                  <input type="text" class="mb-1 w-100" name="uni4" placeholder="대학교" ngModel/>
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="w-100" name="major4" placeholder="학과" ngModel/>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-md-2 my-auto">5지망</div>
+              <div class="row col-md-10">
+                <div class="col-md-6">
+                  <input type="text" class="mb-1 w-100" name="uni5" placeholder="대학교" ngModel/>
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="w-100" name="major5" placeholder="학과" ngModel/>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-md-2 my-auto">6지망</div>
+              <div class="row col-md-10">
+                <div class="col-md-6">
+                  <input type="text" class="mb-1 w-100" name="uni6" placeholder="대학교" ngModel/>
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="w-100" name="major6" placeholder="학과" ngModel/>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" style="width: 30%">참고 사항</th>
+          <td>
+            <textarea class="w-100" name="note" rows="5"></textarea>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" style="width: 30%">상담 시간<span style="color: darkred">*</span></th>
+          <td>
+            <div class="mb-2"><input type="date" name="date" ngModel></div>
+            <div>
+              <div>상담 시간대</div>
+              <div><input type="radio" class="mr-1" name="time" value="0">13:30~14:30</div>
+              <div><input type="radio" class="mr-1" name="time" value="1">14:30~15:30</div>
+              <div><input type="radio" class="mr-1" name="time" value="2">15:30~16:30</div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td scope="row" colspan="2">
+            <strong>수업료는 회당 3만원이며, 강사님께서 시간을 투자하시는만큼 최소한의 비용을 책정했습니다. 설문지 작성 여부 및 입금 확인 이후 상담 진행합니다.<span style="color: darkred">*</span></strong>
+            <div class="pt-3">
+              계좌번호: 1002-857-980326 우리은행 강예은 <br>입금자명: 진학 컨설팅 000 ⇒ 진학 컨설팅 강예은 <span class="text-black-50">(학생 본인의 이름을 넣어주시면 됩니다.)</span>
+            </div>
+            <div class="py-2">
+              <input type="radio" class="mr-1" name="check" value="true" ngModel> 확인했습니다
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" style="width: 30%">환불 계좌</th>
+          <td>
+            <input type="text" class="w-100" name="account" placeholder="1002-857-980326 우리은행 강예은" ngModel>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <input type="submit" class="btn mt-3" value="신청하기">
+    </div>
+  </form>
+</div>

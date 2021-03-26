@@ -16,6 +16,7 @@ import { GedConsultingComponent } from './ged-consulting/ged-consulting.componen
 import { GedConversionComponent } from './ged-conversion/ged-conversion.component';
 import { HeaderComponent } from './main/header/header.component';
 import { ReviewPostComponent } from './review-post/review-post.component';
+import { RequestForConsultingComponent } from './request-for-consulting/request-for-consulting.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ReviewPostComponent } from './review-post/review-post.component';
     GedConversionComponent,
     HeaderComponent,
     ReviewPostComponent,
+    RequestForConsultingComponent,
   ],
   imports: [
     BrowserModule,
