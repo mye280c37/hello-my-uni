@@ -7,6 +7,7 @@ import { MainComponent } from './main/main.component';
 import { GedConsultingComponent } from './ged-consulting/ged-consulting.component';
 import { GedConversionComponent } from './ged-conversion/ged-conversion.component';
 import { RequestForConsultingComponent } from './request-for-consulting/request-for-consulting.component';
+import { ManagementComponent } from './management/management.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'ged/consulting', component: GedConsultingComponent },
   { path: 'ged/conversion', component: GedConversionComponent },
   { path: 'request/consulting', component: RequestForConsultingComponent },
+  { path: 'admin', component: ManagementComponent}
 ];
 
 @NgModule({

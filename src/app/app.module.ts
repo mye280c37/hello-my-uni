@@ -17,6 +17,7 @@ import { GedConversionComponent } from './ged-conversion/ged-conversion.componen
 import { HeaderComponent } from './main/header/header.component';
 import { ReviewPostComponent } from './review-post/review-post.component';
 import { RequestForConsultingComponent } from './request-for-consulting/request-for-consulting.component';
+import { ManagementComponent } from './management/management.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { RequestForConsultingComponent } from './request-for-consulting/request-
     HeaderComponent,
     ReviewPostComponent,
     RequestForConsultingComponent,
+    ManagementComponent,
   ],
   imports: [
     BrowserModule,
