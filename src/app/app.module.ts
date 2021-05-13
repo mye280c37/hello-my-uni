@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faSearch, faCookieBite } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faCookieBite, faBars } from '@fortawesome/free-solid-svg-icons';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -50,7 +50,7 @@ import { UniversityInfoComponent } from './management/university-info/university
 export class AppModule {
   constructor(library: FaIconLibrary) {
     // Add multiple icons to the library
-    library.addIcons(faSearch, faCookieBite);
+    library.addIcons(faSearch, faCookieBite, faBars);
   }
 }
 

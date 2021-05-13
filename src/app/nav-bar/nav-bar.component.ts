@@ -19,4 +19,8 @@ export class NavBarComponent implements OnInit {
     location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSd0VlLOzNwJUSXdF5zMSMgVAiuZBWEiHI1gcRIjTbBkF5crMg/viewform';
   }
 
+  changeState(){
+    this.isopen = !this.isopen;
+  }
+
 }
