@@ -10,6 +10,8 @@ import { HttpClientModule, HttpClient, HttpParams } from '@angular/common/http';
 export class ManagementComponent implements OnInit {
   adminCode = 'admin';
   isAuthentication = false;
+  type0 = true;
+  type1 = false;
 
   constructor() { }
 
@@ -21,6 +23,19 @@ export class ManagementComponent implements OnInit {
     if(f.value["admin"] == this.adminCode){
       console.log("인증 완료");
       this.isAuthentication = true;
+    }
+  }
+
+  changeTable(type: number){
+    switch (type) {
+      case 0:
+        this.type0 = true;
+        this.type1 = false;
+        break;
+      case 1 :
+        this.type0 = false;
+        this.type1 = true;
+        break;
     }
   }
 

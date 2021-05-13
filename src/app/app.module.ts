@@ -18,6 +18,8 @@ import { HeaderComponent } from './main/header/header.component';
 import { ReviewPostComponent } from './review-post/review-post.component';
 import { RequestForConsultingComponent } from './request-for-consulting/request-for-consulting.component';
 import { ManagementComponent } from './management/management.component';
+import { ConsultingReqInfoComponent } from './management/consulting-req-info/consulting-req-info.component';
+import { UniversityInfoComponent } from './management/university-info/university-info.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { ManagementComponent } from './management/management.component';
     ReviewPostComponent,
     RequestForConsultingComponent,
     ManagementComponent,
+    ConsultingReqInfoComponent,
+    UniversityInfoComponent,
   ],
   imports: [
     BrowserModule,

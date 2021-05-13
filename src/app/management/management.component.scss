@@ -1,4 +1,5 @@
 @import "../../scss/_variables.scss";
+@import "../../styles.scss";
 
 .center{
   width: 500px;
@@ -10,4 +11,25 @@
   left: 50%;
   margin-top: -100px;
   margin-left: -250px;
+}
+
+.clicked{
+  background-color: $shadow;
+  font-weight: bold;
+}
+
+.nonclicked{
+  background-color: rgba(166, 146, 129, 0.6);
+}
+
+.click-menu:hover{
+  cursor: pointer;
+}
+
+div.border-end {
+  border-right: 1.5px solid white;
+}
+
+.shadow-bg{
+  background-color: $shadow;
 }

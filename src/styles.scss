@@ -31,5 +31,17 @@ div {
   }
 }
 
+.bg-bright{
+  background-color: $bright;
+}
+
+.bg-primary{
+  background-color: $primary;
+}
+
+.bg-white-50{
+  background-color: rgba(245, 245, 245, 0.6);
+}
+
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';

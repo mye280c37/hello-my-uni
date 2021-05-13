@@ -1,4 +1,4 @@
-<div class="position-absolute center px-4 text-center" *ngIf="!isAuthentication; else adminContents">
+<div class="position-absolute center px-4 text-center bg-white-50" *ngIf="!isAuthentication; else adminContents">
   <div class="mb-3"><strong>관리자 인증</strong></div>
   <form #adminForm="ngForm" (ngSubmit)="onSubmit(adminForm)">
     <input type="text" name="admin" class="form-control mb-4" ngModel>
@@ -8,11 +8,12 @@
   </form>
 </div>
 <ng-template #adminContents>
-  <div class="container py-5">
+  <div class="p-5">
     <div class="d-flex text-center">
-      <div class="w-50">상담 신청 정보</div>
-      <div class="w-50">대학 정보</div>
+      <div class="w-50 pt-4 pb-5 click-menu border-end" [ngClass]="type0?'clicked':'nonclicked'" (click)="changeTable(0)">상담 신청 정보</div>
+      <div class="w-50 pt-4 pb-5 click-menu" [ngClass]="type1?'clicked':'nonclicked'" (click)="changeTable(1)">대학 정보</div>
     </div>
-    <div>관련 정보들</div>
+    <div class="shadow-bg p-5" *ngIf="type0"><app-consulting-req-info></app-consulting-req-info></div>
+    <div class="shadow-bg p-5" *ngIf="type1"><app-university-info></app-university-info></div>
   </div>
 </ng-template>
