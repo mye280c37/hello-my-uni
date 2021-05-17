@@ -92,21 +92,8 @@
 <!--        </ul>-->
 <!--      </nav>-->
 <!--    </div>-->
-    <div style="height: 565px; margin: 35px 0;">
-      <table class="table text-center" *ngIf="result; else noResultMessage">>
-        <thead>
-        <tr>
-          <th>대학명</th>
-          <th>지역</th>
-          <th>내신 환산</th>
-          <th>과별 입결</th>
-        </tr>
-        </thead>
-        <tbody>
-        </tbody>
-        <!-- js로 tbody 넘어옴 -->
-      </table>
-      <ng-template #noResultMessage>
+    <div style="height: 565px; margin: 35px 0;" id="table">
+      <div *ngIf="!result; else resultTable">
         <table class="table text-center">
           <thead>
           <tr>
@@ -116,11 +103,39 @@
             <th>과별 입결</th>
           </tr>
           </thead>
-          <!-- js로 tbody 넘어옴 -->
         </table>
-        <div class="text-center no-result-message" style="margin-top: 257px">
+        <div class="text-center no-result-message w-100" style="margin-top: 257px">
           입력된 점수가 없습니다.
         </div>
+      </div>
+      <ng-template #resultTable>
+        <table class="table text-center" *ngIf="renewal; else exampleResultTable">
+          <tbody>
+
+          </tbody>
+        </table>
+      </ng-template>
+      <ng-template #exampleResultTable>
+        <div class="mb-1" style="color: darkred">아래 결과는 예시 결과입니다. 입력하신 점수와 무관합니다.</div>
+        <table class="table text-center">
+          <thead>
+          <tr>
+            <th>대학명</th>
+            <th>지역</th>
+            <th>내신 환산</th>
+            <th>과별 입결</th>
+          </tr>
+          </thead>
+          <tbody *ngFor="let result of exampleResult">
+            <tr>
+              <td>{{ result.university }}</td>
+              <td>{{ result.area }}</td>
+              <td>{{ result.converted }}</td>
+              <td *ngIf="result.link; else blank">링크</td>
+              <ng-template #blank><td></td></ng-template>
+            </tr>
+          </tbody>
+        </table>
       </ng-template>
     </div>
     <div class="extra-box">
