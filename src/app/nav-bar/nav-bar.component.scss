@@ -84,3 +84,11 @@ nav .btn-box{
   cursor: default !important;
   color: $background !important;
 }
+
+.custom-navbar-toggler{
+  padding: 0.25rem 0.75rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  background-color: rgba(0,0,0,0) !important;
+  border: none !important;
+}

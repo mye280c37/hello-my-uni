@@ -8,6 +8,7 @@ import { GedConsultingComponent } from './ged-consulting/ged-consulting.componen
 import { GedConversionComponent } from './ged-conversion/ged-conversion.component';
 import { RequestForConsultingComponent } from './request-for-consulting/request-for-consulting.component';
 import { ManagementComponent } from './management/management.component';
+import { EssayConsultingComponent} from './essay-consulting/essay-consulting.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'ged/consulting', component: GedConsultingComponent },
   { path: 'ged/conversion', component: GedConversionComponent },
   { path: 'request/consulting', component: RequestForConsultingComponent },
-  { path: 'admin', component: ManagementComponent}
+  { path: 'admin', component: ManagementComponent},
+  { path: 'consulting/essay', component: EssayConsultingComponent },
 ];
 
 @NgModule({

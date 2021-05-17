@@ -20,6 +20,7 @@ import { RequestForConsultingComponent } from './request-for-consulting/request-
 import { ManagementComponent } from './management/management.component';
 import { ConsultingReqInfoComponent } from './management/consulting-req-info/consulting-req-info.component';
 import { UniversityInfoComponent } from './management/university-info/university-info.component';
+import { EssayConsultingComponent } from './essay-consulting/essay-consulting.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { UniversityInfoComponent } from './management/university-info/university
     ManagementComponent,
     ConsultingReqInfoComponent,
     UniversityInfoComponent,
+    EssayConsultingComponent,
   ],
   imports: [
     BrowserModule,

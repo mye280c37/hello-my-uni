@@ -2,7 +2,7 @@
   <div class="nav-absolute-item" style="min-height: 45px;">
     <div class="position-absolute d-flex main">
       <a class="navbar-brand my-2 nav-header" routerLink="">MYUNI</a>
-      <fa-icon [icon]="['fas', 'bars']" size="lg" class="navbar-toggler mr-auto my-2" type="button" (click)="isMenuCollapsed = !isMenuCollapsed"></fa-icon>
+      <fa-icon [icon]="['fas', 'bars']" size="lg" class="custom-navbar-toggler mr-auto my-2" (click)="isMenuCollapsed = !isMenuCollapsed"></fa-icon>
     </div>
   </div>
   <!-- Step 3: Toggle the value of the property when the toggler button is clicked. -->
@@ -15,11 +15,11 @@
           <div ngbDropdownItem class="text-center item-hover" routerLink="/reviews">후기</div>
         </div>
       </li>
-      <li ngbDropdown class="nav-item disabled">
-        <div class="text-center py-2 disabled nav-header" (click)="changeState()" style="min-height: 45px;">진학 컨설팅</div>
+      <li ngbDropdown class="nav-item active">
+        <div class="text-center py-2 nav-header" (click)="changeState()" style="min-height: 45px;">진학 컨설팅</div>
         <div *ngIf="isopen" class="pt-2 pb-3 nav-sub-item">
           <div ngbDropdownItem class="text-center item-hover disabled">자기소개서</div>
-          <div ngbDropdownItem class="text-center item-hover disabled">논술</div>
+          <div ngbDropdownItem class="text-center item-hover" routerLink="consulting/essay">논술</div>
           <div ngbDropdownItem class="text-center item-hover disabled">면접</div>
         </div>
       </li>

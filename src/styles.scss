@@ -39,8 +39,16 @@ div {
   background-color: $primary;
 }
 
+.bg-shadow{
+  background-color: $shadow;
+}
+
 .bg-white-50{
   background-color: rgba(245, 245, 245, 0.6);
+}
+
+.round-10{
+  border-radius: 10px;
 }
 
 /* Importing Bootstrap SCSS file. */

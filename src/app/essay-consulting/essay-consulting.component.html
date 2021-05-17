@@ -1,0 +1,35 @@
+<div class="container py-5">
+  <h1 class="h1 py-4 position-relative">
+    {{ title }}
+    <div class="under-line-box position-absolute"></div>
+  </h1>
+  <div class="text-center bg-shadow mb-5 round-10 text-white shadow" style="height: 200px; padding-top: 85px">
+    논술 컨설팅 방법에 대한 설명
+  </div>
+  <table class="table text-center" *ngIf="loadPosts; else noPostMessage">
+    <thead>
+    <tr>
+      <th scope="col">제목</th>
+      <th scope="col">분류</th>
+      <th scope="col">상담 날짜</th>
+    </tr>
+    </thead>
+  </table>
+  <ng-template #noPostMessage>
+    <table class="table text-center">
+      <thead>
+      <tr>
+        <th scope="col">제목</th>
+        <th scope="col">분류</th>
+        <th scope="col">상담 날짜</th>
+      </tr>
+      </thead>
+    </table>
+    <div class="text-center" style="padding: 150px 0">
+      아직 작성된 글이 없습니다.
+    </div>
+  </ng-template>
+</div>
+<div class="fixed-bottom p-4 shadow-sm">
+  <button class="btn">논술 상담 작성</button>
+</div>
