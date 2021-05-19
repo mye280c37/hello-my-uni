@@ -51,5 +51,13 @@ div {
   border-radius: 10px;
 }
 
+.click-menu:hover{
+  cursor: pointer;
+}
+
+.contents-box{
+  padding-top: 8rem;
+}
+
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';

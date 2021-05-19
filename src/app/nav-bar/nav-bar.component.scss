@@ -28,6 +28,7 @@ nav div{
 .navbar{
   background-color: $dark-90 !important;
   color: $bright;
+  z-index: 10;
 }
 
 .navbar-brand{

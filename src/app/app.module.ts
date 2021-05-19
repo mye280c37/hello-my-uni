@@ -21,6 +21,9 @@ import { ManagementComponent } from './management/management.component';
 import { ConsultingReqInfoComponent } from './management/consulting-req-info/consulting-req-info.component';
 import { UniversityInfoComponent } from './management/university-info/university-info.component';
 import { EssayConsultingComponent } from './essay-consulting/essay-consulting.component';
+import { IntroduceConsultantComponent } from './introduce-consultant/introduce-consultant.component';
+import { IntroduceMyUniComponent } from './introduce-my-uni/introduce-my-uni.component';
+import { YoutubeMaterialsComponent } from './youtube-materials/youtube-materials.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,9 @@ import { EssayConsultingComponent } from './essay-consulting/essay-consulting.co
     ConsultingReqInfoComponent,
     UniversityInfoComponent,
     EssayConsultingComponent,
+    IntroduceConsultantComponent,
+    IntroduceMyUniComponent,
+    YoutubeMaterialsComponent,
   ],
   imports: [
     BrowserModule,

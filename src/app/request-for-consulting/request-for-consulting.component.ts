@@ -8,7 +8,7 @@ import { HttpClientModule, HttpClient, HttpParams } from '@angular/common/http';
   styleUrls: ['./request-for-consulting.component.scss']
 })
 export class RequestForConsultingComponent implements OnInit {
-  title = '상담 신청';
+  title = '컨설팅 신청';
   showTextField = false;
 
   constructor(private http: HttpClient) { }
