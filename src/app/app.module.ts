@@ -24,6 +24,8 @@ import { EssayConsultingComponent } from './essay-consulting/essay-consulting.co
 import { IntroduceConsultantComponent } from './introduce-consultant/introduce-consultant.component';
 import { IntroduceMyUniComponent } from './introduce-my-uni/introduce-my-uni.component';
 import { YoutubeMaterialsComponent } from './youtube-materials/youtube-materials.component';
+import { ReviewDetailComponent } from './reviews/review-detail/review-detail.component';
+import { ReviewListComponent } from './reviews/review-list/review-list.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { YoutubeMaterialsComponent } from './youtube-materials/youtube-materials
     IntroduceConsultantComponent,
     IntroduceMyUniComponent,
     YoutubeMaterialsComponent,
+    ReviewDetailComponent,
+    ReviewListComponent,
   ],
   imports: [
     BrowserModule,

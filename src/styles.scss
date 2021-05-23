@@ -51,12 +51,50 @@ div {
   border-radius: 10px;
 }
 
+.click-menu{
+  font-size: large;
+  box-shadow: 1px 1px 3px 1px #dadce0 inset;
+}
+
+.selected-menu{
+  font-size: larger !important;
+  font-weight: bolder;
+  background-color: $shadow;
+  color: #ECEFF1;
+  border: 1px solid $shadow;
+  box-shadow: 1px 1px 3px 1px #dadce0 !important;
+}
+
 .click-menu:hover{
   cursor: pointer;
+  margin:0;
 }
 
 .contents-box{
   padding-top: 8rem;
+}
+
+.divider-box{
+  border-bottom: 2.5px solid $shadow;
+  width: 100%;
+  height: 1px;
+  margin: 0;
+  box-shadow: 1px 1px 3px 1px #dadce0;
+}
+
+.fixed-bottom-btn{
+  background-color: rgba(89, 89, 89, 0.6);
+  padding: 1rem;
+  color: #dadce0;
+  font-size: 1rem;
+}
+
+.item-hover:hover{
+  cursor: pointer;
+}
+
+.item-underline:hover{
+  text-decoration: underline;
 }
 
 /* Importing Bootstrap SCSS file. */

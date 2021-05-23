@@ -1,0 +1,27 @@
+@import "../../../scss/_variables.scss";
+
+.contents-box{
+  padding: 3rem;
+  border: 1px solid $background;
+  border-radius: 6px;
+  line-height: 2rem;
+}
+
+ul{
+  list-style-type: none;
+  padding-inline-start: 10px;
+}
+
+ul li{
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  padding: 0.5rem;
+}
+
+ul li:last-child{
+  border-bottom: none !important;
+}
+
+h4 .under-line-box{
+  height: 10px;
+  bottom: 27%;
+}

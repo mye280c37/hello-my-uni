@@ -1,0 +1,41 @@
+<div class="mb-5 p-3">
+  <h2 class="text-left h2 mb-3">{{ review.title }}</h2>
+  <div class="row mb-5">
+    <div class="col-md-6 text-left mb-1">작성자: {{ review.author }}</div>
+    <div class="col-md-6 text-right mb-1">상담 시간: {{ review.time }}</div>
+  </div>
+  <div class="contents-box">
+    {{ review.body }}
+  </div>
+</div>
+<div class="d-flex justify-content-between mb-5">
+  <div class="item-hover item-underline" (click)="onChangeGetDetail()">목록으로</div>
+  <div class="item-hover item-underline">수정하기</div>
+</div>
+<div class="pb-4">
+  <h4 class="h4 position-relative py-4" id="title1">
+    다른 후기
+    <div class="under-line-box position-absolute"></div>
+  </h4>
+  <ul class="pb-4">
+    <li class="item-hover">
+      <div class="d-flex justify-content-between">
+        <div>후기 1</div>
+        <div>2020-09-07</div>
+      </div>
+    </li>
+    <li class="item-hover">
+      <div class="d-flex justify-content-between">
+        <div>후기 2</div>
+        <div>2020-09-08</div>
+      </div>
+    </li>
+    <li class="item-hover">
+      <div class="d-flex justify-content-between">
+        <div>후기 3</div>
+        <div>2020-09-09</div>
+      </div>
+    </li>
+  </ul>
+</div>
+
