@@ -84,7 +84,7 @@ export class GedConversionComponent implements OnInit {
           }
         );
     }else{
-      alert('서버 리뉴얼 중입니다. 4월 중 재개 예정입니다.');
+      alert('서버 리뉴얼 중입니다. 6월 중 재개 예정입니다.');
       this.result = true;
 
       const eleMoveTo = document.getElementById('table');

@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EssayConsultingComponent implements OnInit {
   title = '논술 컨설팅';
-  loadPosts = false;
+  loadPosts = true;
 
   constructor() { }
 

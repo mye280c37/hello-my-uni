@@ -26,6 +26,8 @@ import { IntroduceMyUniComponent } from './introduce-my-uni/introduce-my-uni.com
 import { YoutubeMaterialsComponent } from './youtube-materials/youtube-materials.component';
 import { ReviewDetailComponent } from './reviews/review-detail/review-detail.component';
 import { ReviewListComponent } from './reviews/review-list/review-list.component';
+import { CoverLetterConsultingComponent } from './cover-letter-consulting/cover-letter-consulting.component';
+import { InterviewConsultingComponent } from './interview-consulting/interview-consulting.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,8 @@ import { ReviewListComponent } from './reviews/review-list/review-list.component
     YoutubeMaterialsComponent,
     ReviewDetailComponent,
     ReviewListComponent,
+    CoverLetterConsultingComponent,
+    InterviewConsultingComponent,
   ],
   imports: [
     BrowserModule,

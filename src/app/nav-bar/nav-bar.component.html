@@ -27,8 +27,8 @@
         <div class="text-center py-2 nav-header" (click)="changeState()" style="min-height: 45px;" routerLink="/ged/consulting">진학 컨설팅</div>
         <div *ngIf="isopen" class="pt-2 pb-3 nav-sub-item">
           <div ngbDropdownItem class="text-center item-hover" routerLink="/ged/consulting">수시 지원</div>
-          <div ngbDropdownItem class="text-center item-hover disabled">자기소개서</div>
-          <div ngbDropdownItem class="text-center item-hover disabled">면접</div>
+          <div ngbDropdownItem class="text-center item-hover" routerLink="consulting/cover/letter">자기소개서</div>
+          <div ngbDropdownItem class="text-center item-hover" routerLink="consulting/interview">면접</div>
           <div ngbDropdownItem class="text-center item-hover" routerLink="consulting/essay">논술 첨삭</div>
         </div>
       </li>
