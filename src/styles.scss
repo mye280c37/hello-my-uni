@@ -17,6 +17,12 @@ div {
   border-radius: 0 !important;
 }
 
+.btn-general{
+  background-color: $secondary !important;
+  color: $dark-90 !important;
+  border: solid 1px $dark-90 !important;
+}
+
 .under-line-box{
   background-color: $shadow;
   width: 18%;
@@ -41,6 +47,10 @@ div {
 
 .bg-shadow{
   background-color: $shadow;
+}
+
+.bg-background{
+  background-color: $background;
 }
 
 .bg-white-50{
@@ -81,13 +91,11 @@ div {
   width: 100%;
   height: 1px;
   margin: 0;
-  box-shadow: 1px 1px 3px 1px #dadce0;
+  box-shadow: 1px 1px 3px 1px $shadow;
 }
 
 .fixed-bottom-btn{
-  background-color: rgba(89, 89, 89, 0.6);
   padding: 1rem;
-  color: #dadce0;
   font-size: 1rem;
 }
 
@@ -102,10 +110,10 @@ div {
 .process-box{
   display: table;
   background-color: white;
-  border: 7px solid $secondary;
+  border: 7px solid $primary;
   width: 100%;
   height: 125px;
-  box-shadow: 1px 1px 2px $background inset;
+  box-shadow: 1px 1px 2px $shadow inset;
 }
 
 .process-title{
@@ -114,7 +122,7 @@ div {
   text-align: left;
   padding-left: 0.5rem;
   margin-bottom: -0.5rem;
-  text-shadow: 1px 1px 2px $background;
+  text-shadow: 1px 1px 2px $shadow;
   //color: $secondary;
 }
 
@@ -134,10 +142,25 @@ div {
 
 .set-focusing:hover{
   cursor: pointer;
-  background-color: $shadow;
+  background-color: $shadow !important;
   color: white;
   border: 7px solid $shadow;
   box-shadow: 7px 7px 2px $shadow !important;
+  font-weight: bold;
+}
+
+.hidden{
+  display: none;
+}
+
+.primary-text{
+  color: $warning;
+  font-weight: bold;
+  font-size: large;
+}
+
+.item-list{
+  font-size: 1.1rem;
 }
 
 /* Importing Bootstrap SCSS file. */
