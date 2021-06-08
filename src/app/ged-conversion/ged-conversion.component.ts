@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormGroup, FormsModule, NgForm } from '@angular/forms';
 import { HttpClientModule, HttpClient, HttpParams } from '@angular/common/http';
+import { GedConversionService } from './ged-conversion.service';
+import { GedConversionResult, GedConversionTable } from './ged-conversion.model';
 
 @Component({
   selector: 'app-ged-conversion',
@@ -9,8 +11,12 @@ import { HttpClientModule, HttpClient, HttpParams } from '@angular/common/http';
 })
 export class GedConversionComponent implements OnInit {
   // data: object;
-  renewal = false;
+  renewal = true;
   result = false;
+  type = 6;
+  tableTab = 1;
+  tableNumber: number[] = [];
+  conversionResult: GedConversionTable[] = [];
   exampleResult = [
       {
         university : '강원대학교',
@@ -60,6 +66,58 @@ export class GedConversionComponent implements OnInit {
     this.result = false;
   }
 
+
+  createResultList(result: any): void{
+    let aTableCell = 0;
+    let tableId = 1;
+    let aTableList: GedConversionResult[] = [];
+    for (let i = 0; i < this.type; i++){
+      const typeSize = result[i].length;
+      for (let j = 0; j < typeSize; j++){
+        if (result[i][j].converted){
+          const aResult = new GedConversionResult(
+            result[i][j].university,
+            result[i][j].area,
+            result[i][j].converted,
+            result[i][j].link
+          );
+          aTableList.push(aResult);
+          aTableCell += 1;
+        }
+        if (aTableCell === 10 || (j === typeSize - 1 && i === this.type - 1)){
+          if (aTableCell < 10){
+            for (let k = aTableCell; k < 10; k++){
+              aTableList.push(new GedConversionResult(
+                '  ',
+                '  ',
+                null,
+                null
+              ));
+            }
+          }
+          console.log(aTableList);
+          this.conversionResult.push(
+            new GedConversionTable(
+              tableId,
+              aTableList
+            )
+          );
+          this.tableNumber.push(tableId);
+          tableId += 1;
+          aTableList = [];
+          aTableCell = 0;
+        }
+      }
+    }
+    console.log(this.conversionResult);
+    this.result = true;
+    const eleMoveTo = document.getElementById('table');
+    if (eleMoveTo != null){
+      window.scrollTo(0, eleMoveTo.offsetTop - 50);
+    }
+  }
+
+
   onSubmit(f: NgForm): void{
     console.log(f.value);
 
@@ -68,13 +126,16 @@ export class GedConversionComponent implements OnInit {
     console.log(f.value);
 
     if (this.renewal){
-      this.http.get('http://localhost:5000/api/converter/each', {params: f.value})
+      this.http.get<GedConversionService>('http://3.19.95.97:4000/api/converter/each',
+        {
+          params: f.value,
+          responseType: 'json',
+          withCredentials: true
+        })
         .subscribe(
           (val) => {
-            console.log(val);
-           /*
-           * type별로 array에 묶여서 정보 들어옴
-           */
+            console.log(val.result);
+            this.createResultList(val.result);
           },
           err => {
             console.log(err);
@@ -92,5 +153,9 @@ export class GedConversionComponent implements OnInit {
         window.scrollTo(0, eleMoveTo.offsetTop - 50);
       }
     }
+  }
+
+  tabTable(i: number): void{
+    this.tableTab = i;
   }
 }

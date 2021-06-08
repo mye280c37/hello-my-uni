@@ -159,8 +159,17 @@ div {
   font-size: large;
 }
 
+.warning{
+  color: $warning !important;
+  font-weight: bold;
+}
+
 .item-list{
   font-size: 1.1rem;
+}
+
+.border-background{
+  border: 1px solid $background;
 }
 
 /* Importing Bootstrap SCSS file. */
