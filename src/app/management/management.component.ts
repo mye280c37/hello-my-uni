@@ -9,7 +9,7 @@ import { HttpClientModule, HttpClient, HttpParams } from '@angular/common/http';
 })
 export class ManagementComponent implements OnInit {
   adminCode = 'admin';
-  isAuthentication = false;
+  isAuthentication = true;
   type0 = true;
   type1 = false;
 
@@ -18,15 +18,15 @@ export class ManagementComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(f: NgForm){
+  onSubmit(f: NgForm): void{
     console.log(f.value);
-    if(f.value["admin"] == this.adminCode){
-      console.log("인증 완료");
+    if (f.value.admin === this.adminCode){
+      console.log('인증 완료');
       this.isAuthentication = true;
     }
   }
 
-  changeTable(type: number){
+  changeTable(type: number): void{
     switch (type) {
       case 0:
         this.type0 = true;

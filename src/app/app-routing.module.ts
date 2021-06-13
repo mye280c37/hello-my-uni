@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'review/post', component: ReviewPostComponent },
   { path: 'ged/conversion', component: GedConversionComponent },
   { path: 'request/consulting', component: RequestForConsultingComponent },
-  { path: 'admin', component: ManagementComponent},
+  { path: 'admin1', component: ManagementComponent},
   { path: 'ged/consulting', component: GedConsultingComponent },
   { path: 'consulting/essay', component: EssayConsultingComponent },
   { path: 'consulting/cover/letter', component: CoverLetterConsultingComponent },
