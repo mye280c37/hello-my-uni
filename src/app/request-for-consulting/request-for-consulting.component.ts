@@ -1,3 +1,4 @@
+import * as $ from 'jquery';
 import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormGroup, FormsModule, NgForm } from '@angular/forms';
 import { HttpClientModule, HttpClient, HttpParams } from '@angular/common/http';
@@ -59,48 +60,65 @@ export class RequestForConsultingComponent implements OnInit {
             major: f.value.major6
           }
         };
+        if (f.value.option){
+          let optionVal = '';
+          $('input[name="option"]:checked').each((e) => {
+            const value = $(this).val();
+            optionVal += value;
+            optionVal += '/';
+          });
+          console.log(optionVal);
+          if (f.value.application){
+            let applicationVal = '';
+            $('input[name="application"]:checked').each((e) => {
+              const value = $(this).val();
+              applicationVal += value;
+              applicationVal += '/';
+            });
+            console.log(applicationVal);
+            if (f.value.name && f.value.age && f.value.gender && f.value.email && f.value.phone) {
+              if ($('input[name="application"][value="4"]').prop('checked') && f.value.description) {
+                if (f.value.application_reason && f.value.check && f.value.account) {
+                  const body = new Consulting(
+                    f.value.name + f.value.age + f.value.gender + f.value.email + f.value.phone,
+                    f.value.name,
+                    f.value.age,
+                    f.value.gender,
+                    f.value.email,
+                    f.value.phone,
+                    scores,
+                    f.value.average,
+                    optionVal,
+                    applicationVal,
+                    f.value.application === '4' ? f.value.description : '',
+                    f.value.application_reason,
+                    hope,
+                    f.value.note,
+                    f.value.date + ' ' + f.value.time.toDateString(),
+                    f.value.check ? 1 : 0,
+                    f.value.account,
+                    '',
+                    false
+                  );
 
-        if (f.value.name && f.value.age && f.value.gender && f.value.email && f.value.phone) {
-          if (f.value.average && f.value.option && (f.value.application || (f.value.application === '4' && f.value.description))) {
-            if (f.value.application_reason && f.value.check && f.value.account) {
-              const body = new Consulting(
-                f.value.name + f.value.age + f.value.gender + f.value.email + f.value.phone,
-                f.value.name,
-                f.value.age,
-                f.value.gender,
-                f.value.email,
-                f.value.phone,
-                scores,
-                f.value.average,
-                f.value.option,
-                f.value.application,
-                f.value.application === '4' ? f.value.description : '',
-                f.value.application_reason,
-                hope,
-                f.value.note,
-                f.value.date + ' ' + f.value.time.toDateString(),
-                f.value.check ? 1 : 0,
-                f.value.account,
-                '',
-                false
-              );
+                  console.log(body);
 
-              console.log(body);
-
-              this.http.post('https://site.hellomyuni.com/api/consulting/create', body)
-                .subscribe(
-                  (val) => {
-                    console.log(val);
-                    alert('컨설팅이 성공적으로 신청되었습니다');
-                    location.reload();
-                  },
-                  err => {
-                    console.log(err);
-                  },
-                  () => {
-                    console.log('complete');
-                  }
-                );
+                  // this.http.post('https://site.hellomyuni.com/api/consulting/create', body)
+                  //   .subscribe(
+                  //     (val) => {
+                  //       console.log(val);
+                  //       alert('컨설팅이 성공적으로 신청되었습니다. 입금 확인 후 진행되는 개별 연락을 기다려 주세요.');
+                  //       location.reload();
+                  //     },
+                  //     err => {
+                  //       console.log(err);
+                  //     },
+                  //     () => {
+                  //       console.log('complete');
+                  //     }
+                  //   );
+                }
+              }
             }
           }
         }
