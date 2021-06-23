@@ -126,11 +126,10 @@ export class GedConversionComponent implements OnInit {
     console.log(f.value);
 
     if (this.renewal){
-      this.http.get<GedConversionService>('http://3.19.95.97:4000/api/converter/each',
+      this.http.get<GedConversionService>('https://site.hellomyuni.com/api/converter/each',
         {
           params: f.value,
           responseType: 'json',
-          withCredentials: true
         })
         .subscribe(
           (val) => {

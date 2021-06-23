@@ -3,6 +3,8 @@ export class Consulting {
   public name: string;
   public age: number;
   public gender: string;
+  public email: string;
+  public phone: string;
   public scores: {
     korean: number,
     english: number,
@@ -53,7 +55,7 @@ export class Consulting {
   public payment: boolean;
 
   constructor(
-    key: string, name: string, age: number, gender: string, scores: any, average: number, option: string, application: string,
+    key: string, name: string, age: number, gender: string, email: string, phone: string, scores: any, average: number, option: string, application: string,
     // tslint:disable-next-line:variable-name
     description: string, application_reason: string, hope: any, note: string, date_time: string, check: number,
     account: string, comment: string, payment: boolean
@@ -62,6 +64,8 @@ export class Consulting {
     this.name = name;
     this.age = age;
     this.gender = gender;
+    this.email = email;
+    this.phone = phone;
     this.scores = scores;
     this.average = average;
     this.option = option;

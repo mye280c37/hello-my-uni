@@ -1,8 +1,10 @@
+import * as $ from 'jquery';
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { ConsultingReqInfoService } from './consulting-req-info.service';
 import { Consulting } from '../../../models/consulting.model';
 import { ConsultingTable } from './consulting-req-info.model';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-consulting-req-info',
@@ -13,6 +15,7 @@ export class ConsultingReqInfoComponent implements OnInit {
   doesPay = false;
   mss = '미입금';
   tableNumber: number[] = [];
+  tableTab = 1;
   consultingTableList: ConsultingTable[] = [];
   application = [
     '학생부 교과(검정고시 성적)',
@@ -31,7 +34,7 @@ export class ConsultingReqInfoComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.http.get<ConsultingReqInfoService>('http://localhost:4000/api/consulting/board')
+    this.http.get<ConsultingReqInfoService>('https://site.hellomyuni.com/api/consulting/board')
       .subscribe(
         (val) => {
           console.log(val.result);
@@ -56,16 +59,36 @@ export class ConsultingReqInfoComponent implements OnInit {
     }
   }
 
+  isKey(key: string): boolean{
+    for (const consultingTable of this.consultingTableList){
+      if (consultingTable.key === key) { return true; }
+    }
+    return false;
+  }
+
+  getConsultingTable(key: string): ConsultingTable{
+    let targetTable: ConsultingTable;
+    for (const consultingTable of this.consultingTableList){
+      if (consultingTable.key === key) {
+        targetTable = consultingTable;
+        return targetTable;
+      }
+    }
+    return new ConsultingTable(0, '0', []);
+  }
+
   createResultList(result: any): void{
+    console.log(result);
     let tableId = 1;
     let eleNum = 0;
-    let consultingTable = [];
     for (let i = 0; i < result.length; i++){
       const consulting = new Consulting(
         result[i].key,
         result[i].name,
         result[i].age,
         result[i].gender,
+        result[i].email,
+        result[i].phone,
         result[i].scores,
         result[i].average,
         result[i].option,
@@ -80,23 +103,73 @@ export class ConsultingReqInfoComponent implements OnInit {
         result[i].comment,
         result[i].payment
       );
-      consultingTable.push(consulting);
+      const cellId = result[i].name + i;
       eleNum += 1;
-      if (eleNum === 10 || i === result.length - 1){
+      if (this.isKey(result[i].key)){
+        const consultingTable = this.getConsultingTable(result[i].key);
+        // @ts-ignore
+        consultingTable.result.push([cellId, consulting, result[i]._id]);
+      }else{
         this.consultingTableList.push(
           new ConsultingTable(
             tableId,
-            consultingTable
+            result[i].key,
+            [[cellId, consulting, result[i]._id]]
           )
         );
-        console.log(this.consultingTableList);
+        this.tableNumber.push(tableId);
         tableId += 1;
-        consultingTable = [];
       }
     }
+    console.log(this.consultingTableList);
   }
 
   changeStrToInt(str: string): number{
     return parseInt(str);
+  }
+
+  showAdditionalBox(id: string): void{
+    const materialEle = $('#' + id + '-additional-box');
+    const titleEle = $('#' + id);
+    if (materialEle.hasClass('hidden')) {
+      materialEle.removeClass('hidden');
+      titleEle.addClass('font-weight-bold');
+    }else{
+      materialEle.addClass('hidden');
+      if (titleEle.hasClass('font-weight-bold')) {
+        titleEle.removeClass('font-weight-bold');
+      }
+    }
+  }
+
+  tabTable(i: number): void{
+    this.tableTab = i;
+  }
+
+  onSubmit(payment: boolean): void{
+    const body = {
+      id: $('input#id').val(),
+      comment: $('textarea#comment').val(),
+      payment: payment
+    };
+    console.log(body);
+    this.http.post('https://site.hellomyuni.com/api/consulting/update', body)
+      .subscribe(
+        (val) => {
+          console.log(val);
+        },
+        err => {
+          console.log(err);
+          console.log(err.status);
+          if (err.status === 404){
+            alert('변경에 실패하였습니다. 관리자에게 문의 바랍니다.');
+          }
+        },
+        () => {
+          console.log('complete');
+          alert('변경이 완료되었습니다');
+          location.reload();
+        }
+      );
   }
 }

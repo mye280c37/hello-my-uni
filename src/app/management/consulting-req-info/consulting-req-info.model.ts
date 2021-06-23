@@ -1,11 +1,11 @@
-import { Consulting } from '../../../models/consulting.model';
-
 export class ConsultingTable {
   public id: number;
-  public result: Consulting[];
+  public key: string;
+  public result: any[];
 
-  constructor(id: number, result: Consulting[]) {
+  constructor(id: number, key: string, result: any[]) {
     this.id = id;
+    this.key = key;
     this.result = result;
   }
 }

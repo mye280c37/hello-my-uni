@@ -172,5 +172,9 @@ div {
   border: 1px solid $background;
 }
 
+.item-border:hover{
+  font-weight: bold;
+}
+
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';

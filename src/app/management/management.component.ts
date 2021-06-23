@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormGroup, FormsModule, NgForm } from '@angular/forms';
 import { HttpClientModule, HttpClient, HttpParams } from '@angular/common/http';
+import { AdminCodeService } from './management.service';
+
 
 @Component({
   selector: 'app-management',
@@ -8,22 +10,37 @@ import { HttpClientModule, HttpClient, HttpParams } from '@angular/common/http';
   styleUrls: ['./management.component.scss']
 })
 export class ManagementComponent implements OnInit {
-  adminCode = 'admin';
+  adminCode = [];
   isAuthentication = true;
   type0 = true;
   type1 = false;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
   }
 
+  createAdminList(result: any): void{
+
+  }
+
   onSubmit(f: NgForm): void{
+    this.http.get<AdminCodeService>('https://site.hellomyuni.com/api/admin1/code', {params: {key: f.value.admin}})
+      .subscribe(
+        (val) => {
+          console.log(val.message);
+          if (val.message === 'success'){
+            this.isAuthentication = true;
+          }
+        },
+        err => {
+          console.log(err);
+        },
+        () => {
+          console.log('complete');
+        }
+      );
     console.log(f.value);
-    if (f.value.admin === this.adminCode){
-      console.log('인증 완료');
-      this.isAuthentication = true;
-    }
   }
 
   changeTable(type: number): void{

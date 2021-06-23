@@ -21,63 +21,93 @@ export class RequestForConsultingComponent implements OnInit {
   onSubmit(f: NgForm){
     console.log(f.value);
 
-    const scores = {
-      korean: f.value.korean,
-      english: f.value.english,
-      math: f.value.math,
-      society: f.value.society,
-      science: f.value.science,
-      history: f.value.history,
-      choice: f.value.choice
-    };
+    if (f.value.korean && f.value.english && f.value.math && f.value.society && f.value.history && f.value.choice) {
+      const scores = {
+        korean: f.value.korean,
+        english: f.value.english,
+        math: f.value.math,
+        society: f.value.society,
+        science: f.value.science,
+        history: f.value.history,
+        choice: f.value.choice
+      };
+      if (f.value.uni1 && f.value.major1 && f.value.uni2 && f.value.major2 && f.value.uni3 && f.value.major3
+        && f.value.uni4 && f.value.major4 && f.value.uni5 && f.value.major5 && f.value.uni6 && f.value.major6) {
+        const hope = {
+          1: {
+            uni: f.value.uni1,
+            major: f.value.major1
+          },
+          2: {
+            uni: f.value.uni2,
+            major: f.value.major2
+          },
+          3: {
+            uni: f.value.uni3,
+            major: f.value.major3
+          },
+          4: {
+            uni: f.value.uni4,
+            major: f.value.major4
+          },
+          5: {
+            uni: f.value.uni5,
+            major: f.value.major5
+          },
+          6: {
+            uni: f.value.uni6,
+            major: f.value.major6
+          }
+        };
 
-    const hope = {
-      1: {
-        uni: f.value.uni1,
-        major: f.value.major1
-      },
-      2: {
-        uni: f.value.uni2,
-        major: f.value.major2
-      },
-      3: {
-        uni: f.value.uni3,
-        major: f.value.major3
-      },
-      4: {
-        uni: f.value.uni4,
-        major: f.value.major4
-      },
-      5: {
-        uni: f.value.uni5,
-        major: f.value.major5
-      },
-      6: {
-        uni: f.value.uni6,
-        major: f.value.major6
+        if (f.value.name && f.value.age && f.value.gender && f.value.email && f.value.phone) {
+          if (f.value.average && f.value.option && (f.value.application || (f.value.application === '4' && f.value.description))) {
+            if (f.value.application_reason && f.value.check && f.value.account) {
+              const body = new Consulting(
+                f.value.name + f.value.age + f.value.gender + f.value.email + f.value.phone,
+                f.value.name,
+                f.value.age,
+                f.value.gender,
+                f.value.email,
+                f.value.phone,
+                scores,
+                f.value.average,
+                f.value.option,
+                f.value.application,
+                f.value.application === '4' ? f.value.description : '',
+                f.value.application_reason,
+                hope,
+                f.value.note,
+                f.value.date + ' ' + f.value.time.toDateString(),
+                f.value.check ? 1 : 0,
+                f.value.account,
+                '',
+                false
+              );
+
+              console.log(body);
+
+              this.http.post('https://site.hellomyuni.com/api/consulting/create', body)
+                .subscribe(
+                  (val) => {
+                    console.log(val);
+                    alert('컨설팅이 성공적으로 신청되었습니다');
+                    location.reload();
+                  },
+                  err => {
+                    console.log(err);
+                  },
+                  () => {
+                    console.log('complete');
+                  }
+                );
+            }
+          }
+        }
       }
-    };
-
-    const body = new Consulting(
-      f.value.name + f.value.age + f.value.gender,
-      f.value.name,
-      f.value.age,
-      f.value.gender,
-      scores,
-      f.value.average,
-      f.value.option,
-      f.value.application,
-      f.value.application === '4' ? f.value.description : '',
-      f.value.application_reason,
-      hope,
-      f.value.note,
-      f.value.date + ' ' + f.value.time,
-      f.value.check ? 1 : 0,
-      f.value.account,
-      '',
-      false
-    );
-
+    }else{
+      alert('필수 항목을 모두 채워주세요');
+    }
     // const body = {
     //   key: 'unique_key',
     //   name: '이름',
@@ -126,22 +156,6 @@ export class RequestForConsultingComponent implements OnInit {
     //   check: 1,
     //   account: '1002-857-980326 우리은행 강예은',
     // };
-
-    console.log(body);
-
-    this.http.post('http://localhost:4000/api/consulting/save', body)
-      .subscribe(
-        (val) => {
-          console.log(val);
-          alert('컨설팅이 성공적으로 신청되었습니다');
-        },
-        err => {
-          console.log(err);
-        },
-        () => {
-          console.log('complete');
-        }
-      );
   }
 
   onHideTextField(): void{

@@ -6,14 +6,11 @@
 }
 
 .additional-box{
-  left: 0;
-  top: 50px;
-  height: 300px;
-  padding: 15px 23px 0 23px;
+  padding: 15px 23px 15px 23px;
   width: 100%;
   text-align: left !important;
 
-  textarea{
+  textarea, input[type=text]{
     height: 150px;
   }
 }
