@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Review} from '../review.model';
+import { Review} from '../../../models/review.model';
 
 @Component({
   selector: 'app-review-detail',
@@ -9,7 +9,6 @@ import {Review} from '../review.model';
 export class ReviewDetailComponent implements OnInit {
   @Output() getDetail = new EventEmitter<boolean>();
   @Input() review: Review = new Review(
-    0,
     '선생님~~ 감사합니다^^',
     '첫 아이 처음 검정고시 처음 입시를 치루는 저에게는 모든 게 낯설었어요. ' +
     '알아보는 걸 잘 하지만 다 신중하게 해야 하고 조심스러워서 잘못될까 싶고 여기저기 알아보고 상담 받아봤는데 만족함을 얻지 못했습니다. ' +
@@ -20,13 +19,14 @@ export class ReviewDetailComponent implements OnInit {
     'qkrtjdbs',
     '2020-09-07 13:30',
   );
+  @Input() reviewId = '';
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onChangeGetDetail(){
+  onChangeGetDetail(): void{
     this.getDetail.emit(false);
   }
 

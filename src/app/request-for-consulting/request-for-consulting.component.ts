@@ -13,6 +13,20 @@ export class RequestForConsultingComponent implements OnInit {
   title = '컨설팅 신청';
   showTextField = false;
 
+  application = [
+    '학생부 교과(검정고시 성적)',
+    '학생부 교과 면접(검정고시 성적 + 면접)',
+    '학생부 종합(검정고시 성적 + 자기소개서 작성 + 면접)',
+    '정시(수능)',
+    '기타'
+  ];
+  consultingOption = [
+    '수시지원',
+    '자기소개서 컨설팅',
+    '면접 컨설팅',
+    '논술 첨삭'
+  ];
+
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
@@ -60,16 +74,26 @@ export class RequestForConsultingComponent implements OnInit {
             major: f.value.major6
           }
         };
-        if (f.value.option){
+        if (f.value.option0 || f.value.option1 || f.value.option2 || f.value.option3){
           let optionVal = '';
-          $('input[name="option"]:checked').each((e) => {
-            const value = $(this).val();
-            optionVal += value;
-            optionVal += '/';
-          });
+          for (let i = 0; i < 4; i++){
+            const optionEle = $('input[name="option' + i + '"]');
+            if (optionEle.prop('checked')){
+              optionVal += this.consultingOption[parseInt(optionEle.val() as string, 10)];
+              optionVal += '/';
+            }
+          }
+
           console.log(optionVal);
-          if (f.value.application){
+          if (f.value.application0 || f.value.application1 || f.value.application2 || f.value.application3 || f.value.application4){
             let applicationVal = '';
+            for (let i = 0 ; i < 5; i++){
+              const applicationEle = $('input[name="application' + i + '"]');
+              if (applicationEle.prop('checked')){
+                applicationVal += this.application[parseInt(applicationEle.val() as string, 10)];
+                applicationVal += '/';
+              }
+            }
             $('input[name="application"]:checked').each((e) => {
               const value = $(this).val();
               applicationVal += value;
@@ -77,7 +101,8 @@ export class RequestForConsultingComponent implements OnInit {
             });
             console.log(applicationVal);
             if (f.value.name && f.value.age && f.value.gender && f.value.email && f.value.phone) {
-              if ($('input[name="application"][value="4"]').prop('checked') && f.value.description) {
+              const application4Ele = $('input[name="application4"]');
+              if ((application4Ele.prop('checked') && f.value.description) || !application4Ele.prop('checked')) {
                 if (f.value.application_reason && f.value.check && f.value.account) {
                   const body = new Consulting(
                     f.value.name + f.value.age + f.value.gender + f.value.email + f.value.phone,
@@ -94,7 +119,7 @@ export class RequestForConsultingComponent implements OnInit {
                     f.value.application_reason,
                     hope,
                     f.value.note,
-                    f.value.date + ' ' + f.value.time.toDateString(),
+                    f.value.date + ' ' + f.value.time,
                     f.value.check ? 1 : 0,
                     f.value.account,
                     '',

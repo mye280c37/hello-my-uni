@@ -29,8 +29,8 @@
         </ng-template>
       </div>
       <div class="additional-box hidden" id="{{ consulting[0] }}-additional-box">
-        <div><strong>컨설팅 옵션</strong>: {{ consultingOption[changeStrToInt(consulting[1].option)] }}</div>
-        <div><strong>지원 전형</strong>: {{ application[changeStrToInt(consulting[1].application)] }}</div>
+        <div><strong>컨설팅 옵션</strong>: {{ consulting[1].option }}</div>
+        <div><strong>지원 전형</strong>: {{ consulting[1].application }}</div>
         <div><strong>지원 이유</strong>: {{ consulting[1].application_reason }}</div>
         <div>
           <div><strong>점수</strong>(평균: {{consulting[1].average}})</div>

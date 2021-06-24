@@ -17,10 +17,10 @@
     </tr>
     </thead>
     <tbody *ngFor="let review of reviewList">
-    <tr (click)="onChangeGetDetail(review.id)" class="item-hover">
-      <td id="2" class="item-underline">{{ review.title }}</td>
-      <td>{{ review.author }}</td>
-      <td>{{ review.time }}</td>
+    <tr (click)="onChangeGetDetail(review[0])" class="item-hover">
+      <td id="2" class="item-underline">{{ review[1].title }}</td>
+      <td>{{ review[1].author }}</td>
+      <td>{{ review[1].time }}</td>
     </tr>
     </tbody>
   </table>

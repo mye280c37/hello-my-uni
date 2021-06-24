@@ -17,20 +17,6 @@ export class ConsultingReqInfoComponent implements OnInit {
   tableNumber: number[] = [];
   tableTab = 1;
   consultingTableList: ConsultingTable[] = [];
-  application = [
-    '학생부 교과(검정고시 성적)',
-    '학생부 교과 면접(검정고시 성적 + 면접)',
-    '학생부 종합(검정고시 성적 + 자기소개서 작성 + 면접)',
-    '정시(수능)',
-    '기타'
-  ];
-  consultingOption = [
-    '수시지원',
-    '자기소개서 컨설팅',
-    '면접 컨설팅',
-    '논술 첨삭'
-  ];
-
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
@@ -122,10 +108,6 @@ export class ConsultingReqInfoComponent implements OnInit {
       }
     }
     console.log(this.consultingTableList);
-  }
-
-  changeStrToInt(str: string): number{
-    return parseInt(str);
   }
 
   showAdditionalBox(id: string): void{

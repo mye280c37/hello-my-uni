@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Review } from './review.model';
+import { Review } from '../../models/review.model';
+import { HttpClient } from '@angular/common/http';
+import { ReviewBoardService } from './reviews.service';
 
 @Component({
   selector: 'app-reviews',
@@ -10,18 +12,16 @@ import { Review } from './review.model';
 export class ReviewsComponent implements OnInit {
   loadReviews = true;
   getDetail = false;
-  postId = -1;
+  postId = '';
   reviewPost: Review = new Review(
-    -1,
     '',
     '',
     '',
     '',
     '',
   );
-  reviews: Review[] = [
-    new Review(
-      0,
+  reviews: [number, Review, string][] = [
+    [0, new Review(
       '선생님~~ 감사합니다^^',
       '첫 아이 처음 검정고시 처음 입시를 치루는 저에게는 모든 게 낯설었어요. ' +
       '알아보는 걸 잘 하지만 다 신중하게 해야 하고 조심스러워서 잘못될까 싶고 여기저기 알아보고 상담 받아봤는데 만족함을 얻지 못했습니다. ' +
@@ -31,62 +31,56 @@ export class ReviewsComponent implements OnInit {
       '박서윤',
       'qkrtjdbs',
       '2020-09-07 13:30',
-    ),
-    new Review(
-      1,
-      '선생님 제발 가격 올려받으세요ㅠㅠ',
-      '고1때 자퇴한 19살입니다. 제가 2회에 70만원하는 그런 상담도 받아보고 다 받아봤거든요 근데 진짜 도움 하나 안되고 결국엔 또 원점으로 돌아갔었습니다. ' +
-      '다시는 이런 상술에 넘어가지 않겠다고 다짐했었어요. 오늘도 솔직히 너무 가격이 싸길래 그냥 날린다 치고 해보자 하고 신청했습니다. ' +
-      '그런데 저 오늘 길이 보이기 시작했어요. 어떻게 이렇게 하나하나 다 분석하고 알아와주셨는지. ' +
-      '제가 그냥 적어 놨던 말들도 세심하게 기억해서 따로 정리해서 보여주시는데 정말 진심을 다해 도와주는 사람이 생기면 이런 기분이겠구나 싶었습니다. ' +
-      '지금 생각해도 많이 울컥해요.. 상담 받다가 울어보는건 오늘이 처음이자 마지막 일거라고 생각합니다. (울어서 많이 당황하셨죠..) ' +
-      '선생님 아까는 부끄러워서 말씀 못드렸는데 저 진짜 선생님 팬입니다. 진짜 돈 많이 냈던 학원에서도 안 가르쳐주시는 것들 하나하나 세심하게 가르쳐주시는데, ' +
-      '강의 올려주시는 순간부터 선생님 팬 됐습니다. 유튜브에 무료 강의 올려주시는 것만 해도 너무 감사한데 검정고시 내신 환산 복잡하다고 홈페이지도 만들어주시고 진학 컨설팅까지.. ' +
-      '감사해요. 이 컨설팅도 대학 입학 도와주는 꿈드림 센터 많이 없다고 해주시겠다고 하신거래요. 그 마음에 반했습니다 선생님. ' +
-      '그리고 선생님 이 상담 준비하신다고 맨날 밤 새신대요 이런 선생님이 어디있습니까 진짜. 선생님 부탁드리는데 제발 가격 올려받으세요 ' +
-      '이렇게 시간 다 투자하셔서 준비해주시는데 이 가격이 말이 되나요 100만원을 줘도 아깝지 않은 그런 상담이고 더 지불할 의향 있으니까 제발 올려받으세요. ' +
-      '선생님 오래오래 저희 곁에 계셔주셔야죠. 저는 선생님만 믿겠습니다. 자기소개서에 면접까지 선생님만 믿고 가겠습니다. ' +
-      '자퇴하고 정말 막막했는데 선생님 만나고 길이 보여요. 이 기분 정말 겪어보지 않으신 분들은 모를겁니다. 상담 후기만 적으려고 했는데 그냥 찬양을 해버렸네요. ' +
-      '이런 분이랑 함께할 수 있다는 것 자체만으로 저는 영광입니다. 선생님 정말 감사드립니다.',
-      '이규빈',
-      'dlrbqls',
-      '2020-09-08 14:30',
-    ),
-    new Review(
-      2,
-      '진심과 열정에 더해 실력까지 갖추신 분이시네요.',
-      '19살 아이의 엄마입니다. 가고 싶은 대학은 이전에 정했는데, 아이가 유난히 자기소개서 작성을 힘들어하더라고요. ' +
-      '도와주고 싶은데 어디서 도움을 받아야 할지 몰라 고민을 많이 했습니다. ' +
-      '아이가 예은 선생님 유튜브 강의 계속 돌려보면서 열심히 써보고 어떠냐 면서 봐달라고 하는데, 아이 아빠나 제가 글실력이 모자라 봐주지 못하고 있어 아쉬웠습니다. ' +
-      '그래서 진학 컨설팅 소개 영상 보자 마자 바로 신청했습니다. 순식간에 다 마감되는 것을 보고 빨리 신청해서 정말 다행이라는 생각부터 들었던 것 같아요. ' +
-      '아이랑 같이 상담 받았는데, 역시는 역시. 저는 상담시간 내내 감탄만 했네요. 자기소개서가 빼곡하게 메모로 차있는 것을 보고 놀랐고, ' +
-      '문장마다 하나하나 섬세하게 첨삭 준비 해오신 것에 두 번 놀랐습니다. ' +
-      '얼마나 고민을 하셨는지 가늠이 안될 정도로 선생님이 말씀해주시는 방향, 고쳐주시는 부분 모두 정말 너무 좋았어요. 두번째 후기 작성해주신 분께서 울컥하셨다고 하셨는데, ' +
-      '저도 비슷한 기분을 느낀 걸 보면 선생님은 상담 하나하나에 진심으로 최선을 다하시는 분이신 것 같아요. ' +
-      '다른 일로도 많이 바쁘실텐데 정말 감사한 마음 뿐 입니다. 진심과 열정에 더해 실력까지 갖추신 분입니다. ' +
-      '조언해주신대로 열심히 준비해서 좋은 소식 들려드릴 수 있도록 할게요. 선생님 정말 감사합니다.',
-      '박영선',
-      'qkrdudtjs',
-      '2020-09-09 13:30',
-    )
+    ), '123456']
   ];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     this.getDetail = false;
-    this.postId = -1;
     console.log('ngOnInit');
+
+    this.http.get<ReviewBoardService>('https://site.hellomyuni.com/api/review/board')
+      .subscribe(
+        (val) => {
+          console.log(val.result);
+          this.createReviewList(val.result);
+        },
+        err => {
+          console.log(err);
+          console.log(err.status);
+        },
+        () => {
+          console.log('complete');
+        }
+      );
   }
 
-  getDetailHandlerWithId(id: number){
-    this.postId = id;
+  createReviewList(result: any): void{
+    for (let i = 0 ; i < result.length; i++){
+      this.reviews.push([
+          i,
+          new Review(
+            result[i].title,
+            result[i].body,
+            result[i].author,
+            result[i].password,
+            result[i].time
+          ),
+        result[i]._id,
+      ]);
+    }
+    console.log(this.reviews);
+  }
+
+  getDetailHandlerWithId(id: number): void{
+    this.postId = this.reviews[id][2] as string;
     console.log(id);
     this.getDetail = true;
-    this.reviewPost = this.reviews[id];
+    this.reviewPost = this.reviews[id][1] as Review;
   }
 
-  getDetailHandler(e: any){
+  getDetailHandler(e: any): void{
     console.log(e);
     this.getDetail = e;
   }

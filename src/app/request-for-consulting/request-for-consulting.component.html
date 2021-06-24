@@ -38,20 +38,20 @@
         <tr>
           <th scope="row" style="width: 30%"> 컨설팅 선택 옵션<span class="warning">*</span></th>
           <td>
-            <div><input type="checkbox" class="mr-1" name="option" value="0" ngModel/>수시 지원</div>
-            <div><input type="checkbox" class="mr-1" name="option" value="1" ngModel/>자기소개서 컨설팅</div>
-            <div><input type="checkbox" class="mr-1" name="option" value="2" ngModel/>면접 컨설팅</div>
-            <div><input type="checkbox" class="mr-1" name="option" value="3" ngModel/>논술 첨삭</div>
+            <div><input type="checkbox" class="mr-1" name="option0" value="0" ngModel/>수시 지원</div>
+            <div><input type="checkbox" class="mr-1" name="option1" value="1" ngModel/>자기소개서 컨설팅</div>
+            <div><input type="checkbox" class="mr-1" name="option2" value="2" ngModel/>면접 컨설팅</div>
+            <div><input type="checkbox" class="mr-1" name="option3" value="3" ngModel/>논술 첨삭</div>
           </td>
         </tr>
         <tr>
           <th scope="row" style="width: 30%">지원 전형<span class="warning">*</span></th>
           <td>
-            <div><input type="checkbox" class="mr-1" name="application" value="0" (click)="onHideTextField()" ngModel/>학생부 교과(검정고시 성적)</div>
-            <div><input type="checkbox" class="mr-1" name="application" value="1" (click)="onHideTextField()" ngModel/>학생부 교과 면접(검정고시 성적 + 면접)</div>
-            <div><input type="checkbox" class="mr-1" name="application" value="2" (click)="onHideTextField()" ngModel/>학생부 종합(검정고시 성적 + 자기소개서 작성 + 면접)</div>
-            <div><input type="checkbox" class="mr-1" name="application" value="3" (click)="onHideTextField()" ngModel/>정시(수능)</div>
-            <div><input type="checkbox" class="mr-1" name="application" value="4" (click)="showTextField=true" ngModel/>기타</div>
+            <div><input type="checkbox" class="mr-1" name="application0" value="0" (click)="onHideTextField()" ngModel/>학생부 교과(검정고시 성적)</div>
+            <div><input type="checkbox" class="mr-1" name="application1" value="1" (click)="onHideTextField()" ngModel/>학생부 교과 면접(검정고시 성적 + 면접)</div>
+            <div><input type="checkbox" class="mr-1" name="application2" value="2" (click)="onHideTextField()" ngModel/>학생부 종합(검정고시 성적 + 자기소개서 작성 + 면접)</div>
+            <div><input type="checkbox" class="mr-1" name="application3" value="3" (click)="onHideTextField()" ngModel/>정시(수능)</div>
+            <div><input type="checkbox" class="mr-1" name="application4" value="4" (click)="showTextField=true" ngModel/>기타</div>
             <div *ngIf="showTextField" class="pl-2 pt-1">
               <input type="text" name="description" ngModel/>
             </div>
