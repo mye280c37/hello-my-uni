@@ -8,22 +8,24 @@
   <!--    <div class="under-line-box position-absolute"></div>-->
   <!--    <button class="btn position-absolute" style="right: 0; bottom: 0" routerLink="/review/post">후기 작성</button>-->
   <!--  </h1>-->
-  <table class="table text-center" *ngIf="loadReviews; else noReviewMessage">
-    <thead>
-    <tr>
-      <th scope="col">제목</th>
-      <th scope="col">작성자</th>
-      <th scope="col">상담 날짜</th>
-    </tr>
-    </thead>
-    <tbody *ngFor="let review of reviewList">
-    <tr (click)="onChangeGetDetail(review[0])" class="item-hover">
-      <td id="2" class="item-underline">{{ review[1].title }}</td>
-      <td>{{ review[1].author }}</td>
-      <td>{{ review[1].time }}</td>
-    </tr>
-    </tbody>
-  </table>
+  <div class="table-responsive">
+    <table class="table text-center text-nowrap" *ngIf="loadReviews; else noReviewMessage">
+      <thead>
+      <tr>
+        <th scope="col">제목</th>
+        <th scope="col">작성자</th>
+        <th scope="col">상담 날짜</th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let review of reviewList">
+      <tr (click)="onChangeGetDetail(review[0])" class="item-hover">
+        <td id="2" class="item-underline">{{ review[1].title }}</td>
+        <td>{{ review[1].author }}</td>
+        <td>{{ review[1].time }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
   <ng-template #noReviewMessage>
     <table class="table text-center">
       <thead>

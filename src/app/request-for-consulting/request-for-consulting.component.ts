@@ -128,20 +128,20 @@ export class RequestForConsultingComponent implements OnInit {
 
                   console.log(body);
 
-                  // this.http.post('https://site.hellomyuni.com/api/consulting/create', body)
-                  //   .subscribe(
-                  //     (val) => {
-                  //       console.log(val);
-                  //       alert('컨설팅이 성공적으로 신청되었습니다. 입금 확인 후 진행되는 개별 연락을 기다려 주세요.');
-                  //       location.reload();
-                  //     },
-                  //     err => {
-                  //       console.log(err);
-                  //     },
-                  //     () => {
-                  //       console.log('complete');
-                  //     }
-                  //   );
+                  this.http.post('https://site.hellomyuni.com/api/consulting/create', body)
+                    .subscribe(
+                      (val) => {
+                        console.log(val);
+                        alert('컨설팅이 성공적으로 신청되었습니다. 입금 확인 후 진행되는 개별 연락을 기다려 주세요.');
+                        location.reload();
+                      },
+                      err => {
+                        console.log(err);
+                      },
+                      () => {
+                        console.log('complete');
+                      }
+                    );
                 }
               }
             }

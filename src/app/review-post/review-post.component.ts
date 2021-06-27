@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClientModule, HttpClient, HttpParams } from '@angular/common/http';
-import {NgForm} from '@angular/forms';
-import {Review} from '../../models/review.model';
+import { NgForm } from '@angular/forms';
+import { Review } from '../../models/review.model';
 
 @Component({
   selector: 'app-review-post',
@@ -44,5 +44,10 @@ export class ReviewPostComponent implements OnInit {
         }
       );
 
+  }
+
+  backToList(): void{
+    alert('작성된 내용이 저장되지 않습니다');
+    location.href = 'https://www.hellomyuni.com/reviews';
   }
 }

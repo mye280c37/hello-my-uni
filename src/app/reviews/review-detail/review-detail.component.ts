@@ -19,15 +19,48 @@ export class ReviewDetailComponent implements OnInit {
     'qkrtjdbs',
     '2020-09-07 13:30',
   );
-  @Input() reviewId = '';
+  @Input() reviewId = 0;
+  @Input() objId = '';
+  @Input() reviewList: [number, Review, string][] = [];
+  otherReviewList: [number, Review, string][] = [];
 
   constructor() { }
 
   ngOnInit(): void {
+    this.onChangeOtherReviewList();
   }
 
   onChangeGetDetail(): void{
     this.getDetail.emit(false);
+  }
+
+  onChangeOtherReviewList(): void{
+    if (this.reviewList.length !== 0){
+      if (this.reviewId + 4 <= this.reviewList.length){
+        for (let i = this.reviewId + 1; i < this.reviewId + 4 ; i++){
+          this.otherReviewList.push(this.reviewList[i]);
+        }
+      }else{
+        const leftObjs = 3 - (this.reviewList.length - this.reviewId);
+        console.log(leftObjs);
+        for (let i = this.reviewId + 1; i < this.reviewList.length ; i++){
+          this.otherReviewList.push(this.reviewList[i]);
+        }
+        for (let i = 0; i <= leftObjs; i++){
+          this.otherReviewList.push(this.reviewList[i]);
+        }
+
+        console.log(this.otherReviewList);
+      }
+    }
+  }
+
+  onChangePostDetail(order: number): void{
+    this.reviewId = order;
+    this.objId = this.reviewList[order][2];
+    this.review = this.reviewList[order][1];
+    this.otherReviewList = [];
+    this.onChangeOtherReviewList();
   }
 
 }

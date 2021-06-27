@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
@@ -28,6 +28,7 @@ import { ReviewDetailComponent } from './reviews/review-detail/review-detail.com
 import { ReviewListComponent } from './reviews/review-list/review-list.component';
 import { CoverLetterConsultingComponent } from './cover-letter-consulting/cover-letter-consulting.component';
 import { InterviewConsultingComponent } from './interview-consulting/interview-consulting.component';
+import { EssayPostComponent } from './essay-post/essay-post.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { InterviewConsultingComponent } from './interview-consulting/interview-c
     ReviewListComponent,
     CoverLetterConsultingComponent,
     InterviewConsultingComponent,
+    EssayPostComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +60,8 @@ import { InterviewConsultingComponent } from './interview-consulting/interview-c
     NgbModule,
     FormsModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

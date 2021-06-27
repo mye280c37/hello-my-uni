@@ -1,0 +1,47 @@
+<app-nav-bar></app-nav-bar>
+<div class="container contents-box">
+  <h1 class="h1 py-4 position-relative">
+    논술 컨설팅 신청
+    <div class="under-line-box position-absolute"></div>
+  </h1>
+  <div class="text-right item-hover item-underline" routerLink="/consulting/essay" (click)="onAlert('작성한 내용이 저장되지 않습니다.')">
+    돌아가기
+  </div>
+  <form class="mb-3" [formGroup]="form" (ngSubmit)="onSubmit($event)" enctype="multipart/form-data">
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label for="university">대학교</label>
+        <input type="text" class="form-control" id="university" name="author" formControlName="university">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="category">분류</label>
+        <input type="text" class="form-control" name="category" id="category" formControlName="category"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label for="author">작성자</label>
+        <input type="text" class="form-control" id="author" name="author" formControlName="author">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="password">비밀번호 <span class="text-black-50">(글 수정 및 삭제시에 사용됩니다.)</span></label>
+        <input type="password" class="form-control" id="password" name="password" formControlName="password"/>
+      </div>
+    </div>
+    <div class="mb-5">
+      <label for="file">사진 업로드</label>
+      <input type="file" class="form-control" id="file" name="file" formControlName="file" (change)="onFileChange(fileInput.files)" #fileInput>
+    </div>
+    <div class="form-box p-3 mb-3">
+      <img *ngIf="imageSrc; else emptyBox" [src]="imageSrc" class="img-fluid mb-5">
+      <ng-template #emptyBox>
+        <div class="p-5 text-center">
+          <div class="py-5">
+            업로드된 이미지가 없습니다.
+          </div>
+        </div>
+      </ng-template>
+    </div>
+    <input type="submit" class="btn mb-4" name="submit" value="작성하기" [disabled]="form.invalid || loading">
+  </form>
+</div>

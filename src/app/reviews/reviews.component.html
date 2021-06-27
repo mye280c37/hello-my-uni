@@ -4,6 +4,6 @@
   <div class="divider-box"></div>
   <div class="py-3">
     <app-review-list *ngIf="!getDetail" (postId)="getDetailHandlerWithId($event)" [reviewList]="reviews"></app-review-list>
-    <app-review-detail *ngIf="getDetail" (getDetail)="getDetailHandler($event)" [review]="reviewPost" [reviewId]="postId"></app-review-detail>
+    <app-review-detail *ngIf="getDetail" (getDetail)="getDetailHandler($event)" [review]="reviewPost" [objId]="objId" [reviewId]="reviewId" [reviewList]="reviews"></app-review-detail>
   </div>
 </div>

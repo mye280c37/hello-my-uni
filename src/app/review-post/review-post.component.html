@@ -4,6 +4,9 @@
     후기 작성
     <div class="under-line-box position-absolute"></div>
   </h1>
+  <div class="text-right item-hover item-underline" (click)="backToList()">
+    돌아가기
+  </div>
   <form class="mb-3" #reviewForm="ngForm" (ngSubmit)="onSubmit(reviewForm)">
     <div class="form-group">
       <label for="title">제목</label>

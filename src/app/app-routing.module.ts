@@ -11,6 +11,7 @@ import { IntroduceConsultantComponent } from './introduce-consultant/introduce-c
 import { IntroduceMyUniComponent } from './introduce-my-uni/introduce-my-uni.component';
 import { GedConsultingComponent } from './ged-consulting/ged-consulting.component';
 import { EssayConsultingComponent} from './essay-consulting/essay-consulting.component';
+import { EssayPostComponent } from './essay-post/essay-post.component';
 import { CoverLetterConsultingComponent } from './cover-letter-consulting/cover-letter-consulting.component';
 import { InterviewConsultingComponent } from './interview-consulting/interview-consulting.component';
 import { YoutubeMaterialsComponent} from './youtube-materials/youtube-materials.component';
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'admin1', component: ManagementComponent},
   { path: 'ged/consulting', component: GedConsultingComponent },
   { path: 'consulting/essay', component: EssayConsultingComponent },
+  { path: 'essay/post', component: EssayPostComponent },
   { path: 'consulting/cover/letter', component: CoverLetterConsultingComponent },
   { path: 'consulting/interview', component: InterviewConsultingComponent },
   { path: 'introduce/my/uni', component: IntroduceMyUniComponent },
