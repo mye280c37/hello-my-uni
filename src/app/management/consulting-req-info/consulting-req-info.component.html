@@ -1,13 +1,16 @@
 <div class="p-3"></div>
 <div class="table-responsive bg-white-50">
   <div class="text-center" style="min-height: 500px" [ngClass]="{'hidden':consultingTable.id!=tableTab}" *ngFor="let consultingTable of consultingTableList" id="{{ consultingTable.id }}">
-    <div class="row py-4 border-bottom font-weight-bold">
-      <div class="col-md-4 border-right">{{consultingTable.result[0][1].name}}</div>
+    <div class="text-center border-bottom font-weight-bold p-2">
+      {{consultingTable.result[0][1].name}}
+    </div>
+    <div class="row py-3 border-bottom font-weight-bold">
       <div class="col-md-4 border-right">{{consultingTable.result[0][1].age}}</div>
-      <div class="col-md-4" *ngIf="consultingTable.result[0][1].gender==='w'; else maleText">여</div>
+      <div class="col-md-4 border-right" *ngIf="consultingTable.result[0][1].gender==='w'; else maleText">여</div>
       <ng-template #maleText>
-        <div class="col-md-2">남</div>
+        <div class="col-md-2 border-right">남</div>
       </ng-template>
+      <div class="col-md-4">{{consultingTable.result[0][1].phone}}</div>
     </div>
     <div class="row py-2 border-bottom">
       <div class="col-md-6 border-right">상담 날짜</div>
@@ -23,9 +26,9 @@
 <!--          <div class="col-md-2">남</div>-->
 <!--        </ng-template>-->
         <div class="col-md-6 item-hover item-underline item-border" id="{{ consulting[0] }}" (click)="showAdditionalBox(consulting[0])">{{ consulting[1].date_time }}</div>
-        <div class="col-md-6 item-hover" *ngIf="consulting[1].payment; else unpaidText" (click)="onSubmit(!consulting[1].payment)">입금</div>
+        <div class="col-md-6 item-hover" *ngIf="consulting[1].payment; else unpaidText" (click)="onSubmit(consulting[2], !consulting[1].payment)">입금</div>
         <ng-template #unpaidText>
-          <div class="col-md-6" (click)="onSubmit(!consulting[1].payment)">미입금</div>
+          <div class="col-md-6 item-hover" (click)="onSubmit(consulting[2], !consulting[1].payment)">미입금</div>
         </ng-template>
       </div>
       <div class="additional-box hidden" id="{{ consulting[0] }}-additional-box">
@@ -43,11 +46,26 @@
             <span class="pl-2">선택: {{consulting[1].scores.choice}}</span>
           </div>
         </div>
+        <div>
+          <div><strong>희망 대학 및 학과</strong></div>
+          <div>
+            <div class="pl-2">1지망: {{ consulting[1].hope[1].uni }} {{ consulting[1].hope[1].major }}</div>
+            <div class="pl-2">2지망: {{ consulting[1].hope[2].uni }} {{ consulting[1].hope[2].major }}</div>
+            <div class="pl-2">3지망: {{ consulting[1].hope[3].uni }} {{ consulting[1].hope[3].major }}</div>
+            <div class="pl-2">4지망: {{ consulting[1].hope[4].uni }} {{ consulting[1].hope[4].major }}</div>
+            <div class="pl-2">5지망: {{ consulting[1].hope[5].uni }} {{ consulting[1].hope[5].major }}</div>
+            <div class="pl-2">6지망: {{ consulting[1].hope[6].uni }} {{ consulting[1].hope[6].major }}</div>
+          </div>
+        </div>
+        <div *ngIf="consulting[1].note">
+          <div><strong>[참고]</strong></div>
+          <div>{{ consulting[1].note }}</div>
+        </div>
+        <div><strong>환불계좌</strong>: {{consulting[1].account}}</div>
         <div><strong>[comment]</strong></div>
         <div>
-          <form (submit)="onSubmit(consulting[1].payment)" id="update-comment-form">
-            <input type="hidden" name="id" id="id" value="{{consulting[2]}}">
-            <textarea name="comment" id="comment" class="w-100">{{consulting[1].comment}}</textarea>
+          <form (submit)="onSubmit(consulting[2], consulting[1].payment)" id="update-comment-form">
+            <textarea name="comment" id="comment{{consulting[2]}}" class="w-100" rows="25">{{consulting[1].comment}}</textarea>
             <input type="submit" name="submit" value="저장" class="btn-secondary">
           </form>
         </div>

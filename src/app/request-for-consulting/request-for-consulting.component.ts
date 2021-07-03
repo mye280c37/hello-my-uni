@@ -34,6 +34,7 @@ export class RequestForConsultingComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onSubmit(f: NgForm){
+    let isValid = false;
     console.log(f.value);
 
     if (f.value.korean && f.value.english && f.value.math && f.value.society && f.value.history && f.value.choice) {
@@ -51,7 +52,7 @@ export class RequestForConsultingComponent implements OnInit {
         const hope = {
           1: {
             uni: f.value.uni1,
-            major: f.value.major1
+            major: f.value.major1 ? f.value.major1 : ''
           },
           2: {
             uni: f.value.uni2,
@@ -91,25 +92,23 @@ export class RequestForConsultingComponent implements OnInit {
               const applicationEle = $('input[name="application' + i + '"]');
               if (applicationEle.prop('checked')){
                 applicationVal += this.application[parseInt(applicationEle.val() as string, 10)];
+                if (f.value.application4) {
+                  applicationVal += ('(' + f.value.description + ')');
+                }
                 applicationVal += '/';
               }
             }
-            $('input[name="application"]:checked').each((e) => {
-              const value = $(this).val();
-              applicationVal += value;
-              applicationVal += '/';
-            });
             console.log(applicationVal);
-            if (f.value.name && f.value.age && f.value.gender && f.value.email && f.value.phone) {
+            if (f.value.name && f.value.age && f.value.gender && f.value.phone) {
               const application4Ele = $('input[name="application4"]');
               if ((application4Ele.prop('checked') && f.value.description) || !application4Ele.prop('checked')) {
                 if (f.value.application_reason && f.value.check && f.value.account) {
+                  isValid = true;
                   const body = new Consulting(
-                    f.value.name + f.value.age + f.value.gender + f.value.email + f.value.phone,
+                    f.value.name + f.value.age + f.value.gender + f.value.phone,
                     f.value.name,
                     f.value.age,
                     f.value.gender,
-                    f.value.email,
                     f.value.phone,
                     scores,
                     f.value.average,
@@ -119,7 +118,7 @@ export class RequestForConsultingComponent implements OnInit {
                     f.value.application_reason,
                     hope,
                     f.value.note,
-                    f.value.date + ' ' + f.value.time,
+                    f.value.date + ' ' + f.value.hour + ':' + f.value.minute,
                     f.value.check ? 1 : 0,
                     f.value.account,
                     '',
@@ -148,7 +147,8 @@ export class RequestForConsultingComponent implements OnInit {
           }
         }
       }
-    }else{
+    }
+    if (!isValid){
       alert('필수 항목을 모두 채워주세요');
     }
     // const body = {

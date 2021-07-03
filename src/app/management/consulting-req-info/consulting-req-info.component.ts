@@ -73,7 +73,6 @@ export class ConsultingReqInfoComponent implements OnInit {
         result[i].name,
         result[i].age,
         result[i].gender,
-        result[i].email,
         result[i].phone,
         result[i].scores,
         result[i].average,
@@ -128,11 +127,11 @@ export class ConsultingReqInfoComponent implements OnInit {
     this.tableTab = i;
   }
 
-  onSubmit(payment: boolean): void{
+  onSubmit(id: string, payment: boolean): void{
     const body = {
-      id: $('input#id').val(),
-      comment: $('textarea#comment').val(),
-      payment: payment
+      id,
+      comment: $('textarea#comment' + id).val(),
+      payment
     };
     console.log(body);
     this.http.post('https://site.hellomyuni.com/api/consulting/update', body)

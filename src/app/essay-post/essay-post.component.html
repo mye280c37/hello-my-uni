@@ -7,7 +7,7 @@
   <div class="text-right item-hover item-underline" routerLink="/consulting/essay" (click)="onAlert('작성한 내용이 저장되지 않습니다.')">
     돌아가기
   </div>
-  <form class="mb-3" [formGroup]="form" (ngSubmit)="onSubmit($event)" enctype="multipart/form-data">
+  <form class="mb-3" [formGroup]="form" (ngSubmit)="onSubmit($event, fileInput.files)" enctype="multipart/form-data">
     <div class="row">
       <div class="form-group col-md-6">
         <label for="university">대학교</label>

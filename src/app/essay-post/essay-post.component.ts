@@ -12,6 +12,7 @@ export class EssayPostComponent implements OnInit {
   form: FormGroup;
   loading = false;
   imageSrc: string | null = null;
+  file: File | null = null;
 
   constructor(private http: HttpClient, private fb: FormBuilder) {
     this.form = this.fb.group({
@@ -34,9 +35,11 @@ export class EssayPostComponent implements OnInit {
     alert(msg);
   }
 
-  onSubmit(e: Event): void{
+  onSubmit(e: Event, files: FileList | null): void{
     console.log(this.form.value);
     this.form.value.file = this.imageSrc;
+    console.log(this.form.value);
+    this.form.value.file = this.file;
     console.log(this.form.value);
   }
 
@@ -44,6 +47,8 @@ export class EssayPostComponent implements OnInit {
     if (files && files.length > 0) {
       // For Preview
       const file = files[0];
+      this.file = file;
+      console.log(file);
       const reader = new FileReader();
 
       /* 브라우저는 보안 문제로 인해 파일 경로의 참조를 허용하지 않는다.
