@@ -8,7 +8,7 @@
       <div class="col-md-4 border-right">{{consultingTable.result[0][1].age}}</div>
       <div class="col-md-4 border-right" *ngIf="consultingTable.result[0][1].gender==='w'; else maleText">여</div>
       <ng-template #maleText>
-        <div class="col-md-2 border-right">남</div>
+        <div class="col-md-4 border-right">남</div>
       </ng-template>
       <div class="col-md-4">{{consultingTable.result[0][1].phone}}</div>
     </div>
