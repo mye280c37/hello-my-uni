@@ -12,6 +12,7 @@ export class AppComponent {
       console.log('production mode');
     }else{
       console.log('development mode');
+      console.log(environment.apiUrl);
     }
   }
 }

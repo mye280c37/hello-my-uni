@@ -10,7 +10,7 @@
 </div>
 <div class="d-flex justify-content-between mb-5">
   <div class="item-hover item-underline" (click)="onChangeGetDetail()">목록으로</div>
-  <div class="item-hover item-underline">수정하기</div>
+  <div class="item-hover item-underline" (click)="showPasswordBox=true">삭제하기</div>
 </div>
 <div class="pb-4">
   <h4 class="h4 position-relative py-4" id="title1">
@@ -18,12 +18,28 @@
     <div class="under-line-box position-absolute"></div>
   </h4>
   <ul class="pb-4">
-    <li class="item-hover" *ngFor="let other of otherReviewList" (click)="onChangePostDetail(other[0])">
-      <div class="d-flex justify-content-between">
-        <div>{{ other[1].title }}</div>
-        <div>{{ other[1].time }}</div>
-      </div>
-    </li>
+    <ng-container *ngFor="let other of otherReviewList">
+      <li class="item-hover" *ngIf="other" (click)="onChangePostDetail(other[0])">
+        <div class="d-flex justify-content-between">
+          <div>{{ other[1].title }}</div>
+          <div>{{ other[1].time }}</div>
+        </div>
+      </li>
+    </ng-container>
   </ul>
+</div>
+<div class="position-absolute password-box border-background p-2 bg-background" *ngIf="showPasswordBox">
+  <div class="mb-1 text-white d-flex justify-content-between">
+    <div>비밀번호를 입력하세요</div>
+    <div (click)="showPasswordBox=false">X</div>
+  </div>
+  <form #deleteForm="ngForm" (ngSubmit)="onDeletePost(deleteForm)">
+    <div class="my-2">
+      <input type="password" name="password" id="password" class="form-control" ngModel="password">
+    </div>
+    <div class="text-right mb-2">
+      <input type="submit" name="submit" value="확인">
+    </div>
+  </form>
 </div>
 

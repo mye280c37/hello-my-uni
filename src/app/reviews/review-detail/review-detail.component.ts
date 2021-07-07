@@ -1,5 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import { Review} from '../../../models/review.model';
+import * as $ from 'jquery';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Review } from '../../../models/review.model';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { NgForm } from '@angular/forms';
+import { ReviewDetailService } from './review-detail.service';
 
 @Component({
   selector: 'app-review-detail',
@@ -23,8 +28,9 @@ export class ReviewDetailComponent implements OnInit {
   @Input() objId = '';
   @Input() reviewList: [number, Review, string][] = [];
   otherReviewList: [number, Review, string][] = [];
+  showPasswordBox = false;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     this.onChangeOtherReviewList();
@@ -63,4 +69,45 @@ export class ReviewDetailComponent implements OnInit {
     this.onChangeOtherReviewList();
   }
 
+  onDeletePost(f: NgForm): void{
+    console.log(f.value);
+
+    if ($('#password').val()){
+      const body = {
+        id: this.objId,
+        password: $('#password').val()
+      };
+
+      console.log(body);
+
+      this.http.post<ReviewDetailService>(environment.apiUrl + '/api/review/delete', body)
+        .subscribe(
+          (val) => {
+            console.log(val.message);
+            if (val.message === 'success') {
+              alert('후기를 삭제하였습니다.');
+              if (environment.production){
+                window.location.href = 'https://www.hellomyuni.com/reviews';
+              }else{
+                window.location.href = 'http://localhost:4200/reviews';
+              }
+            }else {
+              if (val.error === 'password'){
+                alert('비밀번호를 다시 입력해주세요.');
+              } else{
+                alert('후기 삭제에 실패하였습니다. 관리자에 문의바랍니다.');
+              }
+            }
+          },
+          (err) => {
+            console.log(err);
+          },
+          () => {
+            console.log('complete');
+          }
+        );
+    }else{
+      alert('비밀번호를 입력해주세요.');
+    }
+  }
 }

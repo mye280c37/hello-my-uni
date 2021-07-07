@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClientModule, HttpClient, HttpParams } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { Review } from '../../models/review.model';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-review-post',
@@ -25,7 +26,7 @@ export class ReviewPostComponent implements OnInit {
       f.value.time
     );
 
-    this.http.post('https://site.hellomyuni.com/api/review/post', body)
+    this.http.post(environment.apiUrl + '/api/review/post', body)
       .subscribe(
         (val) => {
           console.log(val);
@@ -40,7 +41,11 @@ export class ReviewPostComponent implements OnInit {
         () => {
           console.log('complete');
           alert('후기가 성공적으로 등록되었습니다.');
-          window.location.href = 'https://www.hellomyuni.com/reviews';
+          if (environment.production){
+            window.location.href = 'https://www.hellomyuni.com/reviews';
+          }else{
+            window.location.href = 'http://localhost:4200/reviews';
+          }
         }
       );
 
@@ -48,6 +53,10 @@ export class ReviewPostComponent implements OnInit {
 
   backToList(): void{
     alert('작성된 내용이 저장되지 않습니다');
-    location.href = 'https://www.hellomyuni.com/reviews';
+    if (environment.production){
+      window.location.href = 'https://www.hellomyuni.com/reviews';
+    }else{
+      window.location.href = 'http://localhost:4200/reviews';
+    }
   }
 }
