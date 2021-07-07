@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormGroup, FormsModule, NgForm } from '@angular/forms';
 import { HttpClientModule, HttpClient, HttpParams } from '@angular/common/http';
 import { Consulting } from '../../models/consulting.model';
+import * as consultingDateInfo from '../../assets/consultingDate.json';
 
 @Component({
   selector: 'app-request-for-consulting',
@@ -12,6 +13,10 @@ import { Consulting } from '../../models/consulting.model';
 export class RequestForConsultingComponent implements OnInit {
   title = '컨설팅 신청';
   showTextField = false;
+  calenderMonth = new Date().getMonth() + 1;
+  calenderYear = new Date().getFullYear();
+  weekDay = ['일', '월', '화', '수', '목', '금', '토'];
+  calender: (string|number)[][] = [];
 
   application = [
     '학생부 교과(검정고시 성적)',
@@ -30,6 +35,7 @@ export class RequestForConsultingComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
+    this.createCalender();
   }
 
   // tslint:disable-next-line:typedef
@@ -204,4 +210,45 @@ export class RequestForConsultingComponent implements OnInit {
   onHideTextField(): void{
     this.showTextField = false;
   }
+
+  createCalender(): void{
+    const firstDate = new Date(this.calenderYear, this.calenderMonth - 1, 1);
+    const lastDate = new Date(this.calenderYear, this.calenderMonth, 0);
+    const firstDay = this.weekDay[firstDate.getDay()];
+    let weekCnt = 0;
+    let week = [];
+
+    for (let i = 0 ; i < firstDate.getDay(); i++){
+      week.push('');
+      weekCnt += 1;
+      if (weekCnt === 7){
+        this.calender.push(week);
+        weekCnt = 0;
+        week = [];
+      }
+    }
+
+    for (let i = 1; i <= lastDate.getDate(); i++){
+     week.push(i);
+     weekCnt += 1;
+     if (weekCnt === 7){
+        this.calender.push(week);
+        weekCnt = 0;
+        week = [];
+      }
+    }
+    if (weekCnt !== 0){
+      while (true){
+        if (weekCnt === 7){
+          this.calender.push(week);
+          break;
+        }
+        week.push('');
+        weekCnt += 1;
+      }
+    }
+
+    console.log(this.calender);
+  }
+
 }

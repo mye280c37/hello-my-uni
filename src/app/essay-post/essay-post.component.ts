@@ -20,7 +20,7 @@ export class EssayPostComponent implements OnInit {
       category: ['', Validators.required],
       author: ['', Validators.required],
       password: ['', Validators.required],
-      file: ['', Validators.required],
+      file: [''],
     });
 
     this.form.valueChanges.subscribe(observer => {
@@ -40,6 +40,10 @@ export class EssayPostComponent implements OnInit {
     this.form.value.file = this.imageSrc;
     console.log(this.form.value);
     this.form.value.file = this.file;
+    console.log(this.form.value);
+  }
+
+  onSubmitwithNoFile(e: Event): void{
     console.log(this.form.value);
   }
 

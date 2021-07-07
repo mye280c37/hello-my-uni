@@ -8,6 +8,7 @@
     돌아가기
   </div>
   <form class="mb-3" [formGroup]="form" (ngSubmit)="onSubmit($event, fileInput.files)" enctype="multipart/form-data">
+<!--  <form class="mb-3" [formGroup]="form" (ngSubmit)="onSubmitwithNoFile($event)" enctype="multipart/form-data">-->
     <div class="row">
       <div class="form-group col-md-6">
         <label for="university">대학교</label>
@@ -28,6 +29,9 @@
         <input type="password" class="form-control" id="password" name="password" formControlName="password"/>
       </div>
     </div>
+<!--    <div class="mb-5">-->
+<!--      <a href="https://forms.gle/nQiToMkWjppGkSDv5">사진 업로드</a>-->
+<!--    </div>-->
     <div class="mb-5">
       <label for="file">사진 업로드</label>
       <input type="file" class="form-control" id="file" name="file" formControlName="file" (change)="onFileChange(fileInput.files)" #fileInput>

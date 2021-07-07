@@ -181,6 +181,27 @@
         <tr>
           <th scope="row" style="width: 30%">상담 시간<span class="warning">*</span></th>
           <td>
+            <div class="mb-1 text-center">{{ calenderMonth }}월</div>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>일</th>
+                  <th>월</th>
+                  <th>화</th>
+                  <th>수</th>
+                  <th>목</th>
+                  <th>금</th>
+                  <th>토</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let week of calender">
+                  <td *ngFor="let date of week">{{date}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
             <div class="mb-2"><input type="date" name="date" ngModel></div>
             <div>
               <div class="d-flex flex-wrap">
