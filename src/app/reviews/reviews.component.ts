@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Review } from '../../models/review.model';
 import { HttpClient } from '@angular/common/http';
 import { ReviewBoardService } from './reviews.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-reviews',
@@ -29,7 +30,7 @@ export class ReviewsComponent implements OnInit {
     this.getDetail = false;
     console.log('ngOnInit');
 
-    this.http.get<ReviewBoardService>('https://site.hellomyuni.com/api/review/board')
+    this.http.get<ReviewBoardService>(environment.apiUrl + '/api/review/board')
       .subscribe(
         (val) => {
           console.log(val.result);

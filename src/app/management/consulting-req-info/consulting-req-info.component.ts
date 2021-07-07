@@ -5,6 +5,7 @@ import { ConsultingReqInfoService } from './consulting-req-info.service';
 import { Consulting } from '../../../models/consulting.model';
 import { ConsultingTable } from './consulting-req-info.model';
 import {NgForm} from '@angular/forms';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-consulting-req-info',
@@ -20,7 +21,7 @@ export class ConsultingReqInfoComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.http.get<ConsultingReqInfoService>('https://site.hellomyuni.com/api/consulting/board')
+    this.http.get<ConsultingReqInfoService>(environment.apiUrl + '/api/consulting/board')
       .subscribe(
         (val) => {
           console.log(val.result);

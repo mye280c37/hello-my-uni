@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormGroup, FormsModule, NgForm } from '@angular/forms';
 import { HttpClientModule, HttpClient, HttpParams } from '@angular/common/http';
 import { Consulting } from '../../models/consulting.model';
-import * as consultingDateInfo from '../../assets/consultingDate.json';
+import { environment } from '../../environments/environment';
+import { RequestForConsultingService } from './request-for-consulting.service';
 
 @Component({
   selector: 'app-request-for-consulting',
@@ -12,9 +13,11 @@ import * as consultingDateInfo from '../../assets/consultingDate.json';
 })
 export class RequestForConsultingComponent implements OnInit {
   title = '컨설팅 신청';
+  consultingDate: any;
   showTextField = false;
   calenderMonth = new Date().getMonth() + 1;
   calenderYear = new Date().getFullYear();
+  calenderDate = 0;
   weekDay = ['일', '월', '화', '수', '목', '금', '토'];
   calender: ((string | never[]| boolean)[] | (number | string[] | boolean)[])[][] = [];
   clicked = false;
@@ -38,7 +41,20 @@ export class RequestForConsultingComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.createCalender();
+    this.http.get<RequestForConsultingService>(environment.apiUrl + '/api/consulting/date')
+      .subscribe(
+        (val) => {
+          this.consultingDate = val.result;
+          console.log(this.consultingDate);
+          this.createCalender();
+        },
+        err => {
+          console.log(err);
+        },
+        () => {
+          console.log('complete');
+        }
+      );
   }
 
   testSubmit(f: NgForm): void{
@@ -141,7 +157,7 @@ export class RequestForConsultingComponent implements OnInit {
 
                   console.log(body);
 
-                  this.http.post('https://site.hellomyuni.com/api/consulting/create', body)
+                  this.http.post(environment.apiUrl + '/api/consulting/create', body)
                     .subscribe(
                       (val) => {
                         console.log(val);
@@ -165,54 +181,6 @@ export class RequestForConsultingComponent implements OnInit {
     if (!isValid){
       alert('필수 항목을 모두 채워주세요');
     }
-    // const body = {
-    //   key: 'unique_key',
-    //   name: '이름',
-    //   age: 17,
-    //   gender: 'm',
-    //   scores: {
-    //     korean: 34,
-    //     english: 56,
-    //     math: 87,
-    //     society: 77,
-    //     science: 89,
-    //     history: 100,
-    //     choice: 94
-    //   },
-    //   average: 86,
-    //   application: '0',
-    //   application_reason: '어쩌구 저쩌구',
-    //   hope: {
-    //     1: {
-    //       uni: '대학1',
-    //       major: '전공1'
-    //     },
-    //     2: {
-    //       uni: '대학2',
-    //       major: '전공2'
-    //     },
-    //     3: {
-    //       uni: '대학3',
-    //       major: '전공3'
-    //     },
-    //     4: {
-    //       uni: '대학4',
-    //       major: '전공4'
-    //     },
-    //     5: {
-    //       uni: '대학5',
-    //       major: '전공5'
-    //     },
-    //     6: {
-    //       uni: '대학6',
-    //       major: '전공6'
-    //     }
-    //   },
-    //   note: '',
-    //   date_time: '2021-03-28 14:30-15:30',
-    //   check: 1,
-    //   account: '1002-857-980326 우리은행 강예은',
-    // };
   }
 
   onHideTextField(): void{
@@ -267,9 +235,8 @@ export class RequestForConsultingComponent implements OnInit {
 
   findPossibleTime(date: number, mon: number): string[]{
     const monthKeys = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    const jsonKey = monthKeys[mon - 1];
-    const dataOfMon = consultingDateInfo.default[jsonKey];
-    // console.log(dataOfMon);
+    // const jsonKey = monthKeys[mon - 1];
+    const dataOfMon = this.consultingDate[mon];
     const possibleTimeList = [];
     if (dataOfMon) {
       if (dataOfMon[date.toString()]){
@@ -285,9 +252,14 @@ export class RequestForConsultingComponent implements OnInit {
   }
 
   showTimeList(date: string | number | boolean | string[], timeList: string | number | boolean | string[]): void{
+    this.calenderDate = date as number;
     this.clicked = true;
     this.clickedDate = this.calenderMonth + '월 ' + date + '일';
     this.clickedTimeList = timeList as string[];
+  }
+
+  changeConsultingDateInfo(): void{
+    //
   }
 
 }
