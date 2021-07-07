@@ -1,0 +1,7 @@
+@import "../../scss/_variables.scss";
+@import "../../styles.scss";
+
+.circle-bg {
+  background-color: $primary;
+  border-radius: 50px;
+}

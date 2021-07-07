@@ -1,21 +1,25 @@
 {
-  "july": {
+  "Jul": {
     "26": [
       {
+        "date": 26,
         "time": "14:00~14:30",
         "valid": true
       },
       {
+        "date": 26,
         "time": "15:00~15:30",
         "valid": true
       },
       {
+        "date": 26,
         "time": "16:00~16:30",
         "valid": true
       }
     ],
     "27": [
       {
+        "date": 27,
         "time": "14:00~14:30",
         "valid": true
       },

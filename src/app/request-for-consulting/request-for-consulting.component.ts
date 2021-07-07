@@ -16,7 +16,10 @@ export class RequestForConsultingComponent implements OnInit {
   calenderMonth = new Date().getMonth() + 1;
   calenderYear = new Date().getFullYear();
   weekDay = ['일', '월', '화', '수', '목', '금', '토'];
-  calender: (string|number)[][] = [];
+  calender: ((string | never[]| boolean)[] | (number | string[] | boolean)[])[][] = [];
+  clicked = false;
+  clickedDate = '';
+  clickedTimeList: string[] = [];
 
   application = [
     '학생부 교과(검정고시 성적)',
@@ -36,6 +39,11 @@ export class RequestForConsultingComponent implements OnInit {
 
   ngOnInit(): void {
     this.createCalender();
+  }
+
+  testSubmit(f: NgForm): void{
+    console.log(this.clickedDate);
+    console.log(f.value.time);
   }
 
   // tslint:disable-next-line:typedef
@@ -108,7 +116,7 @@ export class RequestForConsultingComponent implements OnInit {
             if (f.value.name && f.value.age && f.value.gender && f.value.phone) {
               const application4Ele = $('input[name="application4"]');
               if ((application4Ele.prop('checked') && f.value.description) || !application4Ele.prop('checked')) {
-                if (f.value.application_reason && f.value.check && f.value.account) {
+                if (f.value.application_reason && f.value.check && f.value.account && this.clickedDate !== '' && f.value.time) {
                   isValid = true;
                   const body = new Consulting(
                     f.value.name + f.value.age + f.value.gender + f.value.phone,
@@ -124,7 +132,7 @@ export class RequestForConsultingComponent implements OnInit {
                     f.value.application_reason,
                     hope,
                     f.value.note,
-                    f.value.date + ' ' + f.value.hour + ':' + f.value.minute,
+                    this.clickedDate + ' ' + f.value.time,
                     f.value.check ? 1 : 0,
                     f.value.account,
                     '',
@@ -219,7 +227,7 @@ export class RequestForConsultingComponent implements OnInit {
     let week = [];
 
     for (let i = 0 ; i < firstDate.getDay(); i++){
-      week.push('');
+      week.push(['', [], false]);
       weekCnt += 1;
       if (weekCnt === 7){
         this.calender.push(week);
@@ -229,7 +237,13 @@ export class RequestForConsultingComponent implements OnInit {
     }
 
     for (let i = 1; i <= lastDate.getDate(); i++){
-     week.push(i);
+     const possibleTimeList = this.findPossibleTime(i, this.calenderMonth);
+     if (possibleTimeList.length !== 0){
+       week.push([i, possibleTimeList, true]);
+     }else{
+       week.push([i, possibleTimeList, false]);
+     }
+
      weekCnt += 1;
      if (weekCnt === 7){
         this.calender.push(week);
@@ -243,12 +257,37 @@ export class RequestForConsultingComponent implements OnInit {
           this.calender.push(week);
           break;
         }
-        week.push('');
+        week.push(['', [], false]);
         weekCnt += 1;
       }
     }
 
     console.log(this.calender);
+  }
+
+  findPossibleTime(date: number, mon: number): string[]{
+    const monthKeys = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const jsonKey = monthKeys[mon - 1];
+    const dataOfMon = consultingDateInfo.default[jsonKey];
+    // console.log(dataOfMon);
+    const possibleTimeList = [];
+    if (dataOfMon) {
+      if (dataOfMon[date.toString()]){
+        const dataOfDate = dataOfMon[date.toString()];
+        for (const dataOfTime of dataOfDate) {
+          if (dataOfTime.valid) {
+            possibleTimeList.push(dataOfTime.time);
+          }
+        }
+      }
+    }
+    return possibleTimeList;
+  }
+
+  showTimeList(date: string | number | boolean | string[], timeList: string | number | boolean | string[]): void{
+    this.clicked = true;
+    this.clickedDate = this.calenderMonth + '월 ' + date + '일';
+    this.clickedTimeList = timeList as string[];
   }
 
 }
