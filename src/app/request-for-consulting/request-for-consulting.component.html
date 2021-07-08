@@ -177,7 +177,11 @@
         <div class="row p-2 border-bottom">
           <div class="col-md-3 font-weight-bold">상담 시간<span class="warning">*</span></div>
           <div class="col-md-9">
-            <div class="mb-1 text-center font-weight-bold" style="font-size: large">{{ calenderMonth }}월</div>
+            <div class="mb-1 text-center d-flex justify-content-between">
+              <div class="item-hover" (click)="moveCalender(-1)"><fa-icon [icon]="['fas', 'angle-left']" size="lg" class="navbar-toggler mr-auto my-2"></fa-icon></div>
+              <div class="text-center font-weight-bold" style="font-size: large">{{ calenderYear }}년 {{ calenderMonth }}월</div>
+              <div class="item-hover" (click)="moveCalender(1)"><fa-icon [icon]="['fas', 'angle-right']" size="lg" class="navbar-toggler mr-auto my-2"></fa-icon></div>
+            </div>
             <div class="table-responsive">
               <table class="table text-center">
                 <thead>
