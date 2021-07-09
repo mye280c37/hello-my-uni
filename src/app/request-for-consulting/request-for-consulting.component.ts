@@ -46,7 +46,6 @@ export class RequestForConsultingComponent implements OnInit {
         (val) => {
           this.consultingDate = val.result;
           console.log(this.consultingDate);
-          this.createCalender();
         },
         err => {
           console.log(err);
@@ -55,6 +54,7 @@ export class RequestForConsultingComponent implements OnInit {
           console.log('complete');
         }
       );
+    this.createCalender();
   }
 
   testSubmit(f: NgForm): void{
@@ -205,15 +205,18 @@ export class RequestForConsultingComponent implements OnInit {
     }
 
     for (let i = 1; i <= lastDate.getDate(); i++){
-     const possibleTimeList = this.findPossibleTime(i, this.calenderMonth);
-     if (possibleTimeList.length !== 0){
-       week.push([i, possibleTimeList, true]);
-     }else{
-       week.push([i, possibleTimeList, false]);
-     }
-
-     weekCnt += 1;
-     if (weekCnt === 7){
+      if (this.consultingDate){
+        const possibleTimeList = this.findPossibleTime(i, this.calenderMonth);
+        if (possibleTimeList.length !== 0){
+          week.push([i, possibleTimeList, true]);
+        }else{
+          week.push([i, possibleTimeList, false]);
+        }
+      } else {
+        week.push([i, [], false]);
+      }
+      weekCnt += 1;
+      if (weekCnt === 7){
         this.calender.push(week);
         weekCnt = 0;
         week = [];
@@ -258,8 +261,18 @@ export class RequestForConsultingComponent implements OnInit {
     this.clickedTimeList = timeList as string[];
   }
 
-  changeConsultingDateInfo(): void{
-    //
+  moveCalender(direct: number): void{
+    this.calenderMonth += direct;
+    if (this.calenderMonth === 13){
+      this.calenderYear += 1;
+      this.calenderMonth = 1;
+    }
+    if (this.calenderMonth === 0){
+      this.calenderYear -= 1;
+      this.calenderMonth = 12;
+    }
+    this.calender = [];
+    this.createCalender();
   }
 
 }
