@@ -127,7 +127,7 @@ export class ConsultingReqInfoComponent implements OnInit {
   }
 
   showAddCommentBox(id: string, comments: Comment[]): void{
-    if (comments.length !== 0 && comments[0].contents !== ''){
+    if (comments.length === 0 || comments[0].contents !== ''){
       $('#add-comment-box-' + id).removeClass('hidden');
     }
   }
@@ -162,6 +162,7 @@ export class ConsultingReqInfoComponent implements OnInit {
         (val) => {
           console.log(val);
           alert('변경이 완료되었습니다');
+          this.tableNumber = [];
           this.consultingTableList = [];
           this.getConsultingInfo();
         },
@@ -174,6 +175,49 @@ export class ConsultingReqInfoComponent implements OnInit {
         },
         () => {
           console.log('complete');
+        }
+      );
+  }
+
+  changeToField(commentId: string): void{
+    $('#' + commentId + '-contents').addClass('hidden');
+    $('#' + commentId + '-contents-field').removeClass('hidden');
+  }
+
+  updateComment(f: NgForm, id: string, commentId: string): void{
+    console.log(f.value.contents);
+    this.http.post(environment.apiUrl + '/api/comment/update', {commentId, id, contents: f.value.contents})
+      .subscribe(
+        (val) => {
+          alert('성공적으로 변경되었습니다.');
+          this.tableNumber = [];
+          this.consultingTableList = [];
+          this.getConsultingInfo();
+        },
+        (err) => {
+          console.log(err);
+          alert('변경에 실패하였습니다. 관리자에게 문의바랍니다.');
+        }
+      );
+  }
+
+
+  deleteComment(id: string, commentId: string): void{
+    this.http.post(environment.apiUrl + '/api/comment/delete',
+      {
+        id,
+        commentId
+      })
+      .subscribe(
+        (val) => {
+          alert('성공적으로 삭제되었습니다');
+          this.tableNumber = [];
+          this.consultingTableList = [];
+          this.getConsultingInfo();
+        },
+        (err) => {
+          console.log(err);
+          alert('삭제에 실패하였습니다. 관리자에게 문의바랍니다.');
         }
       );
   }

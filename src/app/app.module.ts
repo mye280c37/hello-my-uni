@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faSearch, faBars, faAngleRight, faAngleLeft, faTimes, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faBars, faAngleRight, faAngleLeft, faTimes, faPlusCircle, faPen } from '@fortawesome/free-solid-svg-icons';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -71,7 +71,7 @@ import { ConsultingDateComponent } from './management/consulting-date/consulting
 export class AppModule {
   constructor(library: FaIconLibrary) {
     // Add multiple icons to the library
-    library.addIcons(faSearch, faBars, faAngleRight, faAngleLeft, faTimes, faPlusCircle);
+    library.addIcons(faSearch, faBars, faAngleRight, faAngleLeft, faTimes, faPlusCircle, faPen);
   }
 }
 

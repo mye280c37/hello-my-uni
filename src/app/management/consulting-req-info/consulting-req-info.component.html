@@ -53,14 +53,26 @@
       <div class="p-2 border-background m-2">
         <div class="mb-2"><strong>comments</strong></div>
         <div class="pl-3 mb-2 text-left" *ngFor="let comment of consulting[1].comments">
-          <div class="mb-2">[{{ comment.date }}]</div>
-          <div class="mx-2" *ngIf="comment.contents.length !== 0; else addContents">{{ comment.contents }}</div>
+          <div class="mb-2 d-flex justify-content-between">
+            <div class="mr-4">[{{ comment.date }}]</div>
+            <div class="mr-4" *ngIf="comment.contents.length !== 0">
+              <fa-icon [icon]="['fas', 'pen']" size="sm" class="mr-2" (click)="changeToField(comment.id)"></fa-icon>
+              <fa-icon [icon]="['fas', 'times']" size="sm" (click)="deleteComment(consulting[2], comment.id)"></fa-icon>
+            </div>
+          </div>
+          <div class="mx-2" id="{{comment.id}}-contents" *ngIf="comment.contents.length !== 0; else addContents">{{ comment.contents }}</div>
           <ng-template #addContents>
             <form class="mx-2" (submit)="onSubmit(consulting[2], comment.date, comment.id)">
               <textarea name="comment" id="{{consulting[2]}}-only-comment" class="w-100" rows="25"></textarea>
               <input type="submit" name="submit" value="저장" class="btn-secondary">
             </form>
           </ng-template>
+          <div class="hidden" id="{{comment.id}}-contents-field">
+            <form class="mx-2" #updateCommentForm="ngForm" (submit)="updateComment(updateCommentForm, consulting[2], comment.id)">
+              <textarea name="contents" class="w-100" rows="25" ngModel="{{comment.contents}}"></textarea>
+              <input type="submit" name="submit" value="저장" class="btn-secondary">
+            </form>
+          </div>
         </div>
         <div class="text-right">
           <fa-icon [icon]="['fas', 'plus-circle']" size="lg" class="navbar-toggler mr-auto my-2" (click)="showAddCommentBox(consulting[2], consulting[1].comments)"></fa-icon>
