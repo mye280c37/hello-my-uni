@@ -1,11 +1,11 @@
 import * as $ from 'jquery';
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import { ConsultingReqInfoService } from './consulting-req-info.service';
-import { Consulting } from '../../../models/consulting.model';
+import { HttpClient } from '@angular/common/http';
+import { HttpResponse } from '../../http-response';
+import { Comment, Consulting } from '../../../models/consulting.model';
 import { ConsultingTable } from './consulting-req-info.model';
-import {NgForm} from '@angular/forms';
-import {environment} from '../../../environments/environment';
+import { NgForm } from '@angular/forms';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-consulting-req-info',
@@ -21,7 +21,11 @@ export class ConsultingReqInfoComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.http.get<ConsultingReqInfoService>(environment.apiUrl + '/api/consulting/board')
+    this.getConsultingInfo();
+  }
+
+  getConsultingInfo(): void{
+    this.http.get<HttpResponse>(environment.apiUrl + '/api/consulting/board')
       .subscribe(
         (val) => {
           console.log(val.result);
@@ -69,6 +73,16 @@ export class ConsultingReqInfoComponent implements OnInit {
     let tableId = 1;
     let eleNum = 0;
     for (let i = 0; i < result.length; i++){
+      const comments = [];
+      for ( const comment of result[i].comments ){
+        comments.push(
+          new Comment(
+            comment._id,
+            comment.date,
+            comment.contents
+          )
+        );
+      }
       const consulting = new Consulting(
         result[i].key,
         result[i].name,
@@ -79,15 +93,13 @@ export class ConsultingReqInfoComponent implements OnInit {
         result[i].average,
         result[i].option,
         result[i].application,
-        result[i].description,
         result[i].application_reason,
         result[i].hope,
+        result[i].hope_reason,
         result[i].note,
-        result[i].date_time,
         result[i].check,
         result[i].account,
-        result[i].comment,
-        result[i].payment
+        comments
       );
       const cellId = result[i].name + i;
       eleNum += 1;
@@ -110,47 +122,58 @@ export class ConsultingReqInfoComponent implements OnInit {
     console.log(this.consultingTableList);
   }
 
-  showAdditionalBox(id: string): void{
-    const materialEle = $('#' + id + '-additional-box');
-    const titleEle = $('#' + id);
-    if (materialEle.hasClass('hidden')) {
-      materialEle.removeClass('hidden');
-      titleEle.addClass('font-weight-bold');
-    }else{
-      materialEle.addClass('hidden');
-      if (titleEle.hasClass('font-weight-bold')) {
-        titleEle.removeClass('font-weight-bold');
-      }
-    }
-  }
-
   tabTable(i: number): void{
     this.tableTab = i;
   }
 
-  onSubmit(id: string, payment: boolean): void{
-    const body = {
-      id,
-      comment: $('textarea#comment' + id).val(),
-      payment
-    };
+  showAddCommentBox(id: string, comments: Comment[]): void{
+    if (comments.length !== 0 && comments[0].contents !== ''){
+      $('#add-comment-box-' + id).removeClass('hidden');
+    }
+  }
+
+  hideAddCommentBox(id: string): void{
+    $('#add-comment-box-' + id).addClass('hidden');
+  }
+
+  onSubmit(id: string, dateTime= '', commentId = ''): void{
+    let body;
+    if (dateTime === '') {
+      const month = $('input#month' + id).val();
+      const date = $('input#date' + id).val();
+      const contents = $('textarea#comment' + id).val();
+      body = {
+        id,
+        date: (month && date) ? month + '월' + date + '일' : '',
+        contents: contents ? contents : '',
+        commentId: ''
+      };
+    }else{
+      body = {
+        id,
+        date: dateTime,
+        contents: $('textarea#' + id + '-only-comment').val(),
+        commentId
+      };
+    }
     console.log(body);
-    this.http.post('https://site.hellomyuni.com/api/consulting/update', body)
+    this.http.post( environment.apiUrl + '/api/consulting/update', body)
       .subscribe(
         (val) => {
           console.log(val);
+          alert('변경이 완료되었습니다');
+          this.consultingTableList = [];
+          this.getConsultingInfo();
         },
         err => {
           console.log(err);
           console.log(err.status);
-          if (err.status === 404){
+          if (err.status === 404) {
             alert('변경에 실패하였습니다. 관리자에게 문의 바랍니다.');
           }
         },
         () => {
           console.log('complete');
-          alert('변경이 완료되었습니다');
-          location.reload();
         }
       );
   }

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Review } from '../../models/review.model';
 import { HttpClient } from '@angular/common/http';
-import { ReviewBoardService } from './reviews.service';
+import { HttpResponse } from '../http-response';
 import { environment } from '../../environments/environment';
 
 @Component({
@@ -30,7 +29,7 @@ export class ReviewsComponent implements OnInit {
     this.getDetail = false;
     console.log('ngOnInit');
 
-    this.http.get<ReviewBoardService>(environment.apiUrl + '/api/review/board')
+    this.http.get<HttpResponse>(environment.apiUrl + '/api/review/board')
       .subscribe(
         (val) => {
           console.log(val.result);

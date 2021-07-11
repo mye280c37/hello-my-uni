@@ -5,3 +5,16 @@
   background-color: $primary;
   border-radius: 50px;
 }
+
+body {
+  position: relative;
+}
+
+.alert-box {
+  width: 250px;
+  height: 200px;
+  top: calc(50% - 100px);
+  left: calc(50% - 125px);
+  background-color: white;
+  color: $warning;
+}

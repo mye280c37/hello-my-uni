@@ -1,10 +1,10 @@
 import * as $ from 'jquery';
 import { Component, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormGroup, FormsModule, NgForm } from '@angular/forms';
-import { HttpClientModule, HttpClient, HttpParams } from '@angular/common/http';
+import { NgForm } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { HttpResponse } from '../http-response';
 import { Consulting } from '../../models/consulting.model';
 import { environment } from '../../environments/environment';
-import { RequestForConsultingService } from './request-for-consulting.service';
 
 @Component({
   selector: 'app-request-for-consulting',
@@ -41,11 +41,13 @@ export class RequestForConsultingComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.http.get<RequestForConsultingService>(environment.apiUrl + '/api/consulting/date')
+    this.http.get<HttpResponse>(environment.apiUrl + '/api/consulting/date')
       .subscribe(
         (val) => {
           this.consultingDate = val.result;
           console.log(this.consultingDate);
+          this.calender = [];
+          this.createCalender();
         },
         err => {
           console.log(err);
@@ -60,6 +62,18 @@ export class RequestForConsultingComponent implements OnInit {
   testSubmit(f: NgForm): void{
     console.log(this.clickedDate);
     console.log(f.value.time);
+  }
+
+  checkApplicationValidation(f: NgForm): boolean{
+    if (f.value.application0 || f.value.application1 || f.value.application2 || f.value.application3 || f.value.application4) {
+      if (f.value.application4) {
+        if (!f.value.description) { return false; }
+      }
+    }else {
+      return false;
+    }
+
+    return true;
   }
 
   // tslint:disable-next-line:typedef
@@ -105,7 +119,7 @@ export class RequestForConsultingComponent implements OnInit {
             major: f.value.major6
           }
         };
-        if (f.value.option0 || f.value.option1 || f.value.option2 || f.value.option3){
+        if (f.value.option0 || f.value.option1 || f.value.option2 ){
           let optionVal = '';
           for (let i = 0; i < 4; i++){
             const optionEle = $('input[name="option' + i + '"]');
@@ -114,9 +128,8 @@ export class RequestForConsultingComponent implements OnInit {
               optionVal += '/';
             }
           }
-
           console.log(optionVal);
-          if (f.value.application0 || f.value.application1 || f.value.application2 || f.value.application3 || f.value.application4){
+          if (this.checkApplicationValidation(f)){
             let applicationVal = '';
             for (let i = 0 ; i < 5; i++){
               const applicationEle = $('input[name="application' + i + '"]');
@@ -130,9 +143,8 @@ export class RequestForConsultingComponent implements OnInit {
             }
             console.log(applicationVal);
             if (f.value.name && f.value.age && f.value.gender && f.value.phone) {
-              const application4Ele = $('input[name="application4"]');
-              if ((application4Ele.prop('checked') && f.value.description) || !application4Ele.prop('checked')) {
-                if (f.value.application_reason && f.value.check && f.value.account && this.clickedDate !== '' && f.value.time) {
+              if (f.value.hope_reason){
+                if (f.value.application_reason && f.value.note && f.value.check && f.value.account && this.clickedDate !== '' && f.value.time) {
                   isValid = true;
                   const body = new Consulting(
                     f.value.name + f.value.age + f.value.gender + f.value.phone,
@@ -144,25 +156,31 @@ export class RequestForConsultingComponent implements OnInit {
                     f.value.average,
                     optionVal,
                     applicationVal,
-                    f.value.application === '4' ? f.value.description : '',
                     f.value.application_reason,
                     hope,
+                    f.value.hope_reason,
                     f.value.note,
-                    this.clickedDate + ' ' + f.value.time,
                     f.value.check ? 1 : 0,
                     f.value.account,
-                    '',
-                    false
+                    [{
+                      id: '',
+                      date: this.clickedDate + ' ' + f.value.time,
+                      contents: ''
+                    }]
                   );
 
                   console.log(body);
 
-                  this.http.post(environment.apiUrl + '/api/consulting/create', body)
+                  this.http.post<HttpResponse>(environment.apiUrl + '/api/consulting/create', body)
                     .subscribe(
                       (val) => {
-                        console.log(val);
-                        alert('컨설팅이 성공적으로 신청되었습니다. 입금 확인 후 진행되는 개별 연락을 기다려 주세요.');
-                        location.reload();
+                        console.log(val.message);
+                        if (val.message === 'success') {
+                          alert('컨설팅이 성공적으로 신청되었습니다. 입금 확인 후 진행되는 개별 연락을 기다려 주세요.');
+                          location.reload();
+                        } else {
+                          alert('컨설팅 신청에 실패했습니다. 서버가 점검 중이니 관리자에게 문의해주세요.');
+                        }
                       },
                       err => {
                         console.log(err);
@@ -245,9 +263,7 @@ export class RequestForConsultingComponent implements OnInit {
       if (dataOfMon[date.toString()]){
         const dataOfDate = dataOfMon[date.toString()];
         for (const dataOfTime of dataOfDate) {
-          if (dataOfTime.valid) {
-            possibleTimeList.push(dataOfTime.time);
-          }
+          possibleTimeList.push(dataOfTime);
         }
       }
     }

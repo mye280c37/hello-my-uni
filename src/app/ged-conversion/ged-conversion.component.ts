@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormGroup, FormsModule, NgForm } from '@angular/forms';
-import { HttpClientModule, HttpClient, HttpParams } from '@angular/common/http';
-import { GedConversionService } from './ged-conversion.service';
+import { NgForm } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { HttpResponse } from '../http-response';
 import { GedConversionResult, GedConversionTable } from './ged-conversion.model';
 
 @Component({
@@ -126,14 +126,14 @@ export class GedConversionComponent implements OnInit {
     console.log(f.value);
 
     if (this.renewal){
-      this.http.get<GedConversionService>('https://site.hellomyuni.com/api/converter/each',
+      this.http.get<HttpResponse>('https://site.hellomyuni.com/api/converter/each',
         {
           params: f.value,
           responseType: 'json',
         })
         .subscribe(
           (val) => {
-            console.log(val.result);
+            // console.log(val.result);
             this.createResultList(val.result);
           },
           err => {

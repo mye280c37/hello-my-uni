@@ -8,6 +8,9 @@
     <span class="warning">*</span>는 필수 항목입니다.
     기타 문의사항은 imaginemyuni@gmail.com으로 메일 부탁드립니다.
   </div>
+  <div class="mb-5 warning">
+    작성해주신 정보를 바탕으로 정성스럽게 컨설팅을 준비합니다. 효율적인 개별 맞춤 컨설팅을 위해 최대한 구체적으로, 상세하게 작성해주세요.
+  </div>
   <form #consultingForm="ngForm" (ngSubmit)="onSubmit(consultingForm)">
     <div class="p-4">
         <div class="row p-2 border-bottom">
@@ -35,7 +38,6 @@
             <div><input type="checkbox" class="mr-1" name="option0" value="0" ngModel/>수시 지원</div>
             <div><input type="checkbox" class="mr-1" name="option1" value="1" ngModel/>자기소개서 컨설팅</div>
             <div><input type="checkbox" class="mr-1" name="option2" value="2" ngModel/>면접 컨설팅</div>
-            <div><input type="checkbox" class="mr-1" name="option3" value="3" ngModel/>논술 첨삭</div>
           </div>
         </div>
         <div class="row p-2 border-bottom">
@@ -93,6 +95,7 @@
         <div class="row p-2 border-bottom">
           <div class="col-md-3 font-weight-bold mb-1">지원 전형 선택 이유<span class="warning">*</span></div>
           <div class="col-md-9 mb-1">
+            <div class="mb-2 warning">위의 전형을 선택한 이유를 가능한 자세히 적어주세요.</div>
             <textarea class="w-100" rows="5" name="application_reason" ngModel></textarea>
           </div>
         </div>
@@ -168,10 +171,22 @@
             </div>
           </div>
         </div>
+      <div class="row p-2 border-bottom">
+        <div class="col-md-3 font-weight-bold mb-1">학교 및 학과 선정 이유<span class="warning">*</span></div>
+        <div class="col-md-9 mb-1">
+          <div class="mb-2 warning">
+            위의 학교/학과 지원을 희망하는 이유를 가능한 자세히 적어주세요.
+          </div>
+          <textarea class="w-100" name="hope_reason" rows="5" ngModel></textarea>
+        </div>
+      </div>
         <div class="row p-2 border-bottom">
-          <div class="col-md-3 font-weight-bold mb-1">참고 사항</div>
+          <div class="col-md-3 font-weight-bold mb-1">참고 사항<span class="warning">*</span></div>
           <div class="col-md-9 mb-1">
-            <textarea class="w-100" name="note" rows="5"></textarea>
+            <div class="mb-2 warning">
+              컨설팅에 참고할 사항을 최대한 구체적으로 작성해주세요. (현재 상황, 학과 선정에 대한 고민, 학과나 대학에 대한 본인의 기호, 가지고 있는 자격증, 어필하고 싶은 경험, 현재 알고 있는 정보 등 사소한 것도 괜찮으니 작성 부탁드립니다!)
+            </div>
+            <textarea class="w-100" name="note" rows="5" ngModel></textarea>
           </div>
         </div>
         <div class="row p-2 border-bottom">

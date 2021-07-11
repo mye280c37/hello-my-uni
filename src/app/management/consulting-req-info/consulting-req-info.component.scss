@@ -10,3 +10,7 @@
   width: 100%;
   text-align: left !important;
 }
+
+input[name='month'], input[name='date'] {
+  width: 40px;
+}

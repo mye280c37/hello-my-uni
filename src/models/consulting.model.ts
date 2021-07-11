@@ -1,3 +1,16 @@
+export class Comment {
+  public id: string;
+  public date: string;
+  public contents: string;
+
+  constructor(id: string, date: string, contents: string) {
+    this.id = id;
+    this.date = date;
+    this.contents = contents;
+  }
+
+}
+
 export class Consulting {
   public key: string;
   public name: string;
@@ -16,7 +29,6 @@ export class Consulting {
   public average: number;
   public option: string;
   public application: string;
-  public description: string;
   // tslint:disable-next-line:variable-name
   public application_reason: string;
   public hope: {
@@ -45,19 +57,19 @@ export class Consulting {
       major: string
     }
   };
+  // tslint:disable-next-line:variable-name
+  public hope_reason :string;
   public note: string;
   // tslint:disable-next-line:variable-name
-  public date_time: string;
   public check: number;
   public account: string;
-  public comment: string;
-  public payment: boolean;
+  public comments: Comment[];
 
   constructor(
     key: string, name: string, age: number, gender: string, phone: string, scores: any, average: number, option: string, application: string,
     // tslint:disable-next-line:variable-name
-    description: string, application_reason: string, hope: any, note: string, date_time: string, check: number,
-    account: string, comment: string, payment: boolean
+    application_reason: string, hope: any, hope_reason: string, note: string, check: number,
+    account: string, comments: Comment[]
   ) {
     this.key = key;
     this.name = name;
@@ -68,14 +80,12 @@ export class Consulting {
     this.average = average;
     this.option = option;
     this.application = application;
-    this.description = description;
     this.application_reason = application_reason;
     this.hope = hope;
+    this.hope_reason = hope_reason;
     this.note = note;
-    this.date_time = date_time;
     this.check = check;
     this.account = account;
-    this.comment = comment;
-    this.payment = payment;
+    this.comments = comments;
   }
 }

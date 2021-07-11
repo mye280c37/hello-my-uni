@@ -2,9 +2,9 @@ import * as $ from 'jquery';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Review } from '../../../models/review.model';
 import { HttpClient } from '@angular/common/http';
+import { HttpResponse } from '../../http-response';
 import { environment } from '../../../environments/environment';
 import { NgForm } from '@angular/forms';
-import { ReviewDetailService } from './review-detail.service';
 
 @Component({
   selector: 'app-review-detail',
@@ -80,7 +80,7 @@ export class ReviewDetailComponent implements OnInit {
 
       console.log(body);
 
-      this.http.post<ReviewDetailService>(environment.apiUrl + '/api/review/delete', body)
+      this.http.post<HttpResponse>(environment.apiUrl + '/api/review/delete', body)
         .subscribe(
           (val) => {
             console.log(val.message);

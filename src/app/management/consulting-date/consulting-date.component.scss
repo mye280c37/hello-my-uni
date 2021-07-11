@@ -1,0 +1,10 @@
+.additional-box {
+  top: calc(50% - 150px);
+  left: calc(50% - 200px);
+  width: 400px;
+  height: 300px;
+}
+
+input[name='month'], input[name='date']{
+  width: 40px;
+}
