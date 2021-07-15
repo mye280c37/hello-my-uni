@@ -1,18 +1,15 @@
 <div class="p-3"></div>
 <div class="bg-white-50 p-3">
   <div *ngFor="let monDateTimeInfo of consultingDateInfo">
-    <div>{{ monDateTimeInfo.month }}월</div>
-    <div class="p-3" *ngFor="let dateTimeInfo of monDateTimeInfo.dateTimeList">
-      <div>{{dateTimeInfo.date}}일</div>
-      <div class="px-3" *ngFor="let timeInfo of dateTimeInfo.timeList">
-        <div>
-          {{ timeInfo }}
-        </div>
+    <div>{{ monDateTimeInfo.month }}월 {{monDateTimeInfo.date}}일</div>
+    <div class="px-3" *ngFor="let timeInfo of monDateTimeInfo.timeList">
+      <div>
+        {{ timeInfo }}
       </div>
     </div>
-    <div class="p-2 text-right">
-      <button class="btn-secondary" (click)="doAdd=true">추가하기</button>
-    </div>
+  </div>
+  <div class="p-2 text-right">
+    <button class="btn-secondary" (click)="doAdd=true">추가하기</button>
   </div>
 </div>
 <div class="position-fixed additional-box bg-background text-white p-2" *ngIf="doAdd">
@@ -22,13 +19,17 @@
       <fa-icon [icon]="['fas', 'times']" size="lg" class="navbar-toggler mr-auto my-2"></fa-icon>
     </div>
   </div>
-  <div class="px-2">
-    <form #consultingDateForm="ngForm" id="consultingDateForm" (ngSubmit)="onSubmit(consultingDateForm)">
-      <div class="mb-2"><input type="text" name="month" ngModel> 월 <input type="text" name="date" ngModel> 일</div>
-      <div>시간</div>
-      <div class="text-center overflow-auto">
-        <div><input type="text" class="form-control" name="time" ngModel></div>
-      </div>
-    </form>
-  </div>
+  <form #consultingDateForm="ngForm" id="consultingDateForm" class="px-2 mb-3" (ngSubmit)="onSubmit(consultingDateForm)">
+    <div class="mb-2"><input type="text" name="month" ngModel> 월 <input type="text" name="date" ngModel> 일</div>
+    <div>시간</div>
+    <div class="text-center" id="time-textfield">
+      <input type="text" class="form-control mb-2" name="time1">
+    </div>
+    <div class="text-center py-1">
+      <fa-icon [icon]="['fas', 'plus-circle']" size="lg" class="navbar-toggler mr-auto my-2" (click)="addTimeTextField()"></fa-icon>
+    </div>
+    <div class="text-right py-1">
+      <input type="submit" name="submit" value="저장하기" class="btn-secondary">
+    </div>
+  </form>
 </div>

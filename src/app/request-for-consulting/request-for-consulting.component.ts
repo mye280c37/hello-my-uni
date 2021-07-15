@@ -15,6 +15,7 @@ export class RequestForConsultingComponent implements OnInit {
   title = '컨설팅 신청';
   consultingDate: any;
   showTextField = false;
+  showTextField2 = false;
   calenderMonth = new Date().getMonth() + 1;
   calenderYear = new Date().getFullYear();
   calenderDate = 0;
@@ -36,6 +37,12 @@ export class RequestForConsultingComponent implements OnInit {
     '자기소개서 컨설팅',
     '면접 컨설팅',
     '논술 첨삭'
+  ];
+  route = [
+    '센터 대학입시 설명회',
+    '유튜브 채널',
+    '지인 소개',
+    '기타'
   ];
 
   constructor(private http: HttpClient) { }
@@ -143,9 +150,21 @@ export class RequestForConsultingComponent implements OnInit {
             }
             console.log(applicationVal);
             if (f.value.name && f.value.age && f.value.gender && f.value.phone) {
-              if (f.value.hope_reason){
+              if (f.value.hope_reason && f.value.fileSendCheck){
                 if (f.value.application_reason && f.value.note && f.value.check && f.value.account && this.clickedDate !== '' && f.value.time) {
                   isValid = true;
+                  let route = '';
+                  if (f.value.route0 || f.value.route1 || f.value.route2 || f.value.route3 ){
+                    for (let i = 0; i <= 3; i++){
+                      if (f.value['route' + i]){
+                        route += this.route[i];
+                        route += '/';
+                      }
+                    }
+                    if (f.value.route3){
+                      route += ( '(' + f.value.description_route + ')' );
+                    }
+                  }
                   const body = new Consulting(
                     f.value.name + f.value.age + f.value.gender + f.value.phone,
                     f.value.name,
@@ -161,7 +180,11 @@ export class RequestForConsultingComponent implements OnInit {
                     f.value.hope_reason,
                     f.value.note,
                     f.value.check ? 1 : 0,
+                    f.value.exam2SubjectName,
+                    f.value.examMon6Result,
+                    f.value.fileSendCheck,
                     f.value.account,
+                    route,
                     [{
                       id: '',
                       date: this.clickedDate + ' ' + f.value.time,
@@ -201,8 +224,20 @@ export class RequestForConsultingComponent implements OnInit {
     }
   }
 
-  onHideTextField(): void{
-    this.showTextField = false;
+  controlTextField(inputName: string, targetVar: string): void{
+    if ($('input[name=' + inputName + ']').prop('checked')) {
+      if (targetVar === 'showTextField'){
+        this.showTextField = true;
+      }else{
+        this.showTextField2 = true;
+      }
+    }else{
+      if (targetVar === 'showTextField'){
+        this.showTextField = false;
+      }else{
+        this.showTextField2 = false;
+      }
+    }
   }
 
   createCalender(): void{
@@ -257,14 +292,11 @@ export class RequestForConsultingComponent implements OnInit {
   findPossibleTime(date: number, mon: number): string[]{
     const monthKeys = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     // const jsonKey = monthKeys[mon - 1];
-    const dataOfMon = this.consultingDate[mon];
-    const possibleTimeList = [];
-    if (dataOfMon) {
-      if (dataOfMon[date.toString()]){
-        const dataOfDate = dataOfMon[date.toString()];
-        for (const dataOfTime of dataOfDate) {
-          possibleTimeList.push(dataOfTime);
-        }
+    let possibleTimeList = [];
+    for (const eachConsultingDate of this.consultingDate){
+      if (eachConsultingDate.month === mon.toString() && eachConsultingDate.date === date.toString()){
+        possibleTimeList = eachConsultingDate.timeList;
+        break;
       }
     }
     return possibleTimeList;
@@ -275,6 +307,7 @@ export class RequestForConsultingComponent implements OnInit {
     this.clicked = true;
     this.clickedDate = this.calenderMonth + '월 ' + date + '일';
     this.clickedTimeList = timeList as string[];
+    console.log(this.clickedTimeList);
   }
 
   moveCalender(direct: number): void{

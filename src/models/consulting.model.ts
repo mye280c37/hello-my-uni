@@ -58,18 +58,22 @@ export class Consulting {
     }
   };
   // tslint:disable-next-line:variable-name
-  public hope_reason :string;
+  public hope_reason: string;
   public note: string;
   // tslint:disable-next-line:variable-name
   public check: number;
+  public exam2SubjectName: string;
+  public examMon6Result: string;
+  public fileSendCheck: boolean;
   public account: string;
+  public route: string;
   public comments: Comment[];
 
   constructor(
     key: string, name: string, age: number, gender: string, phone: string, scores: any, average: number, option: string, application: string,
     // tslint:disable-next-line:variable-name
-    application_reason: string, hope: any, hope_reason: string, note: string, check: number,
-    account: string, comments: Comment[]
+    application_reason: string, hope: any, hope_reason: string, note: string, check: number, exam2SubjectName: string, examMon6Result: string,
+    fileSendCheck: boolean, account: string, route :string, comments: Comment[]
   ) {
     this.key = key;
     this.name = name;
@@ -85,7 +89,11 @@ export class Consulting {
     this.hope_reason = hope_reason;
     this.note = note;
     this.check = check;
+    this.exam2SubjectName = exam2SubjectName;
+    this.examMon6Result = examMon6Result;
+    this.fileSendCheck = fileSendCheck;
     this.account = account;
+    this.route = route;
     this.comments = comments;
   }
 }

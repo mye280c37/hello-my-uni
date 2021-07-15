@@ -98,7 +98,11 @@ export class ConsultingReqInfoComponent implements OnInit {
         result[i].hope_reason,
         result[i].note,
         result[i].check,
+        result[i].exam2SubjectName,
+        result[i].examMon6Result,
+        result[i].fileSendCheck,
         result[i].account,
+        result[i].route,
         comments
       );
       const cellId = result[i].name + i;

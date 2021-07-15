@@ -1,4 +1,4 @@
-export class MonDateTimeInfo {
+export class ConsultingDate {
   month: string;
   date: string;
   timeList: string[];

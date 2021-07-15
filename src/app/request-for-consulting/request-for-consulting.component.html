@@ -13,164 +13,172 @@
   </div>
   <form #consultingForm="ngForm" (ngSubmit)="onSubmit(consultingForm)">
     <div class="p-4">
-        <div class="row p-2 border-bottom">
-          <div class="col-md-3 font-weight-bold mb-1">이름<span class="warning">*</span></div>
-          <div class="col-md-9 mb-1"><input type="text" name="name" ngModel/></div>
+      <div class="row p-2 border-bottom">
+        <div class="col-md-3 font-weight-bold mb-1">이름<span class="warning">*</span></div>
+        <div class="col-md-9 mb-1"><input type="text" name="name" ngModel/></div>
+      </div>
+      <div class="row p-2 border-bottom">
+        <div class="col-md-3 font-weight-bold mb-1">나이<span class="warning">*</span></div>
+        <div class="col-md-9 mb-1"><input type="number" name="age" ngModel/></div>
+      </div>
+      <div class="row p-2 border-bottom">
+        <div class="col-md-3 font-weight-bold mb-1">성별<span class="warning">*</span></div>
+        <div class="col-md-9 mb-1">
+          <input type="radio" class="mr-1" name="gender" value="m" ngModel/><span class="mr-3">남</span>
+          <input type="radio" class="mr-1" name="gender" value="w" ngModel/><span>여</span>
         </div>
-        <div class="row p-2 border-bottom">
-          <div class="col-md-3 font-weight-bold mb-1">나이<span class="warning">*</span></div>
-          <div class="col-md-9 mb-1"><input type="number" name="age" ngModel/></div>
+      </div>
+      <div class="row p-2 border-bottom">
+        <div class="col-md-3 font-weight-bold mb-1">전화번호<span class="warning">*</span></div>
+        <div class="col-md-9 mb-1"><input type="text" name="phone" ngModel/></div>
+      </div>
+      <div class="row p-2 border-bottom">
+        <div class="col-md-3 font-weight-bold mb-1"> 컨설팅 선택 옵션<span class="warning">*</span></div>
+        <div class="col-md-9 mb-1">
+          <div><input type="checkbox" class="mr-1" name="option0" value="0" ngModel/>수시 지원</div>
+          <div><input type="checkbox" class="mr-1" name="option1" value="1" ngModel/>자기소개서 컨설팅</div>
+          <div><input type="checkbox" class="mr-1" name="option2" value="2" ngModel/>면접 컨설팅</div>
         </div>
-        <div class="row p-2 border-bottom">
-          <div class="col-md-3 font-weight-bold mb-1">성별<span class="warning">*</span></div>
-          <div class="col-md-9 mb-1">
-            <input type="radio" class="mr-1" name="gender" value="m" ngModel/><span class="mr-3">남</span>
-            <input type="radio" class="mr-1" name="gender" value="w" ngModel/><span>여</span>
+      </div>
+      <div class="row p-2 border-bottom">
+        <div class="col-md-3 font-weight-bold mb-1">지원 전형<span class="warning">*</span></div>
+        <div class="col-md-9 mb-1">
+          <div><input type="checkbox" class="mr-1" name="application0" value="0" ngModel/>학생부
+            교과(검정고시 성적)
+          </div>
+          <div><input type="checkbox" class="mr-1" name="application1" value="1" ngModel/>학생부
+            교과 면접(검정고시 성적 + 면접)
+          </div>
+          <div><input type="checkbox" class="mr-1" name="application2" value="2" ngModel/>학생부
+            종합(검정고시 성적 + 자기소개서 작성 + 면접)
+          </div>
+          <div><input type="checkbox" class="mr-1" name="application3" value="3" ngModel/>정시(수능)
+          </div>
+          <div><input type="checkbox" class="mr-1" name="application4" value="4" (click)="controlTextField('route3', 'showTextField')"  ngModel/>기타
+          </div>
+          <div *ngIf="showTextField" class="pl-2 pt-1">
+            <input type="text" name="description" ngModel/>
           </div>
         </div>
-        <div class="row p-2 border-bottom">
-          <div class="col-md-3 font-weight-bold mb-1">전화번호<span class="warning">*</span></div>
-          <div class="col-md-9 mb-1"><input type="text" name="phone" ngModel/></div>
-        </div>
-        <div class="row p-2 border-bottom">
-          <div class="col-md-3 font-weight-bold mb-1"> 컨설팅 선택 옵션<span class="warning">*</span></div>
-          <div class="col-md-9 mb-1">
-            <div><input type="checkbox" class="mr-1" name="option0" value="0" ngModel/>수시 지원</div>
-            <div><input type="checkbox" class="mr-1" name="option1" value="1" ngModel/>자기소개서 컨설팅</div>
-            <div><input type="checkbox" class="mr-1" name="option2" value="2" ngModel/>면접 컨설팅</div>
+      </div>
+      <div class="row p-2 border-bottom">
+        <div class="col-md-3 font-weight-bold mb-1">과목별 점수<span class="warning">*</span></div>
+        <div class="col-md-9 mb-1">
+          <div class="row mb-2">
+            <div class="col-md-2 py-auto">국어</div>
+            <div class="col-md-10"><input type="number" name="korean" ngModel></div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-2 py-auto">영어</div>
+            <div class="col-md-10"><input type="number" name="english" ngModel></div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-2 py-auto">수학</div>
+            <div class="col-md-10"><input type="number" name="math" ngModel></div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-2 py-auto">사회</div>
+            <div class="col-md-10"><input type="number" name="society" ngModel></div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-2 py-auto">과학</div>
+            <div class="col-md-10"><input type="number" name="science" ngModel></div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-2 py-auto">한국사</div>
+            <div class="col-md-10"><input type="number" name="history" ngModel></div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-2 py-auto">선택</div>
+            <div class="col-md-10"><input type="number" name="choice" ngModel></div>
           </div>
         </div>
-        <div class="row p-2 border-bottom">
-          <div class="col-md-3 font-weight-bold mb-1">지원 전형<span class="warning">*</span></div>
-          <div class="col-md-9 mb-1">
-            <div><input type="checkbox" class="mr-1" name="application0" value="0" (click)="onHideTextField()" ngModel/>학생부 교과(검정고시 성적)</div>
-            <div><input type="checkbox" class="mr-1" name="application1" value="1" (click)="onHideTextField()" ngModel/>학생부 교과 면접(검정고시 성적 + 면접)</div>
-            <div><input type="checkbox" class="mr-1" name="application2" value="2" (click)="onHideTextField()" ngModel/>학생부 종합(검정고시 성적 + 자기소개서 작성 + 면접)</div>
-            <div><input type="checkbox" class="mr-1" name="application3" value="3" (click)="onHideTextField()" ngModel/>정시(수능)</div>
-            <div><input type="checkbox" class="mr-1" name="application4" value="4" (click)="showTextField=true" ngModel/>기타</div>
-            <div *ngIf="showTextField" class="pl-2 pt-1">
-              <input type="text" name="description" ngModel/>
-            </div>
-          </div>
+      </div>
+      <div class="row p-2 border-bottom">
+        <div class="col-md-3 font-weight-bold mb-1">평균 점수<span class="warning">*</span></div>
+        <div class="col-md-9 mb-1">
+          <input type="number" name="average" ngModel/>
         </div>
-        <div class="row p-2 border-bottom">
-          <div class="col-md-3 font-weight-bold mb-1">과목별 점수<span class="warning">*</span></div>
-          <div class="col-md-9 mb-1">
-            <div class="row mb-2">
-              <div class="col-md-2 py-auto">국어</div>
-              <div class="col-md-10"><input type="number" name="korean" ngModel></div>
-            </div>
-            <div class="row mb-2">
-              <div class="col-md-2 py-auto">영어</div>
-              <div class="col-md-10"><input type="number" name="english" ngModel></div>
-            </div>
-            <div class="row mb-2">
-              <div class="col-md-2 py-auto">수학</div>
-              <div class="col-md-10"><input type="number" name="math" ngModel></div>
-            </div>
-            <div class="row mb-2">
-              <div class="col-md-2 py-auto">사회</div>
-              <div class="col-md-10"><input type="number" name="society" ngModel></div>
-            </div>
-            <div class="row mb-2">
-              <div class="col-md-2 py-auto">과학</div>
-              <div class="col-md-10"><input type="number" name="science" ngModel></div>
-            </div>
-            <div class="row mb-2">
-              <div class="col-md-2 py-auto">한국사</div>
-              <div class="col-md-10"><input type="number" name="history" ngModel></div>
-            </div>
-            <div class="row mb-2">
-              <div class="col-md-2 py-auto">선택</div>
-              <div class="col-md-10"><input type="number" name="choice" ngModel></div>
-            </div>
-          </div>
+      </div>
+      <div class="row p-2 border-bottom">
+        <div class="col-md-3 font-weight-bold mb-1">지원 전형 선택 이유<span class="warning">*</span></div>
+        <div class="col-md-9 mb-1">
+          <div class="mb-2 warning">위의 전형을 선택한 이유를 가능한 자세히 적어주세요.</div>
+          <textarea class="w-100" rows="5" name="application_reason" ngModel></textarea>
         </div>
-        <div class="row p-2 border-bottom">
-          <div class="col-md-3 font-weight-bold mb-1">평균 점수<span class="warning">*</span></div>
-          <div class="col-md-9 mb-1">
-            <input type="number" name="average" ngModel/>
-          </div>
-        </div>
-        <div class="row p-2 border-bottom">
-          <div class="col-md-3 font-weight-bold mb-1">지원 전형 선택 이유<span class="warning">*</span></div>
-          <div class="col-md-9 mb-1">
-            <div class="mb-2 warning">위의 전형을 선택한 이유를 가능한 자세히 적어주세요.</div>
-            <textarea class="w-100" rows="5" name="application_reason" ngModel></textarea>
-          </div>
-        </div>
-        <div class="row p-2 border-bottom">
-          <div class="col-md-3 font-weight-bold mb-1">지망 학교 및 학과 <span class="warning">*</span></div>
-          <div class="col-md-9 mb-1">
-            <div class="mb-3 warning">최대한 채워주시고 정하지 못한 부분은 "미정"이라고 채워주세요</div>
-            <div class="row mb-2">
-              <div class="col-md-2 my-auto">1지망</div>
-              <div class="row col-md-10">
-                <div class="col-md-6">
-                  <input type="text" class="mb-1 w-100" name="uni1" placeholder="대학교" ngModel/>
-                </div>
-                <div class="col-md-6">
-                  <input type="text" class="w-100" name="major1" placeholder="학과" ngModel/>
-                </div>
+      </div>
+      <div class="row p-2 border-bottom">
+        <div class="col-md-3 font-weight-bold mb-1">지망 학교 및 학과 <span class="warning">*</span></div>
+        <div class="col-md-9 mb-1">
+          <div class="mb-3 warning">최대한 채워주시고 정하지 못한 부분은 "미정"이라고 채워주세요</div>
+          <div class="row mb-2">
+            <div class="col-md-2 my-auto">1지망</div>
+            <div class="row col-md-10">
+              <div class="col-md-6">
+                <input type="text" class="mb-1 w-100" name="uni1" placeholder="대학교" ngModel/>
               </div>
-            </div>
-            <div class="row mb-2">
-              <div class="col-md-2 my-auto">2지망</div>
-              <div class="row col-md-10">
-                <div class="col-md-6">
-                  <input type="text" class="mb-1 w-100" name="uni2" placeholder="대학교" ngModel/>
-                </div>
-                <div class="col-md-6">
-                  <input type="text" class="w-100" name="major2" placeholder="학과" ngModel/>
-                </div>
-              </div>
-            </div>
-            <div class="row mb-2">
-              <div class="col-md-2 my-auto">3지망</div>
-              <div class="row col-md-10">
-                <div class="col-md-6">
-                  <input type="text" class="mb-1 w-100" name="uni3" placeholder="대학교" ngModel/>
-                </div>
-                <div class="col-md-6">
-                  <input type="text" class="w-100" name="major3" placeholder="학과" ngModel/>
-                </div>
-              </div>
-            </div>
-            <div class="row mb-2">
-              <div class="col-md-2 my-auto">4지망</div>
-              <div class="row col-md-10">
-                <div class="col-md-6">
-                  <input type="text" class="mb-1 w-100" name="uni4" placeholder="대학교" ngModel/>
-                </div>
-                <div class="col-md-6">
-                  <input type="text" class="w-100" name="major4" placeholder="학과" ngModel/>
-                </div>
-              </div>
-            </div>
-            <div class="row mb-2">
-              <div class="col-md-2 my-auto">5지망</div>
-              <div class="row col-md-10">
-                <div class="col-md-6">
-                  <input type="text" class="mb-1 w-100" name="uni5" placeholder="대학교" ngModel/>
-                </div>
-                <div class="col-md-6">
-                  <input type="text" class="w-100" name="major5" placeholder="학과" ngModel/>
-                </div>
-              </div>
-            </div>
-            <div class="row mb-2">
-              <div class="col-md-2 my-auto">6지망</div>
-              <div class="row col-md-10">
-                <div class="col-md-6">
-                  <input type="text" class="mb-1 w-100" name="uni6" placeholder="대학교" ngModel/>
-                </div>
-                <div class="col-md-6">
-                  <input type="text" class="w-100" name="major6" placeholder="학과" ngModel/>
-                </div>
+              <div class="col-md-6">
+                <input type="text" class="w-100" name="major1" placeholder="학과" ngModel/>
               </div>
             </div>
           </div>
+          <div class="row mb-2">
+            <div class="col-md-2 my-auto">2지망</div>
+            <div class="row col-md-10">
+              <div class="col-md-6">
+                <input type="text" class="mb-1 w-100" name="uni2" placeholder="대학교" ngModel/>
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="w-100" name="major2" placeholder="학과" ngModel/>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-2 my-auto">3지망</div>
+            <div class="row col-md-10">
+              <div class="col-md-6">
+                <input type="text" class="mb-1 w-100" name="uni3" placeholder="대학교" ngModel/>
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="w-100" name="major3" placeholder="학과" ngModel/>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-2 my-auto">4지망</div>
+            <div class="row col-md-10">
+              <div class="col-md-6">
+                <input type="text" class="mb-1 w-100" name="uni4" placeholder="대학교" ngModel/>
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="w-100" name="major4" placeholder="학과" ngModel/>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-2 my-auto">5지망</div>
+            <div class="row col-md-10">
+              <div class="col-md-6">
+                <input type="text" class="mb-1 w-100" name="uni5" placeholder="대학교" ngModel/>
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="w-100" name="major5" placeholder="학과" ngModel/>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-2 my-auto">6지망</div>
+            <div class="row col-md-10">
+              <div class="col-md-6">
+                <input type="text" class="mb-1 w-100" name="uni6" placeholder="대학교" ngModel/>
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="w-100" name="major6" placeholder="학과" ngModel/>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
       <div class="row p-2 border-bottom">
         <div class="col-md-3 font-weight-bold mb-1">학교 및 학과 선정 이유<span class="warning">*</span></div>
         <div class="col-md-9 mb-1">
@@ -180,99 +188,148 @@
           <textarea class="w-100" name="hope_reason" rows="5" ngModel></textarea>
         </div>
       </div>
-        <div class="row p-2 border-bottom">
-          <div class="col-md-3 font-weight-bold mb-1">참고 사항<span class="warning">*</span></div>
-          <div class="col-md-9 mb-1">
-            <div class="mb-2 warning">
-              컨설팅에 참고할 사항을 최대한 구체적으로 작성해주세요. (현재 상황, 학과 선정에 대한 고민, 학과나 대학에 대한 본인의 기호, 가지고 있는 자격증, 어필하고 싶은 경험, 현재 알고 있는 정보 등 사소한 것도 괜찮으니 작성 부탁드립니다!)
-            </div>
-            <textarea class="w-100" name="note" rows="5" ngModel></textarea>
+      <div class="row p-2 border-bottom">
+        <div class="col-md-3 font-weight-bold mb-1">참고 사항<span class="warning">*</span></div>
+        <div class="col-md-9 mb-1">
+          <div class="mb-2 warning">
+            컨설팅에 참고할 사항을 최대한 구체적으로 작성해주세요. (현재 상황, 학과 선정에 대한 고민, 학과나 대학에 대한 본인의 기호, 가지고 있는 자격증, 어필하고 싶은 경험, 현재 알고 있는 정보
+            등 사소한 것도 괜찮으니 작성 부탁드립니다!)
           </div>
+          <textarea class="w-100" name="note" rows="5" ngModel></textarea>
         </div>
-        <div class="row p-2 border-bottom">
-          <div class="col-md-3 font-weight-bold">상담 시간<span class="warning">*</span></div>
-          <div class="col-md-9">
-            <div class="mb-1 text-center d-flex justify-content-between">
-              <div class="item-hover" (click)="moveCalender(-1)"><fa-icon [icon]="['fas', 'angle-left']" size="lg" class="navbar-toggler mr-auto my-2"></fa-icon></div>
-              <div class="text-center font-weight-bold" style="font-size: large">{{ calenderYear }}년 {{ calenderMonth }}월</div>
-              <div class="item-hover" (click)="moveCalender(1)"><fa-icon [icon]="['fas', 'angle-right']" size="lg" class="navbar-toggler mr-auto my-2"></fa-icon></div>
+      </div>
+      <div class="row p-2 border-bottom">
+        <div class="col-md-3 font-weight-bold">상담 시간<span class="warning">*</span></div>
+        <div class="col-md-9">
+          <div class="mb-1 text-center d-flex justify-content-between">
+            <div class="item-hover" (click)="moveCalender(-1)">
+              <fa-icon [icon]="['fas', 'angle-left']" size="lg" class="navbar-toggler mr-auto my-2"></fa-icon>
             </div>
-            <div class="table-responsive">
-              <table class="table text-center">
-                <thead>
-                <tr>
-                  <th>일</th>
-                  <th>월</th>
-                  <th>화</th>
-                  <th>수</th>
-                  <th>목</th>
-                  <th>금</th>
-                  <th>토</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let week of calender">
-                  <td *ngFor="let dateTime of week">
-                    <div [ngClass]="{'circle-bg item-hover':dateTime[2]}" (click)="showTimeList(dateTime[0], dateTime[1])">
-                      {{dateTime[0]}}
-                    </div>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-              <div class="p-3 border-background" *ngIf="clicked">
-                <div class="mb-2" style="font-size: large">{{ clickedDate }}</div>
-                <div class="p-2">
-                  <div class="mb-1" *ngFor="let time of clickedTimeList"><input type="radio" name="time" value="{{time}}" ngModel> {{ time }}</div>
+            <div class="text-center font-weight-bold" style="font-size: large">{{ calenderYear }}년 {{ calenderMonth }}
+              월
+            </div>
+            <div class="item-hover" (click)="moveCalender(1)">
+              <fa-icon [icon]="['fas', 'angle-right']" size="lg" class="navbar-toggler mr-auto my-2"></fa-icon>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table text-center">
+              <thead>
+              <tr>
+                <th>일</th>
+                <th>월</th>
+                <th>화</th>
+                <th>수</th>
+                <th>목</th>
+                <th>금</th>
+                <th>토</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let week of calender">
+                <td *ngFor="let dateTime of week">
+                  <div [ngClass]="{'circle-bg item-hover':dateTime[2]}"
+                       (click)="showTimeList(dateTime[0], dateTime[1])">
+                    {{dateTime[0]}}
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <div class="p-3 border-background" *ngIf="clicked">
+              <div class="mb-2" style="font-size: large">{{ clickedDate }}</div>
+              <div class="p-2">
+                <div class="mb-1" *ngFor="let time of clickedTimeList">
+                  <input type="radio" name="time" value="{{time}}" ngModel> {{ time }}
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="p-2 border-bottom">
-          <strong>컨설팅 비용은 회당 10만원이며, 컨설팅 신청서 작성 여부 및 입금 확인 후 컨설팅 진행합니다.<span class="warning">*</span></strong>
-          <div class="pt-3">
-            계좌번호: 1002-857-980326 우리은행 강예은 <br>입금자명: 진학 컨설팅 000 ⇒ 진학 컨설팅 강예은 <span class="text-black-50">(학생 본인의 이름을 넣어주시면 됩니다.)</span>
+      </div>
+      <div class="p-2 border-bottom">
+        <strong class="text-warning">제 2회 검정고시(08.11) 응시자 필수 답변</strong>
+        <div class="mt-2 mb-1">제 2회 검정고시 응시 과목</div>
+        <div class="text-black-50 mb-2">예시) 수학, 과학</div>
+        <input type="text" name="exam2SubjectName" class="form-control" ngModel>
+      </div>
+      <div class="p-2 border-bottom">
+        <strong class="text-warning">2022 수능 응시자 필수 답변</strong>
+        <div class="mt-2 mb-1">6월 모의고사 등급을 작성해주세요.</div>
+        <div class="text-black-50 mb-2">예시) 국어 1 영어 1 수학 1 한국사 1 사탐(세계지리 1 사회문화 1) 아랍어 1</div>
+        <input type="text" name="examMon6Result" class="form-control" ngModel>
+      </div>
+      <div class="p-2 border-bottom">
+        <strong>첨삭을 위한 자기소개서는 컨설팅 3일 전까지 imaginemyuni@gmail.com으로 보내주세요.<span class="warning">*</span></strong>
+        <div class="my-2">제목: [자기소개서_000(이름)], 형식: 한글/워드, 파일 상단에 지원하고자 하는 학교와 학과를 명시해주시고, 문항도 함께 작성해주세요.</div>
+        <input type="radio" name="fileSendCheck" value="true" ngModel> 확인했습니다.
+      </div>
+      <div class="p-2 border-bottom">
+        <strong>컨설팅 비용은 회당 10만원이며, 컨설팅 신청서 작성 여부 및 입금 확인 후 컨설팅 진행합니다.<span class="warning">*</span></strong>
+        <div class="pt-3">
+          계좌번호: 1002-857-980326 우리은행 강예은 <br>입금자명: 진학 컨설팅 000 ⇒ 진학 컨설팅 강예은 <span class="text-black-50">(학생 본인의 이름을 넣어주시면 됩니다.)</span>
+        </div>
+        <div class="p-2 my-2 border-background" style="font-size: small">
+           수집하는 개인정보 항목<br>
+          회원가입, 상담, 서비스 신청 등을 위해 아래와 같은 개인정보를 수집하고 있습니다.
+          <div class="pl-2">
+             수집항목: 이름, 연락처, 문의내용, 쿠키 등<br>
+             개인정보 수집방법: 홈페이지(상담신청)
           </div>
-          <div class="p-2 my-2 border-background" style="font-size: small">
-            	수집하는 개인정보 항목<br>
-            회원가입, 상담, 서비스 신청 등을 위해 아래와 같은 개인정보를 수집하고 있습니다.
-            <div class="pl-2">
-              	수집항목: 이름, 연락처, 문의내용, 쿠키 등<br>
-              	개인정보 수집방법: 홈페이지(상담신청)
-            </div>
-            <br>
-            	개인정보의 수집 및 이용목적<br>
-            수집한 개인정보를 다음의 목적을 위해 활용합니다.<br>
-            <div class="pl-2">
-              	서비스 제공에 관한 계약 이행 및 서비스 제공에 따른 요금정산, 콘텐츠 제공, 문의 및 불만사항 처리
-            </div>
-            <br>
-            	개인정보의 보유 및 이용기간<br>
-            원칙적으로, 개인정보 수집 및 이용목적이 달성된 후에는 해당 정보를 지체 없이 파기합니다. 단, 관계법령의 규정에 의하여 보존할 필요가 있는 경우 아래와 같이 관계법령에서 정한 일정한 기간 동안 회원정보를 보관합니다.<br>
-            <div class="pl-2">
-              	보존 항목:  이름, 연락처, 문의내용<br>
-              	보존 근거: 서비스 이용의 혼선 방지<br>
-              	보존 기간: 5년 상법, 전자상거래 등에서의 소비자보호에 관한 법률 등 관계법령의 규정에 의하여 보존할 필요가 있는 경우 관계법령에서 정한 일정한 기간 동안 회원정보를 보관합니다. 이 경우 보관하는 정보를 그 보관의 목적으로만 이용하며 보존기간은 아래와 같습니다.<br>
-              	계약 또는 청약철회 등에 관한 기록: 5년 (전자상거래등에서의 소비자보호에 관한 법률)<br>
-              	대금결제 및 재화 등의 공급에 관한 기록: 5년 (전자상거래등에서의 소비자보호에 관한 법률)<br>
-              	소비자의 불만 또는 분쟁처리에 관한 기록: 3년 (전자상거래등에서의 소비자보호에 관한 법률)
-            </div>
+          <br>
+           개인정보의 수집 및 이용목적<br>
+          수집한 개인정보를 다음의 목적을 위해 활용합니다.<br>
+          <div class="pl-2">
+             서비스 제공에 관한 계약 이행 및 서비스 제공에 따른 요금정산, 콘텐츠 제공, 문의 및 불만사항 처리
           </div>
-          <div class="py-2">
-            <input type="radio" class="mr-1" name="check" value="true" ngModel> 확인했습니다
+          <br>
+           개인정보의 보유 및 이용기간<br>
+          원칙적으로, 개인정보 수집 및 이용목적이 달성된 후에는 해당 정보를 지체 없이 파기합니다. 단, 관계법령의 규정에 의하여 보존할 필요가 있는 경우 아래와 같이 관계법령에서 정한 일정한 기간 동안
+          회원정보를 보관합니다.<br>
+          <div class="pl-2">
+             보존 항목: 이름, 연락처, 문의내용<br>
+             보존 근거: 서비스 이용의 혼선 방지<br>
+             보존 기간: 5년 상법, 전자상거래 등에서의 소비자보호에 관한 법률 등 관계법령의 규정에 의하여 보존할 필요가 있는 경우 관계법령에서 정한 일정한 기간 동안 회원정보를 보관합니다. 이 경우
+            보관하는 정보를 그 보관의 목적으로만 이용하며 보존기간은 아래와 같습니다.<br>
+             계약 또는 청약철회 등에 관한 기록: 5년 (전자상거래등에서의 소비자보호에 관한 법률)<br>
+             대금결제 및 재화 등의 공급에 관한 기록: 5년 (전자상거래등에서의 소비자보호에 관한 법률)<br>
+             소비자의 불만 또는 분쟁처리에 관한 기록: 3년 (전자상거래등에서의 소비자보호에 관한 법률)
           </div>
         </div>
-        <div class="row p-2 border-bottom">
-          <div class="col-md-3 font-weight-bold mb-1">환불 계좌<span class="warning">*</span></div>
-          <div class="col-md-9 mb-1">
-            <input type="text" class="w-100" name="account" placeholder="1002-857-980326 우리은행 강예은" ngModel>
-            <div class="mt-2">
-              - 컨설팅 당일 예약 변경 및 취소는 불가능합니다.<br>
-              - 컨설팅 예약일로부터 2일 전까지 예약 변경 및 취소 시 컨설팅 비용의 50%가 과금 됩니다.
-            </div>
+        <div class="py-2">
+          <input type="radio" class="mr-1" name="check" value="true" ngModel> 확인했습니다
+        </div>
+      </div>
+      <div class="p-2 border-bottom">
+        <div class="font-weight-bold mb-1"> 진학 컨설팅 MY UNI를 알게 되신 경로를 선택해주세요.</div>
+        <div class="col-md-9 mb-1">
+          <div>
+            <input type="checkbox" class="mr-1" name="route0" value="0" ngModel/> 센터 대학입시 설명회
+          </div>
+          <div>
+            <input type="checkbox" class="mr-1" name="route1" value="1" ngModel/>유튜브 채널
+          </div>
+          <div>
+            <input type="checkbox" class="mr-1" name="route2" value="2" ngModel/>지인 소개
+          </div>
+          <div>
+            <input type="checkbox" class="mr-1" name="route3" value="4" (click)="controlTextField('route3', 'showTextField2')" ngModel/>기타
+          </div>
+          <div *ngIf="showTextField2" class="pl-2 pt-1">
+            <input type="text" name="description_route" ngModel/>
           </div>
         </div>
+      </div>
+      <div class="row p-2 border-bottom">
+        <div class="col-md-3 font-weight-bold mb-1">환불 계좌<span class="warning">*</span></div>
+        <div class="col-md-9 mb-1">
+          <input type="text" class="w-100" name="account" placeholder="1002-857-980326 우리은행 강예은" ngModel>
+          <div class="mt-2">
+            - 컨설팅 당일 예약 변경 및 취소는 불가능합니다.<br>
+            - 컨설팅 예약일로부터 2일 전까지 예약 변경 및 취소 시 컨설팅 비용의 50%가 과금 됩니다.
+          </div>
+        </div>
+      </div>
       <input type="submit" class="btn mt-3" value="신청하기">
     </div>
   </form>

@@ -42,11 +42,19 @@
         </div>
         <div *ngIf="consulting[1].hope_reason.length !== 0">
           <div><strong>학교 및 학과 선정 이유</strong></div>
-          <div>{{ consulting[1].hope_reason }}</div>
+          <div class="pl-3">{{ consulting[1].hope_reason }}</div>
         </div>
         <div *ngIf="consulting[1].note.length !== 0">
           <div><strong>참고</strong></div>
           <div class="pl-3">{{ consulting[1].note }}</div>
+        </div>
+        <div *ngIf="consulting[1].exam2SubjectName">
+          <div><strong>제 2회 검정고시 응시 과목</strong></div>
+          <div class="pl-3">{{ consulting[1].exam2SubjectName }}</div>
+        </div>
+        <div *ngIf="consulting[1].examMon6Result">
+          <div><strong>6월 모의고사 등급</strong></div>
+          <div class="pl-3">{{ consulting[1].examMon6Result }}</div>
         </div>
         <div><strong>환불계좌</strong>: {{consulting[1].account}}</div>
       </div>
