@@ -1,0 +1,47 @@
+.announcement-box {
+  width: 420px;
+  height: 420px;
+  top: calc(50% - 210px);
+  left: calc(50% - 210px);
+
+  .title{
+    font-size: 1.5rem;
+    height: 11%;
+    padding: 2%;
+  }
+
+  .body{
+    font-size: 1.25rem;
+    height: 89%;
+  }
+
+  @media (max-width: 768px) {
+    width: 380px;
+    height: 380px;
+    top: calc(50% - 190px);
+    left: calc(50% - 190px);
+    .title{
+      height: 12%;
+      font-size: 1.3rem;
+    }
+    .body{
+      font-size: 1.2rem;
+      height: 88%;
+    }
+  }
+
+  @media (max-width: 575.9px) {
+    width: 280px;
+    height: 280px;
+    top: calc(50% - 140px);
+    left: calc(50% - 140px);
+    .title{
+      height: 13%;
+      font-size: 1.2rem;
+    }
+    .body{
+      font-size: 1.15rem;
+      height: 87%;
+    }
+  }
+}

@@ -1,3 +1,19 @@
 <!--<app-nav-bar></app-nav-bar>-->
 <router-outlet></router-outlet>
-
+<div class="position-fixed announcement-box border-background bg-white" *ngIf="showAnnouncement">
+  <div class="bg-background font-weight-bold text-white title d-flex justify-content-between">
+    <div>컨설팅 신청 관련 공지</div>
+    <div class="item-hover">
+      <fa-icon [icon]="['fas', 'times']" size="lg" (click)="hideAnnouncement()"></fa-icon>
+    </div>
+  </div>
+  <div class="body p-4">
+    <table class="text-center h-100 align-middle">
+      <tbody>
+      <tr>
+        <td>현재 컨설팅 신청이 폭주하여 7월 컨설팅 예약이 모두 마감되었습니다. 8월 컨설팅 일정을 확인해주세요.</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

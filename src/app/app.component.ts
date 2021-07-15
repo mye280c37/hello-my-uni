@@ -7,6 +7,8 @@ import { environment } from '../environments/environment';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  showAnnouncement = true;
+
   constructor() {
     if (environment.production){
       console.log('production mode');
@@ -14,5 +16,9 @@ export class AppComponent {
       console.log('development mode');
       console.log(environment.apiUrl);
     }
+  }
+
+  hideAnnouncement(): void{
+    this.showAnnouncement = false;
   }
 }
