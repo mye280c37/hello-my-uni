@@ -18,7 +18,7 @@ import { HeaderComponent } from './main/header/header.component';
 import { ReviewPostComponent } from './review-post/review-post.component';
 import { RequestForConsultingComponent } from './request-for-consulting/request-for-consulting.component';
 import { ManagementComponent } from './management/management.component';
-import { ConsultingReqInfoComponent } from './management/consulting-req-info/consulting-req-info.component';
+import { ConsultingDetailComponent } from './management/consulting-list/consulting-detail/consulting-detail.component';
 import { UniversityInfoComponent } from './management/university-info/university-info.component';
 import { EssayConsultingComponent } from './essay-consulting/essay-consulting.component';
 import { IntroduceConsultantComponent } from './introduce-consultant/introduce-consultant.component';
@@ -30,6 +30,7 @@ import { CoverLetterConsultingComponent } from './cover-letter-consulting/cover-
 import { InterviewConsultingComponent } from './interview-consulting/interview-consulting.component';
 import { EssayPostComponent } from './essay-post/essay-post.component';
 import { ConsultingDateComponent } from './management/consulting-date/consulting-date.component';
+import { ConsultingListComponent } from './management/consulting-list/consulting-list.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { ConsultingDateComponent } from './management/consulting-date/consulting
     ReviewPostComponent,
     RequestForConsultingComponent,
     ManagementComponent,
-    ConsultingReqInfoComponent,
+    ConsultingDetailComponent,
     UniversityInfoComponent,
     EssayConsultingComponent,
     IntroduceConsultantComponent,
@@ -55,6 +56,7 @@ import { ConsultingDateComponent } from './management/consulting-date/consulting
     InterviewConsultingComponent,
     EssayPostComponent,
     ConsultingDateComponent,
+    ConsultingListComponent,
   ],
   imports: [
     BrowserModule,

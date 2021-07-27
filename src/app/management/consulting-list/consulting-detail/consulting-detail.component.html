@@ -1,0 +1,124 @@
+<div class="table-responsive">
+  <div class="text-center" style="min-height: 500px"
+       [ngClass]="{'hidden':consulting.id !== consultingDetail[tableTab-1].id}"
+       *ngFor="let consulting of consultingDetail" id="{{ consulting.id }}">
+    <div class="text-center border-bottom font-weight-bold p-2">
+      {{consulting.consulting.name}}
+    </div>
+    <div class="row py-3 border-bottom font-weight-bold">
+      <div class="col-md-4 border-right">{{consulting.consulting.age}}</div>
+      <div class="col-md-4 border-right" *ngIf="consulting.consulting.gender==='w'; else maleText">여</div>
+      <ng-template #maleText>
+        <div class="col-md-4 border-right">남</div>
+      </ng-template>
+      <div class="col-md-4">{{consulting.consulting.phone}}</div>
+    </div>
+    <div class="p-3 text-left">
+      <div><strong>컨설팅 옵션</strong>: {{ consulting.consulting.option }}</div>
+      <div><strong>지원 전형</strong>: {{ consulting.consulting.application }}</div>
+      <div><strong>지원 이유</strong>: {{ consulting.consulting.application_reason }}</div>
+      <div>
+        <div><strong>점수</strong>(평균: {{consulting.consulting.average}})</div>
+        <div>
+          <span class="pl-2">국어: {{consulting.consulting.scores.korean}}</span>
+          <span class="pl-2">영어: {{consulting.consulting.scores.english}}</span>
+          <span class="pl-2">수학: {{consulting.consulting.scores.math}}</span>
+          <span class="pl-2">사회: {{consulting.consulting.scores.society}}</span>
+          <span class="pl-2">과학: {{consulting.consulting.scores.science}}</span>
+          <span class="pl-2">한국사: {{consulting.consulting.scores.history}}</span>
+          <span class="pl-2">선택: {{consulting.consulting.scores.choice}}</span>
+        </div>
+      </div>
+      <div>
+        <div>
+          <div><strong>희망 대학 및 학과</strong></div>
+          <div>
+            <div class="pl-2">
+              1지망: {{ consulting.consulting.hope[1].uni }} {{ consulting.consulting.hope[1].major }}</div>
+            <div class="pl-2">
+              2지망: {{ consulting.consulting.hope[2].uni }} {{ consulting.consulting.hope[2].major }}</div>
+            <div class="pl-2">
+              3지망: {{ consulting.consulting.hope[3].uni }} {{ consulting.consulting.hope[3].major }}</div>
+            <div class="pl-2">
+              4지망: {{ consulting.consulting.hope[4].uni }} {{ consulting.consulting.hope[4].major }}</div>
+            <div class="pl-2">
+              5지망: {{ consulting.consulting.hope[5].uni }} {{ consulting.consulting.hope[5].major }}</div>
+            <div class="pl-2">
+              6지망: {{ consulting.consulting.hope[6].uni }} {{ consulting.consulting.hope[6].major }}</div>
+          </div>
+        </div>
+        <div *ngIf="consulting.consulting.hope_reason.length !== 0">
+          <div><strong>학교 및 학과 선정 이유</strong></div>
+          <div class="pl-3">{{ consulting.consulting.hope_reason }}</div>
+        </div>
+        <div *ngIf="consulting.consulting.note.length !== 0">
+          <div><strong>참고</strong></div>
+          <div class="pl-3">{{ consulting.consulting.note }}</div>
+        </div>
+        <div *ngIf="consulting.consulting.exam2SubjectName">
+          <div><strong>제 2회 검정고시 응시 과목</strong></div>
+          <div class="pl-3">{{ consulting.consulting.exam2SubjectName }}</div>
+        </div>
+        <div *ngIf="consulting.consulting.examMon6Result">
+          <div><strong>6월 모의고사 등급</strong></div>
+          <div class="pl-3">{{ consulting.consulting.examMon6Result }}</div>
+        </div>
+        <div><strong>환불계좌</strong>: {{consulting.consulting.account}}</div>
+      </div>
+      <div class="p-2 border-background m-2">
+        <div class="mb-2"><strong>comments</strong></div>
+        <div class="pl-3 mb-2 text-left" *ngFor="let comment of consulting.consulting.comments">
+          <div class="mb-2 d-flex justify-content-between">
+            <div class="mr-4">[{{ comment.date }}]</div>
+            <div class="mr-4" *ngIf="comment.contents.length !== 0">
+              <fa-icon [icon]="['fas', 'pen']" size="sm" class="mr-2" (click)="changeToField(comment.id)"></fa-icon>
+              <fa-icon [icon]="['fas', 'times']" size="sm" (click)="deleteComment(consulting.id, comment.id, consulting.consulting.key)"></fa-icon>
+            </div>
+          </div>
+          <div class="mx-2" id="{{comment.id}}-contents"
+               *ngIf="comment.contents.length !== 0; else addContents">{{ comment.contents }}</div>
+          <ng-template #addContents>
+            <form class="mx-2" (submit)="onSubmit(consulting.id, comment.date, comment.id, consulting.consulting.key)">
+              <textarea name="comment" id="{{consulting.id}}-only-comment" class="w-100" rows="25"></textarea>
+              <input type="submit" name="submit" value="저장" class="btn-secondary">
+            </form>
+          </ng-template>
+          <div class="hidden" id="{{comment.id}}-contents-field">
+            <form class="mx-2" #updateCommentForm="ngForm"
+                  (submit)="updateComment(updateCommentForm, consulting.id, comment.id, consulting.consulting.key)">
+              <textarea name="contents" class="w-100" rows="25" ngModel="{{comment.contents}}"></textarea>
+              <input type="submit" name="submit" value="저장" class="btn-secondary">
+            </form>
+          </div>
+        </div>
+        <div class="text-right">
+          <fa-icon [icon]="['fas', 'plus-circle']" size="lg" class="navbar-toggler mr-auto my-2"
+                   (click)="showAddCommentBox(consulting.id, consulting.consulting.comments)"></fa-icon>
+        </div>
+      </div>
+      <div class="border-background p-2 m-2 hidden text-left" id="add-comment-box-{{consulting.id}}">
+        <form (submit)="onSubmit(consulting.id, consulting.consulting.key)" id="update-comment-form-{{consulting.id}}">
+          <div class="mb-2 d-flex justify-content-between">
+            <div>
+              <input type="text" name="month" id="month{{consulting.id}}">월 <input type="text" name="date"
+                                                                                   id="date{{consulting.id}}">일
+            </div>
+            <div>
+              <fa-icon [icon]="['fas', 'times']" size="lg" class="navbar-toggler mr-auto my-2"
+                       (click)="hideAddCommentBox(consulting.id)"></fa-icon>
+            </div>
+          </div>
+          <div class="mb-1">내용</div>
+          <textarea name="comment" id="comment{{consulting.id}}" class="w-100" rows="25"></textarea>
+          <input type="submit" name="submit" value="저장" class="btn-secondary">
+        </form>
+      </div>
+    </div>
+    <div class="text-center overflow-auto pt-3 mb-2">
+    <span class="px-2 item-hover" [ngClass]="{'highlight-text':tableTab===i}" *ngFor="let i of consultingDetailTableId"
+          (click)="tabTable(i)">
+      {{ i }}
+    </span>
+    </div>
+  </div>
+</div>

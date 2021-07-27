@@ -83,12 +83,94 @@ export class RequestForConsultingComponent implements OnInit {
     return true;
   }
 
+  checkValidation(f: NgForm): (boolean|string|null)[] {
+    let valid = true;
+    let msg = '필수 항목을 모두 채워주세요 ';
+    const elements = [];
+    if (!f.value.name){
+      elements.push('이름');
+      valid = false;
+    }
+    if (!f.value.age){
+      elements.push('나이');
+      valid = false;
+    }
+    if (!f.value.gender){
+      elements.push('성별');
+      valid = false;
+    }
+    if (!f.value.phone){
+      elements.push('전화번호');
+      valid = false;
+    }
+    if (!(f.value.option0 || f.value.option1 || f.value.option2)){
+      elements.push('컨설팅 선택 옵션');
+      valid = false;
+    }
+    if (!this.checkApplicationValidation(f)){
+      elements.push('지원 전형');
+      valid = false;
+    }
+    if (!(f.value.korean && f.value.english && f.value.math && f.value.society && f.value.history && f.value.choice)){
+      elements.push('과목별 점수');
+      valid = false;
+    }
+    if (!f.value.average){
+      elements.push('평균 점수');
+      valid = false;
+    }
+    if (!f.value.application_reason){
+      elements.push('지원 전형 선택 이유');
+      valid = false;
+    }
+    if (!(f.value.uni1 && f.value.major1 && f.value.uni2 && f.value.major2 && f.value.uni3 && f.value.major3
+      && f.value.uni4 && f.value.major4 && f.value.uni5 && f.value.major5 && f.value.uni6 && f.value.major6)){
+      elements.push('지망 학교 및 학과');
+      valid = false;
+    }
+    if (!f.value.hope_reason){
+      elements.push('학교 및 학과 선정 이유');
+      valid = false;
+    }
+    if (!f.value.note){
+      elements.push('참고 사항');
+      valid = false;
+    }
+    if (this.clickedDate === '' || !f.value.time){
+      elements.push('상담 시간');
+      valid = false;
+    }
+    if (!f.value.fileSendCheck){
+      elements.push('자기소개서 메일 전송 확인');
+      valid = false;
+    }
+    if (!f.value.check){
+      elements.push('컨설팅 비용 및 개인 정보 확인');
+      valid = false;
+    }
+    if (!f.value.account){
+      elements.push('환불 계좌');
+      valid = false;
+    }
+    if (valid) {
+      msg = '';
+    } else{
+      msg += '(';
+      msg += elements.join(', ');
+      msg += ')';
+    }
+    return [valid, msg];
+  }
+
+
   // tslint:disable-next-line:typedef
   onSubmit(f: NgForm){
-    let isValid = false;
+    const validationResult = this.checkValidation(f);
+    const isValid = validationResult[0];
+    const msg = validationResult[1];
     console.log(f.value);
 
-    if (f.value.korean && f.value.english && f.value.math && f.value.society && f.value.history && f.value.choice) {
+    if (isValid){
       const scores = {
         korean: f.value.korean,
         english: f.value.english,
@@ -98,129 +180,112 @@ export class RequestForConsultingComponent implements OnInit {
         history: f.value.history,
         choice: f.value.choice
       };
-      if (f.value.uni1 && f.value.major1 && f.value.uni2 && f.value.major2 && f.value.uni3 && f.value.major3
-        && f.value.uni4 && f.value.major4 && f.value.uni5 && f.value.major5 && f.value.uni6 && f.value.major6) {
-        const hope = {
-          1: {
-            uni: f.value.uni1,
-            major: f.value.major1 ? f.value.major1 : ''
-          },
-          2: {
-            uni: f.value.uni2,
-            major: f.value.major2
-          },
-          3: {
-            uni: f.value.uni3,
-            major: f.value.major3
-          },
-          4: {
-            uni: f.value.uni4,
-            major: f.value.major4
-          },
-          5: {
-            uni: f.value.uni5,
-            major: f.value.major5
-          },
-          6: {
-            uni: f.value.uni6,
-            major: f.value.major6
-          }
-        };
-        if (f.value.option0 || f.value.option1 || f.value.option2 ){
-          let optionVal = '';
-          for (let i = 0; i < 4; i++){
-            const optionEle = $('input[name="option' + i + '"]');
-            if (optionEle.prop('checked')){
-              optionVal += this.consultingOption[parseInt(optionEle.val() as string, 10)];
-              optionVal += '/';
+      const hope = {
+        1: {
+          uni: f.value.uni1,
+          major: f.value.major1 ? f.value.major1 : ''
+        },
+        2: {
+          uni: f.value.uni2,
+          major: f.value.major2
+        },
+        3: {
+          uni: f.value.uni3,
+          major: f.value.major3
+        },
+        4: {
+          uni: f.value.uni4,
+          major: f.value.major4
+        },
+        5: {
+          uni: f.value.uni5,
+          major: f.value.major5
+        },
+        6: {
+          uni: f.value.uni6,
+          major: f.value.major6
+        }
+      };
+      let optionVal = '';
+      for (let i = 0; i < 4; i++){
+        const optionEle = $('input[name="option' + i + '"]');
+        if (optionEle.prop('checked')){
+          optionVal += this.consultingOption[parseInt(optionEle.val() as string, 10)];
+          optionVal += '/';
+        }
+        let applicationVal = '';
+        for (let i = 0 ; i < 5; i++){
+          const applicationEle = $('input[name="application' + i + '"]');
+          if (applicationEle.prop('checked')){
+            applicationVal += this.application[parseInt(applicationEle.val() as string, 10)];
+            if (f.value.application4) {
+              applicationVal += ('(' + f.value.description + ')');
             }
-          }
-          console.log(optionVal);
-          if (this.checkApplicationValidation(f)){
-            let applicationVal = '';
-            for (let i = 0 ; i < 5; i++){
-              const applicationEle = $('input[name="application' + i + '"]');
-              if (applicationEle.prop('checked')){
-                applicationVal += this.application[parseInt(applicationEle.val() as string, 10)];
-                if (f.value.application4) {
-                  applicationVal += ('(' + f.value.description + ')');
-                }
-                applicationVal += '/';
-              }
-            }
-            console.log(applicationVal);
-            if (f.value.name && f.value.age && f.value.gender && f.value.phone) {
-              if (f.value.hope_reason && f.value.fileSendCheck){
-                if (f.value.application_reason && f.value.note && f.value.check && f.value.account && this.clickedDate !== '' && f.value.time) {
-                  isValid = true;
-                  let route = '';
-                  if (f.value.route0 || f.value.route1 || f.value.route2 || f.value.route3 ){
-                    for (let i = 0; i <= 3; i++){
-                      if (f.value['route' + i]){
-                        route += this.route[i];
-                        route += '/';
-                      }
-                    }
-                    if (f.value.route3){
-                      route += ( '(' + f.value.description_route + ')' );
-                    }
-                  }
-                  const body = new Consulting(
-                    f.value.name + f.value.age + f.value.gender + f.value.phone,
-                    f.value.name,
-                    f.value.age,
-                    f.value.gender,
-                    f.value.phone,
-                    scores,
-                    f.value.average,
-                    optionVal,
-                    applicationVal,
-                    f.value.application_reason,
-                    hope,
-                    f.value.hope_reason,
-                    f.value.note,
-                    f.value.check ? 1 : 0,
-                    f.value.exam2SubjectName,
-                    f.value.examMon6Result,
-                    f.value.fileSendCheck,
-                    f.value.account,
-                    route,
-                    [{
-                      id: '',
-                      date: this.clickedDate + ' ' + f.value.time,
-                      contents: ''
-                    }]
-                  );
-
-                  console.log(body);
-
-                  this.http.post<HttpResponse>(environment.apiUrl + '/api/consulting/create', body)
-                    .subscribe(
-                      (val) => {
-                        console.log(val.message);
-                        if (val.message === 'success') {
-                          alert('컨설팅이 성공적으로 신청되었습니다. 입금 확인 후 진행되는 개별 연락을 기다려 주세요.');
-                          location.reload();
-                        } else {
-                          alert('컨설팅 신청에 실패했습니다. 서버가 점검 중이니 관리자에게 문의해주세요.');
-                        }
-                      },
-                      err => {
-                        console.log(err);
-                      },
-                      () => {
-                        console.log('complete');
-                      }
-                    );
-                }
-              }
-            }
+            applicationVal += '/';
           }
         }
+        let route = '';
+        if (f.value.route0 || f.value.route1 || f.value.route2 || f.value.route3 ){
+          for (let i = 0; i <= 3; i++){
+            if (f.value['route' + i]){
+              route += this.route[i];
+              route += '/';
+            }
+          }
+          if (f.value.route3){
+            route += ( '(' + f.value.description_route + ')' );
+          }
+        }
+        const body = new Consulting(
+          f.value.name + f.value.age + f.value.gender + f.value.phone,
+          f.value.name,
+          f.value.age,
+          f.value.gender,
+          f.value.phone,
+          scores,
+          f.value.average,
+          optionVal,
+          applicationVal,
+          f.value.application_reason,
+          hope,
+          f.value.hope_reason,
+          f.value.note,
+          f.value.check ? 1 : 0,
+          f.value.exam2SubjectName,
+          f.value.examMon6Result,
+          f.value.fileSendCheck,
+          f.value.account,
+          route,
+          [{
+            id: '',
+            date: this.clickedDate + ' ' + f.value.time,
+            contents: ''
+          }]
+        );
+
+        console.log(body);
+
+        this.http.post<HttpResponse>(environment.apiUrl + '/api/consulting/create', body)
+          .subscribe(
+            (val) => {
+              console.log(val.message);
+              if (val.message === 'success') {
+                alert('컨설팅이 성공적으로 신청되었습니다. 입금 확인 후 진행되는 개별 연락을 기다려 주세요.');
+                location.reload();
+              } else {
+                alert('컨설팅 신청에 실패했습니다. 서버가 점검 중이니 관리자에게 문의해주세요.');
+              }
+            },
+            err => {
+              console.log(err);
+            },
+            () => {
+              console.log('complete');
+            }
+          );
       }
-    }
-    if (!isValid){
-      alert('필수 항목을 모두 채워주세요');
+    }else{
+      alert(msg);
     }
   }
 

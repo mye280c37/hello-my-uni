@@ -15,7 +15,7 @@
       <div class="w-50 py-4 click-menu" [ngClass]="type1?'clicked':'nonclicked'" (click)="changeTable(1)">대학 정보</div>
       <div class="w-50 py-4 click-menu" [ngClass]="type2?'clicked':'nonclicked'" (click)="changeTable(2)">컨설팅 날짜 정보</div>
     </div>
-    <div class="shadow-bg p-5" *ngIf="type0"><app-consulting-req-info></app-consulting-req-info></div>
+    <div class="shadow-bg p-5" *ngIf="type0"><app-consulting-list></app-consulting-list></div>
     <div class="shadow-bg p-5" *ngIf="type1"><app-university-info></app-university-info></div>
     <div class="shadow-bg p-5" *ngIf="type2"><app-consulting-date></app-consulting-date></div>
   </div>

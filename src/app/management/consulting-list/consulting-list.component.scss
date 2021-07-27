@@ -1,0 +1,16 @@
+@import "src/scss/variables";
+@import "src/styles";
+
+.side-bar{
+  right: 3px;
+  top: 8px;
+}
+
+.side-bar-box{
+  height: 100%;
+  right: 0;
+  top: 0;
+  width: 20%;
+  background-color: $shadow;
+  color: #dadce0;
+}
