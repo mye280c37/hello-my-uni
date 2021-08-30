@@ -1,13 +1,8 @@
 <div class="p-3">
   <div class="mb-2 mt-4 d-flex justify-content-between">
-    <h4 class="h4">후기</h4>
-    <button class="btn-general" routerLink="/review/post">후기 작성</button>
+    <h4 class="h4">컨설팅 후기</h4>
+    <button class="btn-general" routerLink="/review/post">컨설팅 후기 작성</button>
   </div>
-  <!--  <h1 class="h1 py-4 position-relative">-->
-  <!--    후기-->
-  <!--    <div class="under-line-box position-absolute"></div>-->
-  <!--    <button class="btn position-absolute" style="right: 0; bottom: 0" routerLink="/review/post">후기 작성</button>-->
-  <!--  </h1>-->
   <div class="table-responsive">
     <table class="table text-center text-nowrap" *ngIf="loadReviews; else noReviewMessage">
       <thead>
@@ -31,13 +26,13 @@
       <thead>
       <tr>
         <th scope="col">제목</th>
-        <th scope="col">분류</th>
+        <th scope="col">작성자</th>
         <th scope="col">상담 날짜</th>
       </tr>
       </thead>
     </table>
     <div class="text-center" style="padding: 185px 0">
-      아직 작성된 후기가 없습니다.
+      아직 작성된 컨설팅 후기가 없습니다.
     </div>
   </ng-template>
 </div>

@@ -15,6 +15,7 @@ export class ManagementComponent implements OnInit {
   type0 = true;
   type1 = false;
   type2 = false;
+  type3 = false;
 
   constructor(private http: HttpClient) { }
 
@@ -50,16 +51,26 @@ export class ManagementComponent implements OnInit {
         this.type0 = true;
         this.type1 = false;
         this.type2 = false;
+        this.type3 = false;
         break;
       case 1 :
         this.type0 = false;
         this.type1 = true;
         this.type2 = false;
+        this.type3 = false;
         break;
       case 2:
         this.type0 = false;
         this.type1 = false;
         this.type2 = true;
+        this.type3 = false;
+        break;
+      case 3:
+        this.type0 = false;
+        this.type1 = false;
+        this.type2 = false;
+        this.type3 = true;
+        break;
     }
   }
 

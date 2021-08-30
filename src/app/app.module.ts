@@ -31,6 +31,8 @@ import { InterviewConsultingComponent } from './interview-consulting/interview-c
 import { EssayPostComponent } from './essay-post/essay-post.component';
 import { ConsultingDateComponent } from './management/consulting-date/consulting-date.component';
 import { ConsultingListComponent } from './management/consulting-list/consulting-list.component';
+import { DescriptionListComponent } from './reviews/description-list/description-list.component';
+import { DescriptionAdminComponent } from './management/description-admin/description-admin.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,8 @@ import { ConsultingListComponent } from './management/consulting-list/consulting
     EssayPostComponent,
     ConsultingDateComponent,
     ConsultingListComponent,
+    DescriptionListComponent,
+    DescriptionAdminComponent,
   ],
   imports: [
     BrowserModule,
