@@ -364,7 +364,11 @@ export class RequestForConsultingComponent implements OnInit {
         break;
       }
     }
-    return possibleTimeList;
+    let filtered = possibleTimeList.filter((element: string) => element !== null);
+    filtered = filtered.filter((element: string) => element !== "");
+    filtered = filtered.filter((element: string) => element !== '');
+
+    return filtered;
   }
 
   showTimeList(date: string | number | boolean | string[], timeList: string | number | boolean | string[]): void{
