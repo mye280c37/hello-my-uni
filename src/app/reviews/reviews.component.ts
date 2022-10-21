@@ -29,7 +29,7 @@ export class ReviewsComponent implements OnInit {
     this.getDetail = false;
     console.log('ngOnInit');
 
-    this.http.get<HttpResponse>(environment.apiUrl + '/api/review/board')
+    this.http.get<HttpResponse>(environment.apiUrl + '/v2/review')
       .subscribe(
         (val) => {
           console.log(val.result);
@@ -54,7 +54,7 @@ export class ReviewsComponent implements OnInit {
             result[i].body,
             this.markAuthor(result[i].author),
             result[i].password,
-            result[i].time
+            result[i].createdTime
           ),
         result[i]._id,
       ]);

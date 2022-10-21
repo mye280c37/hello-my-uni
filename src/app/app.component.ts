@@ -7,7 +7,7 @@ import { environment } from '../environments/environment';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  showAnnouncement = false;
+  showAnnouncement = true;
 
   constructor() {
     if (environment.production){

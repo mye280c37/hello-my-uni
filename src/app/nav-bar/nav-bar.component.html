@@ -19,7 +19,7 @@
       <li ngbDropdown class="nav-item active">
         <!--header를 클릭하면 바로 가게 할지 나머지 세부 헤더 있는 것들과 통일할지-->
         <div class="text-center py-2 nav-header" (click)="changeState()" style="min-height: 45px;" routerLink="/ged/conversion">비교내신 환산</div>
-        <div *ngIf="isopen" class="pt-2 pb-3 nav-sub-item">
+        <div *ngIf="isopen" class="pt-2 pb-3 nav-sub-item" >
           <div ngbDropdownItem class="text-center item-hover" routerLink="/ged/conversion">비교내신 환산</div>
         </div>
       </li>
@@ -43,7 +43,7 @@
   <div class="nav-absolute-item">
     <div class="position-absolute btn-box">
       <div class="background-box"></div>
-      <button class="nav-absolute-item btn my-2 nav-header" routerLink="/request/consulting">컨설팅 신청</button>
+      <button class="nav-absolute-item btn my-2 nav-header" onclick="window.open('https://naver.me/GFnoTtNr')">컨설팅 신청</button>
     </div>
   </div>
 </nav>

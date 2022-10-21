@@ -12,6 +12,8 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./request-for-consulting.component.scss']
 })
 export class RequestForConsultingComponent implements OnInit {
+  showAnnouncement = false;
+
   title = '컨설팅 신청';
   consultingDate: any;
   showTextField = false;
@@ -167,7 +169,7 @@ export class RequestForConsultingComponent implements OnInit {
   onSubmit(f: NgForm){
     const validationResult = this.checkValidation(f);
     const isValid = validationResult[0];
-    const msg = validationResult[1];
+    let msg = validationResult[1];
     console.log(f.value);
 
     if (isValid){
@@ -270,14 +272,16 @@ export class RequestForConsultingComponent implements OnInit {
             (val) => {
               console.log(val.message);
               if (val.message === 'success') {
-                alert('컨설팅이 성공적으로 신청되었습니다. 입금 확인 후 진행되는 개별 연락을 기다려 주세요.');
-                location.reload();
+                setTimeout(() => alert('신청을 처리중입니다. 잠시만 기다려주세요.'), 1000);
+                //this.showAnnouncement = true;
+                setTimeout(() => alert('컨설팅이 성공적으로 신청되었습니다. 입금 확인 후 진행되는 개별 연락을 기다려 주세요.'), 3000);
               } else {
-                alert('컨설팅 신청에 실패했습니다. 서버가 점검 중이니 관리자에게 문의해주세요.');
+                alert('컨설팅 신청에 실패했습니다. 서버가 점검 중이니 관리자에게 문의해주세요.'); 
               }
             },
             err => {
               console.log(err);
+              alert('컨설팅 신청에 실패했습니다. 서버가 점검 중이니 관리자에게 문의해주세요.'); 
             },
             () => {
               console.log('complete');
@@ -393,4 +397,7 @@ export class RequestForConsultingComponent implements OnInit {
     this.createCalender();
   }
 
+  hideAnnouncement(): void{
+    this.showAnnouncement = false;
+  }
 }

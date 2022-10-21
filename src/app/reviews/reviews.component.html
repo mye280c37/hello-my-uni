@@ -3,9 +3,6 @@
   <h1 class="h1 text-right pr-2 mb-4">후기</h1>
   <div class="divider-box"></div>
   <div class="py-3">
-    <app-description-list></app-description-list>
-  </div>
-  <div class="py-3">
     <app-review-list *ngIf="!getDetail" (postId)="getDetailHandlerWithId($event)" [reviewList]="reviews"></app-review-list>
     <app-review-detail *ngIf="getDetail" (getDetail)="getDetailHandler($event)" [review]="reviewPost" [objId]="objId" [reviewId]="reviewId" [reviewList]="reviews"></app-review-detail>
   </div>

@@ -334,3 +334,24 @@
     </div>
   </form>
 </div>
+<!--<app-nav-bar></app-nav-bar>-->
+<router-outlet></router-outlet>
+<div class="position-fixed announcement-box border-background bg-white" *ngIf="showAnnouncement">
+  <div class="bg-background font-weight-bold text-white title d-flex justify-content-between">
+    <div>컨설팅 신청이 완료되었습니다.</div>
+    <div class="item-hover">
+      <fa-icon [icon]="['fas', 'times']" size="lg" (click)="hideAnnouncement()"></fa-icon>
+    </div>
+  </div>
+  <div class="body p-4">
+    <table class="text-center h-100 align-middle">
+      <tbody>
+      <tr>
+        <td>
+          컨설팅이 성공적으로 신청되었습니다. 입금 확인 후 진행되는 개별 연락을 기다려 주세요.
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
