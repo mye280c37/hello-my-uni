@@ -2,7 +2,7 @@
   <h2 class="text-left h2 mb-3">{{ review.title }}</h2>
   <div class="row mb-5">
     <div class="col-md-6 text-left mb-1">작성자: {{ review.author }}</div>
-    <div class="col-md-6 text-right mb-1">상담 시간: {{ review.time }}</div>
+    <div class="col-md-6 text-right mb-1">상담 시간: {{ review.consultingTime }}</div>
   </div>
   <div class="contents-box">
     {{ review.body }}
@@ -22,7 +22,7 @@
       <li class="item-hover" *ngIf="other" (click)="onChangePostDetail(other[0])">
         <div class="d-flex justify-content-between">
           <div>{{ other[1].title }}</div>
-          <div>{{ other[1].time }}</div>
+          <div>{{ other[1].consultingTime }}</div>
         </div>
       </li>
     </ng-container>

@@ -23,10 +23,10 @@ export class ReviewPostComponent implements OnInit {
       f.value.body,
       f.value.author,
       f.value.password,
-      f.value.time
+      f.value.consultingTime
     );
 
-    this.http.post(environment.apiUrl + '/api/review/post', body)
+    this.http.post(environment.apiUrl + '/v2/review', body)
       .subscribe(
         (val) => {
           console.log(val);

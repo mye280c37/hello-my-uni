@@ -3,13 +3,13 @@ export class Review {
   public body: string;
   public author: string;
   public password: string;
-  public time: string;
+  public consultingTime: string;
 
-  constructor(title: string, body: string, author: string, password: string, time: string){
+  constructor(title: string, body: string, author: string, password: string, consultingTime: string){
     this.title = title;
     this.body = body;
     this.author = author;
     this.password = password;
-    this.time = time;
+    this.consultingTime = consultingTime;
   }
 }

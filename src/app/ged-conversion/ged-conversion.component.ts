@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { HttpResponse } from '../http-response';
 import { GedConversionResult, GedConversionTable } from './ged-conversion.model';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-ged-conversion',
@@ -71,45 +72,42 @@ export class GedConversionComponent implements OnInit {
     let aTableCell = 0;
     let tableId = 1;
     let aTableList: GedConversionResult[] = [];
-    for (let i = 0; i < this.type; i++){
-      const typeSize = result[i].length;
-      for (let j = 0; j < typeSize; j++){
-        if (result[i][j].converted){
-          const aResult = new GedConversionResult(
-            result[i][j].university,
-            result[i][j].area,
-            result[i][j].converted,
-            result[i][j].link
-          );
-          aTableList.push(aResult);
-          aTableCell += 1;
-        }
-        if (aTableCell === 10 || (j === typeSize - 1 && i === this.type - 1)){
-          if (aTableCell < 10){
-            for (let k = aTableCell; k < 10; k++){
-              aTableList.push(new GedConversionResult(
-                '  ',
-                '  ',
-                null,
-                null
-              ));
-            }
+    for (let i = 0; i<result.length; i++) {
+      if(result[i].converted) {
+        const aResult = new GedConversionResult(
+          result[i].university,
+          result[i].area,
+          result[i].converted,
+          result[i].link
+        );
+        aTableList.push(aResult);
+        aTableCell += 1;
+      }
+      if (aTableCell === 10 || (i === result.length - 1)){
+        if (aTableCell < 10){
+          for (let k = aTableCell; k < 10; k++){
+            aTableList.push(new GedConversionResult(
+              '  ',
+              '  ',
+              null,
+              null
+            ));
           }
-          console.log(aTableList);
-          this.conversionResult.push(
-            new GedConversionTable(
-              tableId,
-              aTableList
-            )
-          );
-          this.tableNumber.push(tableId);
-          tableId += 1;
-          aTableList = [];
-          aTableCell = 0;
         }
+        console.log(aTableList);
+        this.conversionResult.push(
+          new GedConversionTable(
+            tableId,
+            aTableList
+          )
+        );
+        this.tableNumber.push(tableId);
+        tableId += 1;
+        aTableList = [];
+        aTableCell = 0;
       }
     }
-    console.log(this.conversionResult);
+    // console.log(this.conversionResult);
     this.result = true;
     const eleMoveTo = document.getElementById('table');
     if (eleMoveTo != null){
@@ -119,14 +117,11 @@ export class GedConversionComponent implements OnInit {
 
 
   onSubmit(f: NgForm): void{
-    console.log(f.value);
 
-    f.value.status = '0';
-
-    console.log(f.value);
+    // console.log(f.value);
 
     if (this.renewal){
-      this.http.get<HttpResponse>('https://site.hellomyuni.com/api/converter/each',
+      this.http.get<HttpResponse>(environment.apiUrl + '/v2/converter/score',
         {
           params: f.value,
           responseType: 'json',

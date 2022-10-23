@@ -54,7 +54,7 @@ export class ReviewsComponent implements OnInit {
             result[i].body,
             this.markAuthor(result[i].author),
             result[i].password,
-            result[i].createdTime
+            result[i].consultingTime
           ),
         result[i]._id,
       ]);
